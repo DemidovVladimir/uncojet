@@ -1,0 +1,1697 @@
+<!doctype html>
+<html ng-app="myApp">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>First Page Render</title>
+<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Lobster&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
+<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/lib/lightbox/css/lightbox.css" rel="stylesheet">
+<style type="text/css" rel="slylesheet">
+/*Declaring fonts*/
+@font-face {
+    font-family: 'HelveticaNeueCyr-Bold';
+    src: url('fonts/HelveticaNeueCyr-Bold.otf');
+}
+@font-face {
+    font-family: 'HelveticaNeueCyr-BoldItalic';
+    src: url('fonts/HelveticaNeueCyr-BoldItalic.otf');
+}
+@font-face {
+    font-family: 'HelveticaNeueCyr-Italic';
+    src: url('fonts/HelveticaNeueCyr-Italic.otf');
+}
+@font-face {
+    font-family: 'HelveticaNeueCyr-Light';
+    src: url('fonts/HelveticaNeueCyr-Light.otf');
+}
+@font-face {
+    font-family: 'HelveticaNeueCyr-Roman';
+    src: url('fonts/HelveticaNeueCyr-Roman.otf');
+}
+@font-face {
+    font-family: 'HelveticaNeueCyr-Thin';
+    src: url('fonts/HelveticaNeueCyr-Thin.otf');
+}
+@font-face {
+    font-family: 'K_MyriadPro-It';
+    src: url('fonts/K_MyriadPro-It.otf');
+}
+@font-face {
+    font-family: 'K_MyriadPro-Light';
+    src: url('fonts/K_MyriadPro-Light.otf');
+}
+@font-face {
+    font-family: 'KosticSerif-Italic';
+    src: url('fonts/KosticSerif-Italic.otf');
+}
+@font-face {
+    font-family: 'KosticSerif-Regular';
+    src: url('fonts/KosticSerif-Regular.otf');
+}
+@font-face {
+    font-family: 'Nautilus';
+    src: url('fonts/Nautilus.otf');
+}
+@font-face {
+    font-family: 'Roboto-Thin';
+    src: url('fonts/Roboto-Thin.ttf');
+}
+
+html, body {
+    width: auto !important;
+    overflow-x: hidden !important;
+}
+body{
+    font-family: "HelveticaNeueCyr";
+    background-image: url('/img/back.jpg');
+}
+body pre{
+    font-family: "HelveticaNeueCyr";
+}
+body h1,h2,h3,h4,h5,h6,h7{
+    font-family: "HelveticaNeueCyr";
+}
+body p{
+    font-family: "HelveticaNeueCyr";
+}
+body a{
+    font-family: "HelveticaNeueCyr";
+}
+
+/*Навигационное меню*/
+.navbar-brand
+{
+    position: absolute;
+    width: 100%;
+    top:0;
+    left:0;
+    text-align: center;
+    margin: auto;
+    z-index: 1;
+}
+ul.nav{
+    font-family: "HelveticaNeueCyr";
+    font-size: 11px;
+    color: white;
+    text-transform: uppercase;
+}
+ul.nav a:hover{color:limegreen !important; }
+.navbar-brand{
+    margin-top: -15px;
+}
+.circle{
+    border: rgba(255,255,255,0.1);
+}
+.circle .grad{
+    background: -webkit-radial-gradient(50% 40px, circle closest-corner, rgba(255,255,255,0.3), rgba(255,255,255,0) 80px);
+    background: -o-radial-gradient(50% 40px, circle closest-corner, rgba(255,255,255,0.3), rgba(255,255,255,0) 80px);
+    background: -moz-radial-gradient(50% 40px, circle closest-corner, rgba(255,255,255,0.3), rgba(255,255,255,0) 80px);
+    background: radial-gradient(at 50% 40px, circle closest-corner, rgba(255,255,255,0.3), rgba(255,255,255,0) 80px);
+}
+.gradientMenu{
+     background: -webkit-radial-gradient(center top, ellipse farthest-side, rgba(92,94,94,0.23), rgba(92,94,94,0.02));
+     background: -o-radial-gradient(center top, ellipse farthest-side, rgba(92,94,94,0.23), rgba(92,94,94,0.02));
+     background: -moz-radial-gradient(center top, ellipse farthest-side, rgba(92,94,94,0.23), rgba(92,94,94,0.02));
+     background: radial-gradient(center top, ellipse farthest-side, rgba(92,94,94,0.23), rgba(92,94,94,0.02));
+ }
+.navbar-inverse .navbar-nav>li>a{
+    color: white;
+}
+.navbar .row{
+    height: 70px;
+}
+/*Языки*/
+.backCircle a{
+    color: #000000;
+    text-decoration: none;
+    font-family: "HelveticaNeueCyr";
+    font-size: 90%;
+}
+.backCircle a:hover{
+    color: white;
+    cursor:pointer;
+}
+.navbar{
+    background-color: rgba(29,29,27,1);
+}
+
+
+
+/*Верхний слайдер*/
+.carousel-control .glyphicon-chevron-left, .carousel-control .glyphicon-chevron-right, .carousel-control .icon-prev, .carousel-control .icon-next {
+    width: 50px;
+    height: 50px;
+    margin-top: -15px;
+    margin-left: -15px;
+    font-size: 50px;
+}
+#myCarousel_1{
+    margin-top: -20px;
+}
+#myCarousel_1 .carousel-caption p{
+    /*font-family: 'KosticSerif-Italic';*/
+}
+#myCarousel_1 .cont p:first-child{
+    color:green;
+    font-family: 'KosticSerif-Regular';
+}
+#myCarousel_1 .glyphicon-chevron-left{
+    color: limegreen;
+}
+#myCarousel_1  .glyphicon-chevron-right{
+    color: limegreen;
+}
+#myCarousel_1 .cont{
+    font-size: 90%;
+}
+
+
+
+
+
+
+/*Слайдер на странице с меню*/
+#myCarousel_4{
+    margin-top: -20px;
+}
+#myCarousel_4 .carousel-caption p{
+    /*font-family: 'KosticSerif-Italic';*/
+}
+#myCarousel_4 .carousel-caption{
+    background-color: rgba(0,0,0,0.5);
+    margin-bottom: -20px;
+}
+#myCarousel_4 .cont p:first-child{
+    color:green;
+    font-family: 'KosticSerif-Regular';
+}
+#myCarousel_4 .glyphicon-chevron-left{
+    color: limegreen;
+}
+#myCarousel_4  .glyphicon-chevron-right{
+    color: limegreen;
+}
+#myCarousel_4 .cont{
+    font-size: 90%;
+}
+#myCarousel_4 .carousel-control{
+    background-color: rgba(0,0,0,0);
+    border-style:none;
+}
+#myCarousel_4 .img-responsive, #myCarousel_4.thumbnail>img,#myCarousel_4 .thumbnail a>img,#myCarousel_4 .carousel-inner>.item>img,#myCarousel_4 .carousel-inner>.item>a>img{
+    max-height: 250px;
+}
+#myCarousel_4 .carousel-indicators{
+    text-align: right;
+    padding-right: 25px;
+}
+
+
+
+
+/*Контроль слайдера 7ого и 8ого в меню*/
+#myCarousel_7 .item,#myCarousel_8 .item{
+    text-align: center;
+}
+.controlsMenu{
+    clear: both;
+    text-align: center;
+    position: relative;
+    top:50px;
+    padding-bottom: 50px;
+}
+.controlsMenu .prevSlideSecondSlider:active{
+    border: none;
+}
+.controlsMenu .nextSlideSecondSlider:visited{
+    border: none;
+}
+.controlsMenu button{
+    border-style: none;
+    background-color:rgba(255,255,255,0);
+    color: rgba(102, 153, 51, 0.5);
+    font-size: 300%;
+}
+.controlsMenu button:hover{
+    color: rgba(102, 153, 51, 1);
+}
+#myCarousel_7 .thumbnail{
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+    text-align: center;
+}
+#myCarousel_7 .thumbnail h3{
+   font-family: 'HelveticaNeueCyr';
+   color: rgba(102, 153, 26, 1);
+}
+#myCarousel_7 .thumbnail a{
+    font-family: 'k_myriad pro';
+    font-style: italic;
+}
+#myCarousel_7 .carousel-control.left,#myCarousel_7 .carousel-control.right{
+    display: none;
+}
+#myCarousel_7 .img-thumbnail{
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+#myCarousel_8 .thumbnail{
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+    text-align: center;
+}
+#myCarousel_8 .thumbnail h3{
+    font-family: 'HelveticaNeueCyr';
+    color: rgba(102, 153, 26, 1);
+}
+#myCarousel_8 .thumbnail a{
+    font-family: 'k_myriad pro';
+    font-style: italic;
+}
+#myCarousel_8 .carousel-control.left,#myCarousel_8 .carousel-control.right{
+    display: none;
+}
+#myCarousel_8 .img-thumbnail{
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+
+
+
+/*Приветствие после слайдера*/
+#afterSlider{
+    margin-top: -10px;
+    background-color: rgb(29,29,27);
+}
+#circles{
+    text-align: center;
+}
+#circles img{
+    padding-top: 10px;
+    width:30px;
+}
+.greatings h3:first-child{
+    color: rgba(149, 193, 31, 1);
+    font-family: 'HelveticaNeueCyr';
+}
+.greatings h4{
+    font-family: 'HelveticaNeueCyr';
+}
+.greatings{
+    text-align: center;
+    font-family: "Helvetica Neue Light";
+}
+.gradHor{
+    background: -webkit-radial-gradient(center bottom, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
+    background: -o-radial-gradient(center bottom, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
+    background: -moz-radial-gradient(center bottom, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
+    background: radial-gradient(center bottom, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
+}
+
+
+
+
+
+/*Линия после слайдера*/
+.lineAfterSlider{
+    width:100%;
+    height:5px;
+    background-color: darkgrey;
+}
+
+
+/*Общая инфа*/
+.btn-info{
+    border-color: rgb(29,29,27);
+    background-color: rgb(29,29,27);
+}
+.center{
+    text-align:center;
+}
+
+
+
+
+
+/*Статьи*/
+.thumbnails .thumbnail{
+    text-align: center;
+    border-width: 0;
+    background-color:rgba(255,255,255,0.1);
+}
+.btn:hover{
+    background-color: rgba(149, 193, 31, 1);
+    border-color: rgba(149, 193, 31, 1);
+}
+.homeThumbs .thumbnail .caption h3{
+    font-family: 'KosticSerif-Regular';
+}
+.homeThumbs .thumbnail .caption p{
+    font-family: 'K_Myriad Pro';
+}
+.homeThumbs .thumbnails a{
+    font-family: 'K_Myriad Pro';
+    font-style : italic;
+}
+
+
+
+
+
+/*Зеленые кружки после статей*/
+.greenDots{
+    clear: both;
+    text-align: center;
+}
+.greenDots img{
+    width:30px;
+}
+.secondDots img{
+    margin-top: 25px;
+}
+
+
+
+
+/*Наше меню*/
+.ourMenu{
+    text-align: center;
+}
+.ourMenu #rightLine{
+    background-color: #000000;
+}
+.ourMenu #leftLine{
+    background-color: #000000;
+}
+.ourMenu p{
+    margin-top:-15px;
+    font-family: 'HelveticaNeueCyr';
+    font-size: 14pt;
+}
+.ourMenu h2{
+    font-family: 'Nautilus Pompilius';
+}
+
+
+
+#myCarousel_1 .carousel-control{
+    background-color: rgba(0,0,0,0);
+    border-style:hidden;
+}
+
+
+
+
+
+
+
+/*Второй слайдер*/
+.fa-2x {
+    font-size: 32px;
+    position: relative;
+    bottom: 10px;
+}
+#myCarousel_2 .carousel-control.left,#myCarousel_2 .carousel-control.right{
+     display: none;
+ }
+.minimized .nextSlideSecondSlider a, .minimized .prevSlideSecondSlider a{
+    color:  rgba(149, 193, 31, 0.5);
+}
+.minimized .nextSlideSecondSlider a:hover, .minimized .prevSlideSecondSlider a:hover{
+    text-decoration: none;
+    color:  rgba(149, 193, 31, 1);
+}
+#myCarousel_2 .img-thumbnail, #myCarousel_3 .img-thumbnail{
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+#myCarousel_1 .carousel-inner{
+    padding-bottom: 0px;
+}
+#afterSlider{
+    margin-top: -20px;
+}
+
+
+.carousel-inner{
+    padding-bottom: 10px;
+}
+
+/*Третий слайдер*/
+#myCarousel_3{
+    margin-bottom: 50px;
+}
+#myCarousel_3 .carousel-control.left,#myCarousel_3 .carousel-control.right{
+    display: none;
+}
+.minimizedThird .nextSlideThirdSlider a, .minimizedThird .prevSlideThirdSlider a{
+    display: none;
+}
+
+
+
+
+
+/*Футер*/
+.gradHorFooter{
+    background: -webkit-radial-gradient(center top, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
+    background: -o-radial-gradient(center top, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
+    background: -moz-radial-gradient(center top, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
+    background: radial-gradient(center top, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
+}
+.lineFooter{
+    clear: both;
+    width:100%;
+    height:5px;
+    background-color: darkgrey;
+}
+.contentFooter{
+    background-color: rgb(29,29,27);
+    height:215px;
+    overflow:hidden;
+}
+.contentFooter a{
+    color:#ffffff;
+}
+.contentFooter a:hover{
+    color:rgba(149, 193, 31, 1);
+}
+.contentFooter pre{
+    background-color: rgba(29,29,27,0);
+    color: #ffffff;
+    border-width: 0;
+    font-size: 90%;
+}
+.contentFooter .ourNavigation #downHome h5{
+    margin-top: 20px;
+}
+.ourNavigation h5{
+    font-family: "HelveticaNeueCyr";
+    font-style: italic;
+}
+address p{
+    font-family: 'Roboto';
+}
+
+
+
+
+
+/*Контакты в футере*/
+.contacts{
+    color: white;
+}
+.contacts a:hover{
+    color: rgba(149, 193, 31, 1);
+}
+.contacts .cell_phone{
+    margin-top: 2%;
+}
+.contacts .phone{
+    margin-top: 2%;
+}
+
+
+
+/*Заголовок в меню*/
+.menuH h2{
+    margin-left: 35px;
+    font-family: 'Nautilus Pompilius';
+    font-size: 28pt;
+}
+.menuH p{
+    margin-left: 35px;
+    font-family: 'K_Myriad Pro';
+}
+
+
+
+
+
+
+
+
+
+/*--------------------------------------------------------------------------------------------------------------------*/
+/*Разрешение монитора > 768px*/
+@media (min-width: 768px) {
+    /*Навигация*/
+    .circle{
+        width: 220px;
+        height: 220px;
+        border-radius: 50%;
+        background-color: rgba(29,29,27,1);
+        border-color: rgba(29,29,27,0);
+        display: inline-block;
+        margin-top: -40px;
+    }
+    .circle img{
+        width: 110px;
+        height: 90px;
+        margin-top: 90px;
+    }
+    ul.nav li a{
+        margin-top: 10px;
+    }
+    .navbar-right ul{
+        position: absolute;
+        right: 7%;
+    }
+    .navbar-left ul{
+        position: absolute;
+        left: 7%;
+    }
+    /*Главный слайдер*/
+    #myCarousel_1 .carousel-caption{
+        background-color: rgba(0,0,0,0.5);
+        margin-bottom: -20px;
+        height:20%;
+    }
+    #myCarousel_1 .carousel-indicators{
+        text-align: right;
+        padding-right: 25px;
+    }
+    #myCarousel_1 .cont{
+        text-align: left;
+        margin-left: 25px;
+    }
+    /*Cлайдер на странице меню*/
+    #myCarousel_4 .cont{
+        text-align: left;
+        margin-left: 25px;
+    }
+    /*Приветствие после слайдера*/
+    #leftLine{
+        display:inline-block;
+        height:1px;
+        width:18%;
+        background-color: white;
+        margin-right:200px;
+        margin-bottom: 30px;
+    }
+    #rightLine{
+        display:inline-block;
+        height:1px;
+        width:18%;
+        background-color: white;
+        margin-left:200px;
+        margin-bottom: 30px;
+    }
+    .greatings #leftLine{
+        display:inline-block;
+        height:1px;
+        width:24%;
+        background-color: white;
+        margin-right:200px;
+        margin-bottom: 20px;
+    }
+    .greatings #rightLine{
+        display:inline-block;
+        height:1px;
+        width:24%;
+        background-color: white;
+        margin-left:200px;
+        margin-bottom: 20px;
+    }
+    #afterSlider{
+        height: 150px;
+    }
+    .greatings h4{
+        color: white;
+        margin-top: -20px;
+    }
+    /*Статьи*/
+    .homeThumbs .thumbnails .thumbnail img{
+        width: 35%;
+        margin-top:-20%;
+    }
+    /*Текст после слайдеров*/
+    .ourMenu p{
+        margin-top: -40px;
+    }
+    /*Управление вторым слайдером*/
+    .minimized{
+        display: none;
+    }
+    .nextSlideSecondSlider{
+        position: relative;
+        top:-10px;
+        display: inline-block;
+    }
+    .nextSlideSecondSlider a{
+        color: rgba(149, 193, 31, 0.5);
+        margin-left: 50px;
+    }
+    .nextSlideSecondSlider a:hover{
+        text-decoration: none;
+        color: rgba(149, 193, 31, 1);
+    }
+    .prevSlideSecondSlider{
+        position: relative;
+        top:-10px;
+        display: inline-block;
+    }
+    .prevSlideSecondSlider a:hover{
+        text-decoration: none;
+        color: rgba(149, 193, 31, 1);
+    }
+    .prevSlideSecondSlider a{
+        color: rgba(149, 193, 31, 0.5);
+        margin-right: 50px;
+    }
+    /*Управление третьим слайдером*/
+    .minimizedThird{
+        display: none;
+    }
+    .nextSlideThirdSlider{
+        position: relative;
+        top:-10px;
+        display: inline-block;
+    }
+    .nextSlideThirdSlider a{
+        color: rgba(149, 193, 31, 0.5);
+        margin-left: 50px;
+    }
+    .nextSlideThirdSlider a:hover{
+        text-decoration: none;
+        color: rgba(149, 193, 31, 1);
+    }
+    .prevSlideThirdSlider{
+        position: relative;
+        top:-10px;
+        display: inline-block;
+    }
+    .prevSlideThirdSlider a:hover{
+        text-decoration: none;
+        color: rgba(149, 193, 31, 1);
+    }
+    .prevSlideThirdSlider a{
+        color: rgba(149, 193, 31, 0.5);
+        margin-right: 50px;
+    }
+    /*8й слайдер*/
+    #myCarousel_8 .carousel-inner{
+        margin-top: -40px;
+    }
+    .bear{
+        margin-top: 15px;
+        margin-right: 25px;
+    }
+}
+
+
+
+
+
+/*Между 768px u 992px*/
+@media (min-width: 768px) and (max-width: 992px ) {
+    /*Первый слайдер*/
+    #myCarousel_1 .carousel-caption .cont{
+        position: relative;
+        bottom:10%;
+    }
+    #myCarousel_1 .carousel-indicators{
+        position: absolute;
+        top:85%;
+        left:50%;
+    }
+    /*Слайдер на странице меню*/
+    #myCarousel_4 .carousel-indicators{
+        position: absolute;
+        top:85%;
+        left:50%;
+    }
+    /*Второй слайдер*/
+    #myCarousel_2 .active > div {
+        display:none;
+    }
+    #myCarousel_2 .active > div:first-child {
+        display:block;
+    }
+    #myCarousel_2 .active > div:first-child + div {
+        display:block;
+    }
+    #myCarousel_2 .active > div:first-child + div + div {
+        display:block;
+    }
+    #myCarousel_2 .active > div:first-child + div + div + div {
+        display:block;
+    }
+    #myCarousel_2 .active > div:first-child + div + div + div {
+        display:block;
+    }
+    /*Ceдьмой и восьмой слайдер*/
+    #myCarousel_7 .active > div {
+        display:none;
+    }
+    #myCarousel_7 .active > div:first-child {
+        display:block;
+    }
+    #myCarousel_7 .active > div:first-child + div {
+        display:block;
+    }
+    #myCarousel_7 .active > div:first-child + div + div {
+        display:block;
+    }
+    #myCarousel_7 .active > div:first-child + div + div + div {
+        display:block;
+    }
+    #myCarousel_7 .active > div:first-child + div + div + div {
+        display:block;
+    }
+
+    #myCarousel_8 .active > div {
+        display:none;
+    }
+    #myCarousel_8 .active > div:first-child {
+        display:block;
+    }
+    #myCarousel_8 .active > div:first-child + div {
+        display:block;
+    }
+    #myCarousel_8 .active > div:first-child + div + div {
+        display:block;
+    }
+    #myCarousel_8 .active > div:first-child + div + div + div {
+        display:block;
+    }
+    #myCarousel_8 .active > div:first-child + div + div + div {
+        display:block;
+    }
+    #myCarousel_3 .active > div {
+        display:none;
+    }
+    #myCarousel_3 .active > div:first-child {
+        display:block;
+    }
+    #myCarousel_3 .active > div:first-child + div {
+        display:block;
+    }
+}
+
+
+
+
+
+
+
+
+/*Разрешение монитора > 992px*/
+@media (min-width: 992px){
+    /*Навигация*/
+    .navbar-right ul{
+        position: absolute;
+        right: 10%;
+    }
+    .navbar-right li{
+        margin-left: 35px;
+    }
+    .navbar-left ul{
+        position: absolute;
+        left: 10%;
+    }
+    .navbar-left li{
+        margin-right: 35px;
+    }
+    /*Языки*/
+    .languages{
+        position: absolute;
+        top:25px;
+        right: 10px;
+    }
+    .backCircle{
+        text-align: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: white;
+        color: white;
+        float: left;
+        margin-left: 5px;
+    }
+    /*Главный слайдер*/
+    #myCarousel_1 .carousel-caption{
+        background-color: rgba(0,0,0,0.5);
+    }
+    #myCarousel_1 .carousel-indicators{
+        text-align: right;
+        padding-right: 25px;
+    }
+    #myCarousel_1 .cont{
+        text-align: left;
+        margin-left: 25px;
+    }
+    /*Слайдер на странице меню*/
+    #myCarousel_4 .carousel-indicators{
+        text-align: right;
+        padding-right: 25px;
+    }
+    #myCarousel_4 .cont{
+        text-align: left;
+        margin-left: 25px;
+    }
+    /*Футер caption*/
+    .contacts p{
+        margin-left: -20px;
+    }
+}
+
+
+/*Разрешение монитора < 992px*/
+@media (max-width: 992px) {
+    /*Языки*/
+    .languages{
+        position: absolute;
+        top:5px;
+        right: 10px;
+    }
+    .backCircle{
+        text-align: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: white;
+        color: white;
+        clear: left;
+    }
+    /*Футер*/
+    .contentFooter .aboutUs{
+        display: none;
+    }
+    .contentFooter .ourNavigation{
+        display: none;
+    }
+    /*Футер caption*/
+    .contacts p{
+        margin-left: -50px;
+    }
+}
+
+
+
+
+/*Между 992px u 1200px*/
+@media(min-width: 992px) and (max-width: 1200px){
+    #myCarousel_2 .carousel-inner{
+        margin-left: 8.2%;
+    }
+}
+
+
+
+
+
+/*Разрешение монитора > 1200px*/
+@media (min-width:1200px){
+    /*Главный слайдер*/
+    #myCarousel_1 .carousel-indicators{
+        text-align: right;
+        padding-right: 25px;
+    }
+    #myCarousel_1 .cont{
+        text-align: left;
+        margin-left: 25px;
+    }
+    #myCarousel_1 .carousel-caption{
+        height: 15%;
+    }
+    /*Слайдер на странице меню*/
+    #myCarousel_4 .carousel-indicators{
+        text-align: right;
+        padding-right: 25px;
+    }
+    #myCarousel_4 .cont{
+        text-align: left;
+        margin-left: 25px;
+    }
+    #myCarousel_4 .carousel-caption{
+        height: 35%;
+    }
+    /*Статьи*/
+    .homeThumbs .thumbnails .thumbnail img{
+        width: 35%;
+        margin-top:-15%;
+    }
+    /*Второй слайдер*/
+    #myCarousel_2 .carousel-inner{
+        width: 100%;
+    }
+}
+
+
+/*Разрешение монитора < 1200px*/
+@media (max-width: 1200px){
+    #myCarousel_4 .carousel-caption{
+        display:none;
+    }
+    #myCarousel_4 .carousel-indicators{
+        display: none;
+    }
+}
+
+
+
+
+
+/*Разрешение монитора < 768px*/
+@media (max-width: 768px){
+    /*Навигация*/
+    .circle{
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background-color: rgba(29,29,27,1);
+        border-color: rgba(29,29,27,0);
+        display: inline-block;
+        margin-top: -40px;
+    }
+    .circle img{
+        width: 90px;
+        height: 70px;
+        margin-top: 55px;
+    }
+    .navbar-collapse .navbar-left{
+        margin-top:90px;
+    }
+    #navbar-collapse-2{
+        margin-top: -10px;
+    }
+    .navbar-toggle{
+        position: absolute;
+        left: 30px;
+        top: 10px;
+        z-index: 2;
+    }
+    .navbar-collapse {
+        background-color:  rgb(29,29,27);
+        text-align: center;
+    }
+
+    /*Языки*/
+    .languages{
+        position: absolute;
+        top:25px;
+        right: 10px;
+    }
+    .backCircle{
+        text-align: center;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: white;
+        color: white;
+        float: right;
+        margin-left: 5px;
+    }
+    .cont{
+        position: relative;
+        top:25px;
+    }
+    .cont p{
+        font-size: 80%;
+    }
+    .titleDate_2 h5{
+        position: relative;
+        left:-15px;
+    }
+    /*Статьи*/
+    .homeThumbs .thumbnails .thumbnail img{
+        width: 35%;
+        margin-top:20%;
+    }
+    /*Приветствие после слайдера*/
+    #afterSlider{
+        height: 100px;
+    }
+    .firstMenu{
+        margin-top: 80%;
+    }
+    .firstDots{
+        margin-top: 25%;
+    }
+    .greatings h4{
+        font-size: 80%;
+    }
+    .greatings h3{
+        font-size: 80%;
+    }
+    .greatings h4{
+        color: white;
+        margin-top: -5px;
+    }
+    /*Статьи*/
+    .homeThumbs .thumbnail img{
+        width: 35%;
+    }
+    /*Второй слайдер*/
+    #myCarousel_2 .active > div {
+        display:none;
+    }
+    #myCarousel_2 .active > div:first-child {
+        display:block;
+    }
+    #myCarousel_2 .carousel-inner{
+        width:100%;
+        margin: 0 auto;
+    }
+    /*Управление вторым слайдером*/
+
+    .nextSlideSecondSlider{
+        display: none;
+    }
+    .prevSlideSecondSlider{
+        display: none;
+    }
+    .minimized{
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .minimized .nextSlideSecondSlider{
+        display: none;
+    }
+    .minimized .prevSlideSecondSlider{
+        display: none;
+    }
+    .controlsMenu .nextSlideSecondSlider{
+        display: inline-block;
+    }
+    .controlsMenu .prevSlideSecondSlider{
+        display: inline-block;
+    }
+    /*Третий слайдер*/
+    #myCarousel_3 .active > div {
+        display:none;
+    }
+    #myCarousel_3 .active > div:first-child {
+        display:block;
+    }
+    #myCarousel_3 .carousel-inner{
+        width:100%;
+        margin: 0 auto;
+    }
+    /*Управление третьим слайдером*/
+    .nextSlideThirdSlider{
+        display: none;
+    }
+    .prevSlideThirdSlider{
+        display: none;
+    }
+    .minimizedThird{
+        display: block;
+        width: 100%;
+        text-align: center;
+    }
+    .minimizedThird .nextSlideThirdSlider{
+        display: inline-block;
+    }
+    .minimizedThird .prevSlideThirdSlider{
+        display: inline-block;
+    }
+    .contentFooter .tableOrder{
+        display: none;
+    }
+    .contentFooter p{
+        font-size: 120%;
+    }
+    .ourMenu p{
+        margin-top:5px;
+    }
+    .ourMenu{
+        margin-top: 10%;
+    }
+    /*Слайдер на странице меню*/
+    #myCarousel_4 .glyphicon-chevron-left{
+        font-size: 150%;
+    }
+    #myCarousel_4 .glyphicon-chevron-right{
+        font-size: 150%;
+    }
+    .slider2 .thumbnail:first-child{
+        margin-top: 0;
+    }
+    .slider2 .thumbnail{
+        margin-top: -250px;
+    }
+    /*Slider 3 minimized*/
+    .slider3 .thumbnail{
+        background-color: rgba(255,255,255,0.1);
+        text-align: center;
+    }
+    .slide{
+        margin-top: 15px;
+        padding-bottom: 20px;
+    }
+
+    .bear{
+        margin-top: 15px;
+    }
+}
+
+
+/*
+    .homeThumbs .btn-info{
+        margin-top: 400px;
+    }
+*/
+
+
+/*Прозрачный placeholder во вставке файла*/
+input[type='file'] {
+    color: transparent;
+}
+
+.uploadingPic{
+    text-align: center;
+}
+
+
+/*Incoming info*/
+.maintainDish{
+    clear:both;
+}
+.table-hover{
+    margin-top: 25px;
+}
+.table-hover>tbody>tr:hover>td{
+    background-color: #550055;
+    color:#eeeeee;
+}
+.picsFromDB{
+    margin-top: 25px;
+}
+.picsFromDB a{
+    margin-left: 25px;
+}
+.picsFromDB img{
+    width: 100px;
+    margin-left: 10px;
+}
+.picsFromDB:first-child{
+    clear: both;
+}
+
+.maintainDish form{
+    margin-top: 25px;
+}
+
+.addToMenu{
+    margin-top:150px;
+}
+
+.maintainDish{
+    margin-top:150px;
+}
+
+.lineBeneath{
+    height:30px;
+    width:100%;
+    background-color: rgba(60,60,59,1);
+}
+
+
+
+
+#myCarousel_2{
+    text-align: center;
+}
+
+/*Меню глава в каждом блюде*/
+.thirdMenu{
+    margin-top: 150px;
+}
+
+.greenHelvetica{
+    font-family: "HelveticaNeueCyr";
+    color: rgba(102, 153, 26, 1);
+}
+.greenHelveticaItalicBold{
+    font-family: "HelveticaNeueCyr";
+    color: rgba(102, 153, 26, 1);
+    font-weight: bold;
+    font-style: italic;
+}
+.greenBack{
+    background-color: rgba(102, 153, 26, 1);
+}
+.clearFloat{
+    clear: both;
+}
+.marginTop15{
+    margin-top: 15px;
+}
+.marginTop35{
+    margin-top: 35px;
+}
+.marginTop_35{
+    margin-top: -35px;
+}
+.softShadow{
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+.floatLeft{
+    float: left;
+}
+.floatRight{
+    float:right;
+}
+.noBack{
+    background-color: rgba(255,255,255,0);
+}
+.noBorder{
+    border-style: none;
+}
+.thirdMenu{
+    margin-top: 0;
+}
+.alignCenter{
+    text-align: center;
+}
+.fontHelvetica{
+    font-family: HelveticaNeueCyr;
+}
+
+
+#myCarousel_10 .carousel-control{
+    display: none;
+}
+#myCarousel_10 .carousel-inner{
+    margin-left: 5%;
+}
+.titleDate{
+    margin-left: 20px;
+}
+.totalDate{
+    padding-left: 15px;
+    padding-right: 15px;
+}
+.titleDate_2{
+    position: relative;
+    top:10px;
+    left:25px;
+}
+.justLine{
+    margin-top: 0;
+}
+.justLine2{
+    width:100%;
+}
+#myCarousel_10 .newsBrief{
+    padding-bottom: 20px;
+}
+.newsBrief{
+   position: relative;
+   top:20px;
+   left:20px;
+}
+.aboutTotal img{
+    margin-left: 0;
+}
+.aboutTotal{
+    padding-left: 0;
+}
+.totalDate{
+    font-family:Myriad Pro;
+    color: #ffffff;
+}
+.titleDate{
+    font-family: HelveticaNeueCyr;
+}
+.newsBrief p{
+    font-family: "K_Myriad Pro";
+}
+.newsBrief a{
+    font-family: "k_myriad pro";
+    font-style: italic;
+}
+.k_myriad_italic{
+    font-family: "k_myriad pro";
+    font-style: italic;
+}
+.newsPhoto{
+    padding-left: 0;
+}
+#myCarousel_11 .carousel-control{
+    display: none;
+}
+.angular-google-map-container {
+    height: 400px;
+}
+.mapThumb{
+    margin-top:50px;
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.25);
+}
+ .firstMenu .fa-chevron-circle-left{
+     color:rgba(102, 153, 26, 0.5);
+     background-color: rgba(255,255,255,0);
+     border-style: none;
+ }
+.firstMenu .fa-chevron-circle-left:hover{
+    color:rgba(102, 153, 26, 1);
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.firstMenu .fa-chevron-circle-right{
+    color:rgba(102, 153, 26, 0.5);
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.firstMenu .fa-chevron-circle-right:hover{
+    color:rgba(102, 153, 26, 1);
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.eventsSlide .fa-chevron-circle-left{
+    color:rgba(102, 153, 26, 0.5);
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.eventsSlide .fa-chevron-circle-left:hover{
+    color:rgba(102, 153, 26, 1);
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.eventsSlide .fa-chevron-circle-right{
+    color:rgba(102, 153, 26, 0.5);
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.eventsSlide .fa-chevron-circle-right:hover{
+    color:rgba(102, 153, 26, 1);
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.dropdown-menu{
+    background-color: rgba(29,29,27,1);
+    min-width: 10px;
+    padding:2px;
+    text-align: center;
+}
+.dropdown-menu li{
+    width:100%;
+}
+.dropdown-menu li a{
+    color: #ffffff;
+    font-size: 80%;
+}
+.dropdown-menu li a:hover{
+    background-color: rgba(29,29,27,0);
+}
+.navbar-inverse .navbar-nav>.open>a, .navbar-inverse .navbar-nav>.open>a:hover, .navbar-inverse .navbar-nav>.open>a:focus {
+    background-color: rgba(29,29,27,0.1);
+}
+
+
+
+.animate_1.ng-hide-add, .animate_1.ng-hide-remove {
+    -webkit-transition:all linear 0.5s;
+    -moz-transition:all linear 0.5s;
+    -o-transition:all linear 0.5s;
+    transition:all linear 0.5s;
+    display:block!important;
+}
+
+.animate_1.ng-hide-add.ng-hide-add-active,
+.animate_1.ng-hide-remove {
+    opacity:0;
+}
+
+.animate_1.ng-hide-add,
+.animate_1.ng-hide-remove.ng-hide-remove-active {
+    opacity:1;
+}
+
+.maintain_category{
+    margin-top: 150px;
+}
+#myCarousel_7 .caption h5{
+   color:rgba(102, 153, 26, 1);
+    font-family: 'HelveticaNeueCyr';
+}
+.bear{
+    font-family: 'HelveticaNeueCyr';
+}
+.dishHead{
+    color:rgba(102, 153, 26, 1);
+}
+.caption a{
+    font-style: normal;
+    color: #000000;
+}
+.caption a h3{
+    font-family: 'KosticSerif-Regular';
+    font-style: normal;
+}
+.caption a p{
+    font-family: 'K_Myriad Pro';
+    font-style: normal;
+}
+.caption .btn-info{
+    color:white;
+}
+.aboutUs pre{
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.brewery pre{
+    background-color: rgba(255,255,255,0);
+    border-style: none;
+}
+.dishHeadLink a{
+    color:rgba(102, 153, 26, 1);
+    text-decoration: none;
+    font-family: 'K_Myriad Pro';
+}
+.delivery pre{
+    background-color:rgba(255,255,255,0);
+    border-style: none;
+    font-size: 120%;
+}
+.ui-loader{
+    display:none;
+}
+#myCarousel_2 a{
+    color:rgba(102, 153, 26, 1);
+}
+#bearFest{
+    background-color: rgba(255,255,255,0);
+    border-style: hidden;
+}
+#myCarousel_11 img{
+    height:112px;
+}
+#myCarousel_3 img{
+    height:190px;
+}
+.logos{
+    margin-top: -20px;
+}
+#weProud{
+    text-align: center;
+    font-family: 'KosticSerif-Italic';
+    color:rgba(102, 153, 26, 1);
+}
+#beerHead{
+    font-family: 'KosticSerif-Italic';
+}
+#weProud_2{
+    text-align: center;
+    font-family: 'KosticSerif-Italic';
+    color:rgba(102, 153, 26, 1);
+    margin-top:-20px;
+}
+</style>
+<script type="text/javascript" src="../lib/jquery/dist/jquery.min.js"></script>
+<script type="text/javascript" src="../lib/angular/angular.js"></script>
+<script type="text/javascript" src="../js/app.js"></script>
+<script type="text/javascript" src="../js/controller.js"></script>
+<script type="text/javascript" src="../js/directives.js"></script>
+<script type="text/javascript" src="../lib/jqmobile/jquery.mobile-1.4.3.min.js"></script>
+<script type="text/javascript" src="../lib/lightbox/js/lightbox.min.js"></script>
+<script type="text/javascript" src="../lib/swipe/jquery.touchSwipe.min.js"></script>
+<script type="text/javascript" src="../lib/bootstrap/dist/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="../lib/angular-route/angular-route.min.js"></script>
+<script type="text/javascript" src="../lib/angular-resource/angular-resource.min.js"></script>
+<script type="text/javascript" src="../lib/angular-file-upload/angular-file-upload.min.js"></script>
+<script type="text/javascript" src='//maps.googleapis.com/maps/api/js?sensor=true'></script>
+<script type="text/javascript" src="../lib/lodash/dist/lodash.min.js"></script>
+<script type="text/javascript" src="../lib/angular-google-maps/dist/angular-google-maps.min.js"></script>
+<script type="text/javascript" src="../lib/angular-animate/angular-animate.min.js"></script>
+
+</head>
+<body>
+
+<!--Навигация-->
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-1,#navbar-collapse-2">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+
+            <div class="navbar-brand">
+                <div class="circle">
+                    <div class="grad">
+                        <a ng-href=""><img src="/img/logo.png"></a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-nav navbar-left" id="navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-left menuGroup">
+                    <li><a ng-href="/">Домой</a></li>
+                    <li><a ng-href="aboutUs">О нас</a></li>
+                    <li class="dropdown">
+                        <a class="dropdown-toggle" data-toggle="dropdown">
+                            Меню <span class="caret"></span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a ng-href="/menubar">Бар</a></li>
+                            <li><a ng-href="/menufood">Кухня</a></li>
+                            <!--<li><a href="#/menu/bear">Пивное</a></li>-->
+                            <li><a ng-href="/menulaunch">Ланч</a></li>
+                            <li><a ng-href="/menubranch">Бранч</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+
+            <div class="collapse navbar-collapse navbar-nav navbar-right" id="navbar-collapse-2">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ng-href="brewery">Пивоварня</a></li>
+                    <li><a ng-href="events">Галерея</a></li>
+                    <li><a ng-href="contacts">Контакты</a></li>
+                </ul>
+            </div>
+            <!--Смена языков-->
+            <!--
+            <div class="languages">
+                <div class="backCircle">
+                    <a>ru</a>
+                </div>
+                <div class="backCircle">
+                    <a>en</a>
+                </div>
+                <div class="backCircle">
+                    <a>kz</a>
+                </div>
+            </div>
+            -->
+        </div>
+    </div>
+</nav>
+
+
+    <div ng-view></div>
+
+
+<!--Футер-->
+<footer class="navbar-static-bottom">
+    <div class="lineFooter">
+    </div>
+    <div class="contentFooter gradHorFooter">
+        <div class="container">
+            <div class="ourNavigation col-md-1 col-md-offset-1">
+                <a ng-href="/">
+                    <h4>НАВИГАЦИЯ</h4>
+                </a>
+                <a ng-href="/" id="downHome">
+                    <h5>ДОМОЙ</h5>
+                </a>
+                <a ng-href="/aboutUs">
+                    <h5>О НАС</h5>
+                </a>
+                <a ng-href="/brewery">
+                    <h5>ПИВОВАРНЯ</h5>
+                </a>
+                <a ng-href="/menu">
+                    <h5>МЕНЮ</h5>
+                </a>
+                <a ng-href="/events">
+                    <h5>ГАЛЕРЕЯ</h5>
+                </a>
+                <a ng-href="/contacts">
+                    <h5>КОНТАКТЫ</h5>
+                </a>
+            </div>
+            <div class="tableOrder col-md-4 col-sm-6 col-md-offset-2">
+                <a ng-href="delivery">
+                    <h4 class="center">ДОСТАВКА</h4>
+                </a>
+                    <pre>
+Мы осуществляем доставку блюд из основного меню, а так же Ланчи и Пиво, сваренного на пивоварне O'Hara Irish Pub & Brewery. Все, что Вам нужно для оформления заказа - снять трубку и позвонить, предварительно выбрав желаемое в разделе меню.  Доставка работает: вк-чт с 12:00 до 01:00
+пт-сб с 12:00 до 04:00
+                    </pre>
+                <div class="logos">
+                    <div class="col-md-3 col-sm-3">
+                        <a ng-href="http://vk.com/oharairishpub" target="_blank">
+                            <i class="fa fa-vk fa-2x"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <a ng-href="/contacts" target="_blank">
+                            <i class="fa fa-envelope fa-2x"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <a ng-href="https://www.facebook.com/OharaIrishPubAndBrewery?ref=hl" target="_blank">
+                            <i class="fa fa-facebook fa-2x"></i>
+                        </a>
+                    </div>
+                    <div class="col-md-3 col-sm-3">
+                        <a ng-href="" target="_blank">
+                            <i class="fa fa-instagram fa-2x"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <address class="contacts col-md-3 col-sm-6 col-xs-12 col-md-offset-1">
+                <a>
+                    <h4 class="center">КОНТАКТЫ</h4>
+                </a>
+                <div class="row">
+                    <div class="col-md-3 col-sm-3 col-sm-offset-0 col-xs-3 col-xs-offset-1">
+                        <img src="/img/marker.png" width="19px" class="img-responsive">
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            Республика Казахстан Астана, 010000   Желтоксан 2/2 ЖК "Гранд Алатау"
+                        </p>
+                    </div>
+                </div>
+                <div class="row phone">
+                    <div class="col-md-3 col-sm-3 col-sm-offset-0 col-xs-3 col-xs-offset-1">
+                        <img ng-src="/img/phone.png" width="12px" height="19px">
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            8 (7172) 570 888
+                        </p>
+                    </div>
+                </div>
+                <div class="row cell_phone ">
+                    <div class="col-md-3 col-sm-3 col-sm-offset-0 col-xs-3 col-xs-offset-1">
+                        <img ng-src="/img/cell_phone.png" width="8px" height="19px">
+                    </div>
+                    <div class="col-md-9 col-sm-9 col-xs-8">
+                        <p>
+                            8 707 570 88 83
+                        </p>
+                    </div>
+                </div>
+            </address>
+
+
+<!--Some comments for github-->
+
+
+        </div>
+    </div>
+    <div class="lineBeneath"></div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<div class="content" xmlns="http://www.w3.org/1999/html">
+
+    <main-carousel-second></main-carousel-second>
+
+
+
+
+
+
+
+
+<!--Десятый слайдер-->
+<div class="col-md-12 col-sm-12 visible-sm visible-md visible-lg">
+    <div class="carousel slide" data-ride="carousel" data-type="multi" data-interval="5000" id="myCarousel_10">
+        <div class="carousel-inner col-sm-10 col-sm-offset-1">
+            <div class="item active">
+                <div class="clearfix">
+                <div data-ng-repeat="pic in activeNews" class="col-md-6 col-sm-6 col-xs-12">
+                    <div ng-show="pic.day" class="marginTop15">
+                        <div class="totalDate floatLeft greenBack">
+                            <h3 class="dayDate">{{pic.day}}</h3>
+                            <h5 class="yearDate">{{pic.mongth}} {{pic.year}}</h5>
+                        </div>
+                        <div class="titleDate col-sm-6">
+                            <h5>{{pic.title}}</h5>
+                        </div>
+                        <div class="justLine greenBack col-md-12 col-sm-12 clearFloat"></div>
+                            <div class="aboutTotal clearFloat">
+                                <div class="newsPic floatLeft">
+                                    <a href="{{pic.pic}}" data-lightbox="tenthSlider">
+                                        <img src="{{pic.mini}}" class="img-responsive marginTop15 center-block img-polaroid img-thumbnail">
+                                    </a>
+                                </div>
+                                <div class="newsBrief col-sm-6">
+                                    <pre>{{pic.brief}}</pre>
+                                    <a href="#news{{pic.title}}" class="btn btn-info btn-xs">Читать далее</a>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+                </div>
+            </div>
+            <div class="item" data-ng-repeat="ipics in singleNews">
+                <div class="clearfix">
+                <div data-ng-repeat="pic in ipics" class="col-md-6 col-sm-6 col-xs-12">
+                    <div ng-show="pic.day" class="marginTop15">
+                        <div class="totalDate floatLeft greenBack">
+                            <h3 class="dayDate">{{pic.day}}</h3>
+                            <h5 class="yearDate">{{pic.mongth}} {{pic.year}}</h5>
+                        </div>
+                        <div class="titleDate col-sm-6">
+                            <h5>{{pic.title}}</h5>
+                        </div>
+                        <div class="justLine greenBack col-md-8 col-sm-8 clearFloat"></div>
+                        <div class="aboutTotal clearFloat">
+                            <div class="newsPic floatLeft">
+                                <a href="{{pic.pic}}" data-lightbox="tenthSlider">
+                                    <img src="{{pic.mini}}" class="img-responsive marginTop15 center-block img-polaroid img-thumbnail">
+                                </a>
+                            </div>
+                            <div class="newsBrief">
+                                <pre>{{pic.brief}}</pre>
+                                <a href="news{{pic.title}}" class="btn btn-info btn-xs">Читать далее</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <button type="button" class="left carousel-control" href="#myCarousel_10" data-slide="prev">
+            <span class="glyphicon glyphicon-chevron-left"></span>
+        </button>
+        <button type="button" class="right carousel-control" href="#myCarousel_10" data-slide="next">
+            <span class="glyphicon glyphicon-chevron-righ"></span>
+        </button>
+    </div>
+</div>
+<!--Второй слайдер-->
+
+<!--Если размеры для телефона-->
+<div class="thumbnails slider2 visible-xs">
+    <div class="col-xs-12 center">
+        <div class="slide col-xs-12" data-ng-repeat="data in totalNews">
+                <h3 class="fontHelvetica">{{data.news_date}}</h3>
+                <a class="col-xs-12" href="/uploaded/{{data.news_photo[0]}}" data-lightbox="repo2">
+                    <img class="col-xs-6 col-xs-offset-3 img-responsive img-thumbnail" src="/uploaded/mini_{{data.news_photo[0]}}" alt="{{data.news_name}}">
+                </a>
+                <p>{{data.news_brief}}</p>
+                <a href="news{{data.news_name}}" class="col-xs-6 col-xs-offset-3 clearFloat btn btn-info btn-md k_myriad_italic">Читать далее</a>
+        </div>
+    </div>
+</div>
+
+
+<!--Управление слайдером-->
+<div class="controlsMenu visible-sm visible-md visible-lg">
+    <div class="prevSlideSecondSlider">
+        <button type="button" ng-click="clickLeftMenu()" class="fa fa-chevron-circle-left fa-2x"></button>
+    </div>
+
+    <div class="nextSlideSecondSlider">
+        <button type="button" ng-click="clickRightMenu()" class="fa fa-chevron-circle-right fa-2x"></button>
+    </div>
+</div>
+
+
+
+
+</div>

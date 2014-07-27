@@ -1,0 +1,9 @@
+<main-carousel-second></main-carousel-second>
+
+<div class="bear">
+    <div data-ng-repeat="res in result">
+        <h2 class="center dishHead">{{res.dish_name}}</h2>
+        <h3 class="center"><span ng-show="res.dish_weight">{{res.dish_weight}}гр., </span><span ng-show="res.dish_price">{{res.dish_price}}тг.</span></h3>
+        <h5 class="center" ng-show="res.dish_about">{{res.dish_about}}</h5>
+    </div>
+</div>

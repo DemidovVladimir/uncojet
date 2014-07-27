@@ -1,0 +1,66 @@
+<div class="content" xmlns="http://www.w3.org/1999/html">
+
+    <main-carousel-second></main-carousel-second>
+
+
+    <div class="mapThumb col-sm-10 col-sm-offset-1 thumbnail">
+            <google-map center="map.center" zoom="map.zoom"><marker coords='[71.419655,51.161960]'>
+            </marker></google-map>
+    </div>
+
+
+
+
+<!-- Call to Action -->
+<div class="call-to-action">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="text-center">
+                    <h3 class="headerTitle">Обратная связь:</h3>
+                </div>
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <label for="nameInput" class="control-label col-md-3">Ваше имя:</label>
+                        <div class="col-md-8">
+                            <input type="text" name="nameInput" ng-model="name" placeholder="Пусто" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="emailInput" class="control-label col-md-3">Ваш email:</label>
+                        <div class="col-md-8">
+                            <input type="email" name="emailInput" ng-model="emailFrom" placeholder="Пусто" class="form-control">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="themeInput" class="control-label col-md-3">Тема сообщения:</label>
+                        <div class="col-md-8">
+                            <select name="themeInput" ng-model="theme" class="form-control">
+                                <option value="Отвлеченная" class="form-control">Отвлеченная</option>
+                                <option value="Ценовая_политика" class="form-control">Ценовая политика</option>
+                                <option value="Пивоварня" class="form-control">Пивоварня</option>
+                                <option value="Рабочие_места" class="form-control">Рабочие места</option>
+                                <option value="Запрос_на_выполнение" class="form-control">Запрос на выполнение заказа</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="bodyInput" class="control-label col-md-3">Ваше сообщение:</label>
+                        <div class="col-md-8">
+                            <textarea name="bodyInput" ng-model="body" placeholder="Пусто" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-10 col-md-offset-3">
+                            <a ng-click="submitIt();name='';emailFrom='';theme='';body='';" class="btn btn-success">Отправить</a>
+                        </div>
+                    </div>
+                </form>
+                <h3>{{result}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- /Call to Action -->
+
+</div>
