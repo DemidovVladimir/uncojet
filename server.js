@@ -1,5 +1,6 @@
 var express = require('express');
-var http = require('http');
+var app = express();
+var http = require('http').Server(app);
 var path = require('path');
 var favicon = require('static-favicon');
 var logger = require('morgan');
@@ -7,12 +8,26 @@ var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var bodyParser = require('body-parser');
 var api = require('./api/index');
+var io = require('socket.io')(http);
 
 
-var app = express();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-
 app.use(favicon());
 app.use(logger('dev'));
 app.use(express.bodyParser());
@@ -23,6 +38,29 @@ app.use(session({
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
+
+
+
+
+
+
+
+
+
+
+
+
+io.on('connection',function(socket){
+    //socket.broadcast.emit('chat message','Пользователь на связи!');
+    socket.on('disconnect', function(){
+        socket.broadcast.emit('chat message','Спасибо за помощь!');
+    });
+    socket.on('chat message', function(msg){
+        io.emit('chat message', msg);
+    });
+});
+
+
 
 
 
@@ -78,6 +116,10 @@ app.get('/photosVk',api.photosVk);
 app.get('*',function(req, res) {
     res.sendfile('index.html');
 });
+
+
+
+
 /*
  app.post('/adminPanel',api.tryToLog);
  app.get('/adminPanel',function(req,res){
@@ -112,4 +154,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-app.listen(8080);
+http.listen(8080, function(){
+    console.log('listening on 8080');
+});

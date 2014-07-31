@@ -1,17 +1,40 @@
 'use strict';
 
-app.controller('tryout',function($scope,$resource){
-    $scope.setdish = function(){
-        var name = $scope.dishname;
-        var about = $scope.aboutdish;
-        var inputTo = $resource('input_dish');
 
-        var input = new inputTo();
-        input.name = name;
-        input.about = about;
 
-        input.$save();
-    }
+
+
+
+
+
+
+app.controller('home',function($scope,$resource,$window){
+
+
+});
+app.controller('total',function($scope,$resource){
+    $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+        // Avoid following the href location when clicking
+        event.preventDefault();
+        // Avoid having the menu to close when clicking
+        event.stopPropagation();
+        // If a menu is already open we close it
+        //$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+        // opening the one you clicked on
+        $('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+        $(this).parent().toggleClass('open');
+
+        var menu = $(this).parent().find("ul");
+        var menupos = menu.offset();
+
+        if ((menupos.left + menu.width()) + 30 > $(window).width()) {
+            var newpos = - menu.width();
+        } else {
+            var newpos = $(this).parent().width();
+        }
+        menu.css({ left:newpos });
+
+    });
 });
 
 
@@ -1844,6 +1867,25 @@ app.controller('events',function($scope,$resource){
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//INs
 app.controller('contacts',function($scope,$resource){
     $scope.submitIt = function(){
         var name = $scope.name;
@@ -1863,12 +1905,80 @@ app.controller('contacts',function($scope,$resource){
     };
     $scope.map = {
         center: {
-            latitude: 51.161960,
-            longitude: 71.419655
+            latitude: 43.249761,
+            longitude: 76.851154
         },
         zoom: 15
     };
 });
+app.controller('assist',function($scope){
+    var person = prompt("Введите ваше имя", "");
+    sessionStorage.person = person;
+    if(sessionStorage.person=='' || sessionStorage.person=='undefined' || sessionStorage.person == 'null' || sessionStorage.person == 'UncoTech'){
+        window.location.href = '/';
+    }else{
+        var socket = io();
+        $('form').submit(function(){
+            socket.emit('chat message', sessionStorage.person +' : '+ $('#msg').val());
+            $('#msg').val('');
+            return false;
+        });
+        socket.on('chat message', function(msg){
+            var endMsg = msg.split(":");
+            endMsg = endMsg[0];
+            if(endMsg=='UncoTech '){
+                $('#messages').append($('<li style="color: blue">').text(msg));
+            }else{
+                $('#messages').append($('<li>').text(msg));
+            }
+        });
+
+        var pageHeight = window.innerHeight;
+        var approxHeight = pageHeight - 280;
+        $('.assist_msg').height(approxHeight);
+    }
+});
+app.controller('assistTech',function($scope){
+    var pass = prompt("Введите пароль", "");
+    sessionStorage.pass = pass;
+    if(sessionStorage.pass!='TechSupport'){
+        window.location.href = '/';
+    }else{
+        var socket = io();
+        $('form').submit(function(){
+            socket.emit('chat message', 'UncoTech' +' : '+ $('#msg').val());
+            $('#msg').val('');
+            return false;
+        });
+        socket.on('chat message', function(msg){
+            var endMsg = msg.split(":");
+            endMsg = endMsg[0];
+            if(endMsg!='UncoTech '){
+                $('#messages').append($('<li style="color: green">').text(msg));
+            }else{
+                $('#messages').append($('<li>').text(msg));
+            }
+        });
+
+        var pageHeight = window.innerHeight;
+        var approxHeight = pageHeight - 280;
+        $('.assist_msg').height(approxHeight);
+    }
+});
+
+
+//INs
+
+
+
+
+
+
+
+
+
+
+
 
 
 

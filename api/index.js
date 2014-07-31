@@ -1520,7 +1520,7 @@ exports.sendEmail = function(req,res,next){
 
     mail({
         from: name+" ✔ "+emailAddress, // sender address
-        to: "oharaforfriends@gmail.com", // list of receivers
+        to: "meandevelopmentstudio@gmail.com", // list of receivers
         subject: theme+" ✔", // Subject line
         text: body+" ✔", // plaintext body
         html: "<b>"+body+" ✔</b>" // html body

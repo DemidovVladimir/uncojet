@@ -9,7 +9,7 @@ var app = angular.module('myApp',['ngRoute','ngResource','angularFileUpload','go
         $routeProvider
             .when('/', {
                 templateUrl:"parts/home.html",
-                controller:'getMenu'
+                controller:'home'
             })
             .when('/aboutUs',{
                 templateUrl:'parts/aboutUs.html',
@@ -95,13 +95,23 @@ var app = angular.module('myApp',['ngRoute','ngResource','angularFileUpload','go
                 templateUrl:"/parts/viewEvent.html",
                 controller:'viewEvent'
             })
+            .when('/menubyCat:category', {
+                templateUrl:"/parts/menuCat.html",
+                controller:'menuCat'
+            })
+
+
             .when('/contacts', {
                 templateUrl:"/parts/contacts.html",
                 controller:'contacts'
             })
-            .when('/menubyCat:category', {
-                templateUrl:"/parts/menuCat.html",
-                controller:'menuCat'
+            .when('/assist',{
+                templateUrl:"/parts/assist.html",
+                controller:'assist'
+            })
+            .when('/assistTech',{
+                templateUrl:"/parts/assistTech.html",
+                controller:'assistTech'
             })
             .otherwise({
                 redirectTo: '/'
