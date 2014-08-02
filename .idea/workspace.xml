@@ -23,10 +23,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="server.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/server.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="10" selection-start="970" selection-end="970" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="2445">
+            <state line="11" column="0" selection-start="400" selection-end="400" vertical-scroll-proportion="0.24229075" vertical-offset="0" max-vertical-offset="2430">
               <folding />
             </state>
           </provider>
@@ -61,19 +61,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="package.json" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="package.json" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="0.3785489" vertical-offset="0" max-vertical-offset="634">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="socket.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/socket.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="54" column="14" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0" vertical-offset="810" max-vertical-offset="1620">
+            <state line="16" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="360">
               <folding />
             </state>
           </provider>
@@ -136,13 +127,13 @@
         <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/api/index.js" />
         <option value="$PROJECT_DIR$/api/socket.js" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/public/parts/assist.html" />
         <option value="$PROJECT_DIR$/public/js/controller.js" />
         <option value="$PROJECT_DIR$/public/parts/assistTech.html" />
         <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/mongo_install.bash" />
         <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
@@ -194,6 +185,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="uncojet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uncojet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uncojet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="api" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -275,10 +280,10 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="252" y="31" width="1440" height="821" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24947146" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -335,13 +340,6 @@
           <folding>
             <element signature="n#style#0;n#li#0;n#ul#0;n#div#0;n#div#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/socket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="14" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0" vertical-offset="774" max-vertical-offset="1620">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -563,13 +561,6 @@
         <state line="0" column="102" selection-start="102" selection-end="102" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1920" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/socket.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="14" selection-start="1102" selection-end="1102" vertical-scroll-proportion="0.0" vertical-offset="774" max-vertical-offset="1620">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/parts/contacts.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="133" column="20" selection-start="6998" selection-end="7274" vertical-scroll-proportion="0.5947205" vertical-offset="1612" max-vertical-offset="2280" />
@@ -578,13 +569,6 @@
     <entry file="file://$PROJECT_DIR$/api/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1708" column="0" selection-start="72132" selection-end="72132" vertical-scroll-proportion="0.0" vertical-offset="25042" max-vertical-offset="25710">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="54" column="10" selection-start="970" selection-end="970" vertical-scroll-proportion="0.0" vertical-offset="555" max-vertical-offset="2445">
           <folding />
         </state>
       </provider>
@@ -637,7 +621,14 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="0.3785489" vertical-offset="0" max-vertical-offset="634">
+        <state line="16" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="360">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="400" selection-end="400" vertical-scroll-proportion="0.24229075" vertical-offset="0" max-vertical-offset="2430">
           <folding />
         </state>
       </provider>

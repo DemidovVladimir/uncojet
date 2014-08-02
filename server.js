@@ -9,7 +9,6 @@ var session      = require('express-session');
 var bodyParser = require('body-parser');
 var api = require('./api/index');
 var io = require('socket.io')(http);
-//var socket = require('./api/socket.js');
 
 
 
