@@ -16,6 +16,14 @@ app
  *
  */
 
+    .directive('listUser',function(){
+        return {
+            restrict: 'E',
+            link:function(scope,element,attrs){
+            },
+            templateUrl: 'parts/userList.html'
+        };
+    })
     .directive('mainCarousel',function(){
         return {
             restrict: 'E',

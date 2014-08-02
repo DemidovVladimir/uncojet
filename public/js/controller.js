@@ -1912,52 +1912,177 @@ app.controller('contacts',function($scope,$resource){
     };
 });
 app.controller('assist',function($scope){
-    var person = prompt("Введите ваше имя", "");
-    sessionStorage.person = person;
+    var info = [];
+    if(!sessionStorage.person){
+        var person = prompt("Введите ваше имя", "");
+        sessionStorage.person = person;
+    }else{
+
+    }
+
+
+
     if(sessionStorage.person=='' || sessionStorage.person=='undefined' || sessionStorage.person == 'null' || sessionStorage.person == 'UncoTech'){
         window.location.href = '/';
     }else{
         var socket = io();
-        $('form').submit(function(){
+        socket.on('connect', function () {
+            socket.emit('chat message', sessionStorage.person+' : онлайн!!!');
+        });
+        window.onbeforeunload = function (event) {
+            socket.emit('chat message', sessionStorage.person+' : offline!!!');
+        };
+        /*$scope.$on('$routeChangeStart', function(next, current) {
+            socket.emit('chat message', sessionStorage.person+' : offline!!!');
+        });*/
+
+        $scope.submitMsg = function(){
             socket.emit('chat message', sessionStorage.person +' : '+ $('#msg').val());
             $('#msg').val('');
             return false;
-        });
+        }
+
+
         socket.on('chat message', function(msg){
-            var endMsg = msg.split(":");
-            endMsg = endMsg[0];
-            if(endMsg=='UncoTech '){
-                $('#messages').append($('<li style="color: blue">').text(msg));
+            if(msg=='Make_beep'){
             }else{
-                $('#messages').append($('<li>').text(msg));
+            var endMsg = msg.split(":");
+            if(endMsg.length==3){
+                var msgUser = endMsg[0];
+                var toUser = endMsg[1];
+                if(toUser==' undefined '){
+                    toUser = 'Всем';
+                }
+                var msgBody = endMsg.pop();
+                var data = {};
+                data.user = msgUser;
+                data.toUser = toUser;
+                data.msg = msgBody;
+                info.push(data);
+                $scope.$apply(function () {
+                    $scope.info = info;
+                });
+            }else{
+                var msgUser = endMsg[0];
+                var msgBody = endMsg.pop();
+                var data = {};
+                data.user = msgUser;
+                data.msg = msgBody;
+                info.push(data);
+                $scope.$apply(function () {
+                    $scope.info = info;
+                });
             }
+        }
         });
+
+
+
+
+
+
 
         var pageHeight = window.innerHeight;
         var approxHeight = pageHeight - 280;
         $('.assist_msg').height(approxHeight);
     }
 });
+
+
+
+
 app.controller('assistTech',function($scope){
+
+    var users = [];
+    var info = [];
+
+    function PlaySound(soundObj) {
+        var sound = document.getElementById(soundObj);
+        sound.Play();
+    }
+
     var pass = prompt("Введите пароль", "");
     sessionStorage.pass = pass;
     if(sessionStorage.pass!='TechSupport'){
         window.location.href = '/';
     }else{
         var socket = io();
-        $('form').submit(function(){
-            socket.emit('chat message', 'UncoTech' +' : '+ $('#msg').val());
+
+        $scope.submitMsg = function(){
+            socket.emit('chat message', 'UncoTech' +' : '+$scope.result+' : '+ $scope.msg);
             $('#msg').val('');
+            $scope.result = 'Всем!';
             return false;
-        });
+        }
         socket.on('chat message', function(msg){
-            var endMsg = msg.split(":");
-            endMsg = endMsg[0];
-            if(endMsg!='UncoTech '){
-                $('#messages').append($('<li style="color: green">').text(msg));
+            if(msg=='Make_beep'){
+                PlaySound("sound1");
             }else{
-                $('#messages').append($('<li>').text(msg));
+                var endMsg = msg.split(":");
+                if(endMsg.length==3){
+                    var msgUser = endMsg[0];
+                    var toUser = endMsg[1];
+                    if(toUser==' undefined '){
+                        toUser = 'Всем';
+                    }
+                    var msgBody = endMsg.pop();
+                    var data = {};
+                    data.user = msgUser;
+                    data.toUser = toUser;
+                    data.msg = msgBody;
+                    info.push(data);
+                    $scope.$apply(function () {
+                        $scope.info = info;
+                    });
+                }else{
+                    var msgUser = endMsg[0];
+                    var msgBody = endMsg.pop();
+                    var data = {};
+                    data.user = msgUser;
+                    data.msg = msgBody;
+                    info.push(data);
+                    $scope.$apply(function () {
+                        $scope.info = info;
+                    });
+                }
             }
+
+
+
+
+
+
+
+                $scope.reactClick = function(user){
+                        $scope.result = user;
+                };
+
+
+
+
+
+
+
+               /* if(msgUser!='UncoTech ' && msgBody){
+                    var check = users.indexOf(msgUser);
+
+
+
+                    if(check===-1){
+                        users.push(msgUser);
+                    }
+
+                    $scope.users = users;
+                    //users.forEach(function(user){
+                       // $('#to').html('');
+                    //});
+                    //$('#messages').append($('<li style="color: green">').text(msg));
+
+
+                }else{
+                    $('#messages').append($('<li>').text(msg));
+                }*/
+
         });
 
         var pageHeight = window.innerHeight;

@@ -9,7 +9,7 @@ var session      = require('express-session');
 var bodyParser = require('body-parser');
 var api = require('./api/index');
 var io = require('socket.io')(http);
-
+//var socket = require('./api/socket.js');
 
 
 
@@ -44,16 +44,15 @@ app.use(app.router);
 
 
 
-
-
+//io.sockets.on('connection', socket);
 
 
 
 
 io.on('connection',function(socket){
-    //socket.broadcast.emit('chat message','Пользователь на связи!');
+    socket.broadcast.emit('chat message','Make_beep');
     socket.on('disconnect', function(){
-        socket.broadcast.emit('chat message','Спасибо за помощь!');
+        //socket.broadcast.emit('chat message','Спасибо за помощь!');
     });
     socket.on('chat message', function(msg){
         io.emit('chat message', msg);
@@ -154,6 +153,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-http.listen(8080, function(){
-    console.log('listening on 8080');
+http.listen(80, function(){
+    console.log('listening on 80');
 });
