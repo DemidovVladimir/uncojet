@@ -63,7 +63,7 @@ io.on('connection',function(socket){
 
 
 
-
+/*
 
 
 
@@ -110,7 +110,7 @@ app.get('/getBearMenuTotal',api.getBearMenuTotal);
 app.get('/getLaunchMenuTotal',api.getLaunchMenuTotal);
 app.get('/getBranchMenuTotal',api.getBranchMenuTotal);
 app.get('/photosVk',api.photosVk);
-
+*/
 app.get('*',function(req, res) {
     res.sendfile('index.html');
 });

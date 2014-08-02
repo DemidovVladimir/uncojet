@@ -5,7 +5,7 @@ var nodemailer = require("nodemailer");
 var async = require('async');
 var request = require('request');
 
-
+/*
 exports.input_dish = function(req,res,next){
     var dishe = req.body.name;
     var about = req.body.about;
@@ -80,7 +80,7 @@ exports.getBarTotal = function(req,res,next){
      result.push(cat);
      });
      });
-     });*/
+     });*//*
 
 }
 exports.getFoodTotal = function(req,res,next){
@@ -1515,7 +1515,7 @@ exports.sendEmail = function(req,res,next){
      }else{
      console.log("Message sent: " + response.message);
      }
-     });*/
+     });
     var mail = require("nodemailer").mail;
 
     mail({
@@ -1686,7 +1686,7 @@ exports.photosVk = function(req,res,next){
 
 
 
-
+*/
 
 
 

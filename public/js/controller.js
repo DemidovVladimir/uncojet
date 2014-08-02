@@ -39,7 +39,7 @@ app.controller('total',function($scope,$resource){
 
 
 
-
+/*
 app.controller('getMenu',function($scope,$resource,$document,$window){
     $('.collapse li').mouseover(function(){
         $(this).addClass('gradientMenu');
@@ -130,7 +130,7 @@ app.controller('getMenu',function($scope,$resource,$document,$window){
                 for(var d=0;d<set.length-1;d++){
                     itemsResult.push(set[d+1]);
                 }
-                $scope.singleEvents = itemsResult;*/
+                $scope.singleEvents = itemsResult;
             }else{
                 var pictureArr = [];
                 for(var x=0; x<events.length; x++){
@@ -195,7 +195,7 @@ app.controller('getMenu',function($scope,$resource,$document,$window){
                 var itemsResult = [];
                 for(var d=0;d<set.length-1;d++){
                     itemsResult.push(set[d+1]);
-                }*/
+                }
 
 
 
@@ -627,7 +627,7 @@ app.controller('menuCat',function($scope,$resource,$document,$window,$routeParam
     /*#myCarousel_2 .thumbnail .btn-info{
         position: relative;
         bottom: -150px;
-    }*/
+    }
 
 
 });
@@ -736,7 +736,7 @@ app.controller('addMenu', function ($scope, $fileUploader,$resource,$route, $loc
         // ADDING FILTERS
 
         // Images only
-        uploader.filters.push(function(item /*{File|HTMLInputElement}*/) {
+        uploader.filters.push(function(item /*{File|HTMLInputElement}) {
             var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
             type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
             return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
@@ -1021,7 +1021,7 @@ app.controller('addNews',function($scope,$fileUploader,$routeParams,$resource,$r
     // ADDING FILTERS
 
     // Images only
-    uploader.filters.push(function(item /*{File|HTMLInputElement}*/) {
+    uploader.filters.push(function(item /*{File|HTMLInputElement}) {
         var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
         type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
@@ -1156,7 +1156,7 @@ app.controller('addEvent',function($scope,$fileUploader,$routeParams,$resource,$
     // ADDING FILTERS
 
     // Images only
-    uploader.filters.push(function(item /*{File|HTMLInputElement}*/) {
+    uploader.filters.push(function(item /*{File|HTMLInputElement}) {
         var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
         type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
         return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
@@ -1884,7 +1884,7 @@ app.controller('events',function($scope,$resource){
 
 
 
-
+*/
 //INs
 app.controller('contacts',function($scope,$resource){
     $scope.submitIt = function(){
@@ -2106,7 +2106,7 @@ app.controller('assistTech',function($scope){
 
 
 
-
+/*
 
 
 
@@ -2355,7 +2355,7 @@ app.controller('bar',function($scope,$resource,$document,$window){
     /*#myCarousel_2 .thumbnail .btn-info{
      position: relative;
      bottom: -150px;
-     }*/
+     }
 
 
 });
@@ -2714,7 +2714,7 @@ app.controller('food',function($scope,$resource,$document,$window){
     /*#myCarousel_2 .thumbnail .btn-info{
      position: relative;
      bottom: -150px;
-     }*/
+     }
 
 
 });
@@ -2772,3 +2772,4 @@ app.controller('allMenu',function($scope){
 app.controller('delivery',function($scope){
 
 });
+    */
