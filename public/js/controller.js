@@ -1937,8 +1937,7 @@ app.controller('assist',function($scope){
         });*/
 
         $scope.submitMsg = function(){
-            socket.emit('chat message', sessionStorage.person +' : '+ $('#msg').val());
-            $('#msg').val('');
+            socket.emit('chat message', sessionStorage.person +' : '+ $scope.msg);
             return false;
         }
 
@@ -1998,7 +1997,7 @@ app.controller('assistTech',function($scope){
 
     function PlaySound(soundObj) {
         var sound = document.getElementById(soundObj);
-        sound.Play();
+        sound.play();
     }
 
     var pass = prompt("Введите пароль", "");
@@ -2010,15 +2009,15 @@ app.controller('assistTech',function($scope){
 
         $scope.submitMsg = function(){
             socket.emit('chat message', 'UncoTech' +' : '+$scope.result+' : '+ $scope.msg);
-            $('#msg').val('');
             $scope.result = 'Всем!';
             return false;
         }
         socket.on('chat message', function(msg){
-            if(msg=='Make_beep'){
-                PlaySound("sound1");
-            }else{
-                var endMsg = msg.split(":");
+            var endMsg = msg.split(":");
+            if(endMsg[1]==' онлайн!!!'){
+                PlaySound("audiotag1");
+            }
+
                 if(endMsg.length==3){
                     var msgUser = endMsg[0];
                     var toUser = endMsg[1];
@@ -2045,7 +2044,7 @@ app.controller('assistTech',function($scope){
                         $scope.info = info;
                     });
                 }
-            }
+
 
 
 

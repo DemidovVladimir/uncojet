@@ -1482,7 +1482,7 @@ exports.tryToLog = function(req,res,next){
         //console.log(req.session.user);
         res.redirect('/menuAdmin');
     });
-};
+};*/
 
 exports.sendEmail = function(req,res,next){
     var name = req.body.name;
@@ -1491,7 +1491,7 @@ exports.sendEmail = function(req,res,next){
     var body = req.body.body;
 
     // create reusable transport method (opens pool of SMTP connections)
-    /* var smtpTransport = nodemailer.createTransport("SMTP",{
+     var smtpTransport = nodemailer.createTransport("SMTP",{
      service: "Gmail",
      auth: {
      user: "meandevelopmentstudio@gmail.com",
@@ -1516,7 +1516,10 @@ exports.sendEmail = function(req,res,next){
      console.log("Message sent: " + response.message);
      }
      });
-    var mail = require("nodemailer").mail;
+
+
+
+    /*var mail = require("nodemailer").mail;
 
     mail({
         from: name+" ✔ "+emailAddress, // sender address
@@ -1524,10 +1527,10 @@ exports.sendEmail = function(req,res,next){
         subject: theme+" ✔", // Subject line
         text: body+" ✔", // plaintext body
         html: "<b>"+body+" ✔</b>" // html body
-    });
+    });*/
 
 }
-
+/*
 exports.getCategoriesTotal = function(req,res,next){
     db.dishesModel.aggregate({$group:{_id:'$dish_category'}},{$sort:{_id:1}},function(err,data){
         if(err) return next(err);

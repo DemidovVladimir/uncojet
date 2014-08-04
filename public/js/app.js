@@ -11,6 +11,16 @@ var app = angular.module('myApp',['ngRoute','ngResource','angularFileUpload','go
                 templateUrl:"parts/home.html",
                 controller:'home'
             })
+            .when('/equipmentAdmin', {
+                templateUrl:"parts/add_equipment.html",
+                controller:'addEquipment'
+            })
+            .when('/equipmentAdmin:equipment', {
+                templateUrl:"/parts/maintain_equipment.html",
+                controller:'oneEquipment'
+            })
+
+
             .when('/aboutUs',{
                 templateUrl:'parts/aboutUs.html',
                 controller:'aboutUs'
@@ -47,14 +57,7 @@ var app = angular.module('myApp',['ngRoute','ngResource','angularFileUpload','go
                 templateUrl:'parts/branch.html',
                 controller:'branch'
             })
-            .when('/menuAdmin', {
-                templateUrl:"parts/add_menu.html",
-                controller:'addMenu'
-            })
-            .when('/menuAdmin:dish', {
-                templateUrl:"/parts/maintain_dish.html",
-                controller:'oneDish'
-            })
+
             .when('/adminCategory', {
                 templateUrl:"parts/maintain_category.html",
                 controller:'maintainCategory'

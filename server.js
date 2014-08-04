@@ -3,7 +3,7 @@ var app = express();
 var http = require('http').Server(app);
 var path = require('path');
 var favicon = require('static-favicon');
-//var logger = require('morgan');
+var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var session      = require('express-session');
 var bodyParser = require('body-parser');
@@ -33,7 +33,7 @@ app.use(express.bodyParser());
 app.use(cookieParser());
 app.use(cookieParser());
 app.use(session({
-    secret: 'Ohara Pub'
+    secret: 'UncoJet'
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
@@ -49,7 +49,7 @@ app.use(app.router);
 
 
 io.on('connection',function(socket){
-    socket.broadcast.emit('chat message','Make_beep');
+   // socket.broadcast.emit('chat message','Make_beep');
     socket.on('disconnect', function(){
         //socket.broadcast.emit('chat message','Спасибо за помощь!');
     });
@@ -61,7 +61,7 @@ io.on('connection',function(socket){
 
 
 
-
+app.post('/sendEmail',api.sendEmail);
 
 /*
 
@@ -83,7 +83,7 @@ app.post('/postEventDataOutOfFile',api.postEventDataOutOfFile);
 app.post('/postNewsOutOfFile',api.postNewsOutOfFile);
 app.post('/postEventOutOfFile',api.postEventOutOfFile);
 app.post('/addEvent',api.addEvent);
-app.post('/sendEmail',api.sendEmail);
+
 app.post('/postCategoryDataOutOfFile',api.postCategoryDataOutOfFile);
 
 app.get('/getMenuTotal',api.getMenuTotal);
