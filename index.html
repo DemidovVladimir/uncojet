@@ -394,6 +394,20 @@ footer{
     height:400px;
     overflow: scroll;
 }
+.clear-both{
+    clear: both;
+}
+.thumbnails .thumbnail{
+    text-align: center;
+    border-width: 0;
+    background-color:rgba(255,255,255,0.1);
+}
+.addToEquipmentList{
+    margin-top: 15px;
+}
+.progress{
+    margin-top: 30px;
+}
 
 
 
@@ -401,7 +415,9 @@ footer{
 </style>
 <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
+<script type="text/javascript"src="/lib/ng-file-upload/angular-file-upload-html5-shim.min.js"></script>
 <script type="text/javascript" src="/lib/angular/angular.js"></script>
+<script type="text/javascript" src="/lib/ng-file-upload/angular-file-upload.min.js"></script>
 <script type="text/javascript" src="/js/app.js"></script>
 <script type="text/javascript" src="/js/controller.js"></script>
 <script type="text/javascript" src="/js/directives.js"></script>
@@ -412,7 +428,6 @@ footer{
 <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/lib/angular-route/angular-route.min.js"></script>
 <script type="text/javascript" src="/lib/angular-resource/angular-resource.min.js"></script>
-<script type="text/javascript" src="/lib/angular-file-upload/angular-file-upload.min.js"></script>
 <script type="text/javascript" src='//maps.googleapis.com/maps/api/js?sensor=true'></script>
 <script type="text/javascript" src="/lib/lodash/dist/lodash.min.js"></script>
 <script type="text/javascript" src="/lib/angular-google-maps/dist/angular-google-maps.min.js"></script>
@@ -437,18 +452,16 @@ footer{
         </div>
         <div class="navbar-body collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
-                <li class="menu-item dropdown equipment"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Оборудование<b class="caret"></b></a>
+                <li class="menu-item dropdown equipment"><a href="" class="dropdown-toggle" data-toggle="dropdown">Оборудование<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Каплеструйные принтеры</a>
+                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-click="collectData('ink jet')">Каплеструйные принтеры<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li class="menu-item "><a href="#">Videojet 1220</a></li>
-                                <li class="menu-item "><a href="#">Videojet 1520</a></li>
+                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="item{{equipment.equipment_name}}">{{equipment.equipment_name}}</a></li>
                             </ul>
                         </li>
-                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Системы лазерной маркировки</a>
+                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-click="collectData('laser jet')">Сиситемы лазерной маркировки<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li class="menu-item "><a href="#">Videojet 3020</a></li>
-                                <li class="menu-item "><a href="#">Videojet 3130</a></li>
+                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="item{{equipment.equipment_name}}">{{equipment.equipment_name}}</a></li>
                             </ul>
                         </li>
                     </ul>

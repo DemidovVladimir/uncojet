@@ -1,10 +1,120 @@
 var db = require('./../data/db.js');
-//var fs = require('fs');
-//var gm = require('gm');
+var fs = require('fs');
+var gm = require('gm');
 var nodemailer = require("nodemailer");
 var async = require('async');
 var request = require('request');
+//var formidable = require('formidable');
 
+
+
+
+
+
+
+//At the menu administration adding photo with data
+exports.addEquipment = function(req,res,next){
+    db.equipmentModel.find({equipment_name:req.body.title},{equipment_photo:1},function(err,data){if(err) return next(err);
+        if(data.length!=0){
+            fs.createReadStream(req.files.file.path)
+                .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+            gm('public/uploaded/'+req.files.file.originalFilename)
+                .resize(170, 140)
+                .write('public/uploaded/mini_'+req.files.file.originalFilename, function (err) {
+                    if (!err) console.log('done_mini');
+                });
+            db.equipmentModel.update({equipment_name:req.body.title},
+                { $push: {"equipment_photo": req.files.file.originalFilename}},function(err){
+                    if(err) return next(err);
+                    res.send(200);
+                }
+            );
+        }else{
+            fs.createReadStream(req.files.file.path)
+                .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+            gm('public/uploaded/'+req.files.file.originalFilename)
+                .resize(170, 140)
+                .write('public/uploaded/mini_'+req.files.file.originalFilename, function (err) {
+                    if (!err) console.log('done_mini');
+                });
+            var title = req.body.title;
+            var about = req.body.about;
+            var some = req.body.some;
+            var price = req.body.price;
+            var benefit = req.body.benefit;
+            var category = req.body.category;
+            var specs = req.body.specs;
+            var areas = req.body.areas;
+            var videoLinks = req.body.videoLinks;
+            var order = req.body.order;
+            db.equipmentModel.create({equipment_name:title,equipment_photo:req.files.file.originalFilename,equipment_about:about,equipment_some:some,equipment_price:price,equipment_benefits:benefit,equipment_category:category,equipment_spec:specs,equipment_areas:areas,equipment_videos:videoLinks,equipment_order:order},function(err){
+                if(err) return next(err);
+                res.send(200);
+            });
+        }
+    });
+}
+
+exports.deleteEquipmentTotal = function(req,res,next){
+    var equipmentTitle = req.params.equipment;
+    db.equipmentModel.find({equipment_name:equipmentTitle},function(err,data){
+        if(err) return next(err);
+        var picObj = data[0].equipment_photo;
+        picObj.forEach(function(pic){
+            fs.unlink(__dirname+'/../public/uploaded/'+pic,function(err){
+                if(err) return next(err);
+                fs.unlink(__dirname+'/../public/uploaded/mini_'+pic,function(err){
+                    if(err) return next(err);
+                })
+            })
+        });
+        db.equipmentModel.remove({equipment_name:equipmentTitle},function(err){
+            if(err) return next(err);
+        });
+    });
+};
+
+//At the menu administration posting data without photo
+exports.postOutOfFile = function(req,res,next){
+    var title = req.body.title;
+    var about = req.body.about;
+    var some = req.body.some;
+    var price = req.body.price;
+    var benefit = req.body.benefit;
+    var category = req.body.category;
+    var specs = req.body.specs;
+    var areas = req.body.areas;
+    var videoLinks = req.body.videoLinks;
+    var order = req.body.order;
+    db.equipmentModel.create({equipment_name:title, equipment_about:about,equipment_some:some,equipment_price:price,equipment_benefits:benefit,equipment_category:category,equipment_spec:specs,equipment_areas:areas,equipment_videos:videoLinks,equipment_order:order},function(err){
+        if(err) return next(err);
+        res.send(200);
+    });
+}
+exports.getEquipmentsTotal = function(req,res,next){
+    db.equipmentModel.aggregate({$sort:{equipment_order:1}},function(err,data){
+        if(err) return next(err);
+        var info = data;
+        res.send(info);
+    });
+}
+exports.getEquipmentsTotalByCat = function(req,res,next){
+    var cat = req.params.bycat;
+    db.equipmentModel.aggregate({$match:{equipment_category:cat}},{$sort:{equipment_order:1}},function(err,data){
+        if(err) return next(err);
+        var info = data;
+        res.send(info);
+    });
+}
+exports.getEquipmentTotal = function(req,res,next){
+    var equipment = req.params.equipment;
+    db.equipmentModel.find({equipment_name:equipment},function(err,data){
+        if(err) return next(err);
+        var info = data;
+        console.log(info);
+        res.send(info);
+    });
+}
 /*
 exports.input_dish = function(req,res,next){
     var dishe = req.body.name;

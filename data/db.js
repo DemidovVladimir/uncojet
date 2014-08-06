@@ -19,12 +19,8 @@ var equipment = mongoose.Schema({
         type:String,
         unique:false
     },
-    equipment_spec_title:{
-        type:String,
-        unique:false
-    },
-    equipment_spec_value:{
-        type:String,
+    equipment_spec:{
+        type:[],
         unique:false
     },
     equipment_price:{
@@ -47,12 +43,12 @@ var equipment = mongoose.Schema({
         type:[],
         unique:false
     },
-    eqiupment_category:{
+    equipment_category:{
         type:String,
         unique:false
     },
     equipment_order:{
-        type:Number
+        type:String
     }
 });
 exports.equipmentModel = mongoose.model('equipment',equipment);

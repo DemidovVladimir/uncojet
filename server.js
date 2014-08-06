@@ -62,7 +62,12 @@ io.on('connection',function(socket){
 
 
 app.post('/sendEmail',api.sendEmail);
-
+app.post('/addEquipment',api.addEquipment);
+app.get('/deleteEquipmentTotal/:equipment',api.deleteEquipmentTotal);
+app.post('/postEquipmentOutOfFile',api.postOutOfFile);
+app.get('/getEquipmentsTotal',api.getEquipmentsTotal);
+app.get('/getEquipmentTotal/:equipment',api.getEquipmentTotal);
+app.get('/getEquipmentsTotal/:bycat',api.getEquipmentsTotalByCat);
 /*
 
 

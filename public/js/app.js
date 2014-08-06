@@ -19,6 +19,14 @@ var app = angular.module('myApp',['ngRoute','ngResource','angularFileUpload','go
                 templateUrl:"/parts/maintain_equipment.html",
                 controller:'oneEquipment'
             })
+            .when('/test',{
+                templateUrl:'/parts/test.html',
+                controller:'test'
+            })
+            .when('/item:equipment_name',{
+                templateUrl:'/parts/item.html',
+                controller:'item'
+            })
 
 
             .when('/aboutUs',{

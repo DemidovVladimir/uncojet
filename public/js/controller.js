@@ -9,10 +9,22 @@
 
 
 app.controller('home',function($scope,$resource,$window){
+    var todo = $resource('/getEquipmentsTotal');
+    var equipments = todo.query(function(){
 
-
+        $scope.equipments = equipments;
+    });
 });
 app.controller('total',function($scope,$resource){
+    $scope.collectData = function(cat){
+     var todo_2 = $resource('/getEquipmentsTotal/'+cat);
+     var equipments = todo_2.query(function(){
+
+     $scope.equipmentsInCat = equipments;
+     });
+     }
+
+
     $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
         // Avoid following the href location when clicking
         event.preventDefault();
@@ -2089,6 +2101,189 @@ app.controller('assistTech',function($scope){
         $('.assist_msg').height(approxHeight);
     }
 });
+
+
+
+app.controller('addEquipment', function ($scope,$resource,$route,$upload,$location) {
+
+
+    $scope.specs = [];
+    $scope.addSpec = function(){
+        $scope.specs.push({title:'',value:''});
+    }
+
+    $scope.areas = [];
+    $scope.addArea = function(){
+        $scope.areas.push({area:''});
+    }
+
+    $scope.videoLinks = [];
+    $scope.addVideoLink = function(){
+        $scope.videoLinks.push({videoLink:''});
+    }
+
+
+
+
+    $scope.path = 'http://localhost/equipmentAdmin';// Путь который контролит данный обработчик--------------------------------------
+
+
+    $scope.deleteTotalEquipment = function(equipment){
+        var Todo = $resource('/deleteEquipmentTotal/'+equipment);
+        var info = Todo.query();
+        $route.reload();
+    }
+
+
+    var Todo = $resource('getEquipmentsTotal');
+    $scope.incomings = [];
+    var info = Todo.query(function(){
+        info.forEach(function(data){
+            var incomeInfo = {};
+            incomeInfo.title = data.equipment_name;
+            incomeInfo.photo = data.equipment_photo;
+            incomeInfo.about = data.equipment_about;
+            incomeInfo.some = data.equipment_some;
+            incomeInfo.price = data.equipment_price;
+            incomeInfo.benefit = data.equipment_benefits;
+            incomeInfo.category = data.eqiupment_category;
+            incomeInfo.specs = data.equipment_spec;
+            incomeInfo.specs = JSON.parse(incomeInfo.specs);
+            incomeInfo.areas = data.equipment_areas;
+            incomeInfo.areas = JSON.parse(incomeInfo.areas);
+            incomeInfo.videoLinks = data.equipment_videos;
+            incomeInfo.videoLinks = JSON.parse(incomeInfo.videoLinks);
+            incomeInfo.order = data.equipment_order;
+            $scope.incomings.push(incomeInfo);
+        });
+    });
+
+    var files='';
+
+    $scope.onFileSelect = function($files){
+        files = $files;
+    };
+
+
+    $scope.sendData = function() {
+        if(files==''){
+            var title = $scope.title;
+            var about = $scope.about;
+            var some = $scope.some;
+            var price = $scope.price;
+            var benefit = $scope.benefit;
+            var category = $scope.category;
+            var specs = $scope.specs;
+            var areas = $scope.areas;
+            var videoLinks = $scope.videoLinks;
+            var order = $scope.order;
+            if(title && title!='Данное поле является обязательным!!!'){
+                var inputTo = $resource('/postEquipmentOutOfFile');
+
+                var input = new inputTo();
+                input.title = title;
+                input.about = about;
+                input.some = some;
+                input.price = price;
+                input.benefit = benefit;
+                input.category = category;
+                input.specs = specs;
+                input.specs = JSON.stringify(input.specs);
+                input.areas = areas;
+                input.areas = JSON.stringify(input.areas);
+                input.videoLinks = videoLinks;
+                input.videoLinks = JSON.stringify(input.videoLinks);
+                input.order = order;
+
+                input.$save();
+
+                $route.reload();
+            }else{
+                $scope.title = 'Данное поле является обязательным!!!';
+            }
+        }else{
+            var specs = $scope.specs;
+            specs = JSON.stringify(specs);
+            var areas = $scope.areas;
+            areas = JSON.stringify(areas);
+            var videoLinks = $scope.videoLinks;
+            videoLinks = JSON.stringify(videoLinks);
+            //$files: an array of files selected, each file has name, size, and type.
+            for (var i = 0; i < files.length; i++) {
+                var file = files[i];
+                $scope.upload = $upload.upload({
+                    url: 'addEquipment', //upload.php script, node.js route, or servlet url
+                    //method: 'POST' or 'PUT',
+                    //headers: {'header-key': 'header-value'},
+                    //withCredentials: true,
+
+                    data: {title : $scope.title,
+                        about : $scope.about,
+                        some : $scope.some,
+                        price : $scope.price,
+                        benefit : $scope.benefit,
+                        category : $scope.category,
+                        specs : specs,
+                        areas : areas,
+                        videoLinks : videoLinks,
+                        order : $scope.order},
+
+                    file: file // or list of files ($files) for html5 only
+                    //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
+                    // customize file formData name ('Content-Desposition'), server side file variable name.
+                    //fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file'
+                    // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
+                    //formDataAppender: function(formData, key, val){}
+                }).progress(function(evt) {
+                        var progress = parseInt(100.0 * evt.loaded / evt.total);
+                        $scope.progress = progress;
+
+                    }).success(function(data, status, headers, config) {
+                        // file is uploaded successfully
+                        //console.log(data);
+                        $route.reload();
+                    });
+                //.error(...)
+                //.then(success, error, progress);
+                // access or attach event listeners to the underlying XMLHttpRequest.
+                //.xhr(function(xhr){xhr.upload.addEventListener(...)})
+            }
+            /* alternative way of uploading, send the file binary with the file's content-type.
+             Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed.
+             It could also be used to monitor the progress of a normal http post/put request with large data*/
+            // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
+
+        };
+        }
+});
+
+
+app.controller('item',function($scope,$routeParams,$resource){
+    var equipment = $routeParams.equipment_name;
+    var Todo = $resource('/getEquipmentTotal/'+equipment);
+    var info = Todo.query(function(){
+        $scope.info = info;
+        var areas = info[0].equipment_areas;
+        areas = JSON.parse(areas);
+        $scope.areas = areas;
+        var photos = info[0].equipment_photo;
+        $scope.photosActive = photos.shift();
+        $scope.photosSingle = photos;
+    });
+});
+
+
+app.controller('test',function($scope){
+
+    $scope.input = [];
+    $scope.addEl = function(){
+        $scope.input.push({title:'',value:''});
+    }
+    $scope.confirm = function(){
+        $scope.output = $scope.input;
+    }
+});
+
 
 
 //INs
