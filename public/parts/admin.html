@@ -1,0 +1,36 @@
+<div class="adminPan text-center">
+    <h1>Упрощенная панель управления!</h1>
+
+    <!-- Button trigger modal
+    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+        Ввести данные администратора!
+    </button> -->
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Введите пароль для входа в админку!</h4>
+                </div>
+                <div class="modal-body">
+                    {{errorPass}}
+                    <input type="password" ng-model="pass">
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" ng-click="closeAdmin()" data-dismiss="modal">Закрыть</button>
+                    <button type="button" ng-click="checkPass()" class="btn btn-primary">Войти</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr>
+    <a class="btn btn-success" ng-href="/equipmentAdmin">Перейти на страничку управления оборудованием!</a><br>
+    <hr>
+    <a class="btn btn-success" ng-href="/areaAdmin">Перейти на страничку управления отраслями!</a>
+    <hr>
+    <a class="btn btn-success" ng-href="/categoryAdmin">Перейти на страничку управления категориями!</a>
+    <hr>
+
+</div>

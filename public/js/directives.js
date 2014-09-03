@@ -104,60 +104,208 @@ app
 
 
 
+app.directive('inputFile',function($resource,$route,$upload){
+        return{
+            restrict:'E',
+            link:function(scope,element,attrs){
+                var files;
+                scope.onFileSelect = function($files){
+                     files = $files;
+                    scope.files = [];
+                    files.forEach(function(item){
+                        scope.upload = $upload.upload({
+                            url: 'addFilesTo/equipment',
+                             data: {titleEl : scope.fileType,
+                             equipment_title:scope.title
+                             },
+                            file: item
+                        }).progress(function(evt) {
+                                var progress = parseInt(100.0 * evt.loaded / evt.total);
+                                scope.progress = progress;
 
-/*
-app.directive('activeFirst',function(){
+                            }).success(function(data, status, headers, config) {
+                                scope.files.push(item);
+                                //$route.reload();
+                            });
+                    });
+                };
+
+                scope.deleteEquipmentFile = function(file){
+                    var Todo = $resource('/deleteFileEquipment/'+scope.fileType+'/'+file);
+                    var info = Todo.query();
+                    var indexOf = scope.files.indexOf(file);
+                    scope.files.splice(indexOf, 1);
+                }
+            },
+            templateUrl:'parts/inputFile.html'
+        }
+    });
+
+app.directive('inputArea',function($resource,$route,$upload){
     return{
-        restrict: 'E',
-        replace:true,
-        templateUrl: 'parts/carouselActive.html'
+        restrict:'E',
+        link:function(scope,element,attrs){
+            var files;
+            scope.onFileSelect = function($files){
+                files = $files;
+                scope.files = [];
+                files.forEach(function(item){
+                    scope.upload = $upload.upload({
+                        url: 'addFilesTo/areas',
+                        data: {
+                            area_title:scope.title
+                        },
+                        file: item
+                    }).progress(function(evt) {
+                            var progress = parseInt(100.0 * evt.loaded / evt.total);
+                            scope.progress = progress;
+
+                        }).success(function(data, status, headers, config) {
+                            scope.files.push(item);
+                            //$route.reload();
+                        });
+                });
+            };
+
+            scope.deleteEquipmentFile = function(file){
+                var Todo = $resource('/deleteFileArea/'+file);
+                var info = Todo.query();
+                var indexOf = scope.files.indexOf(file);
+                scope.files.splice(indexOf, 1);
+            }
+        },
+        templateUrl:'parts/inputFile.html'
     }
 });
 
-app.directive('single',function(){
+
+app.directive('inputFileArea',function($resource,$route,$upload){
     return{
-        restrict: 'E',
-        replace:true,
-        templateUrl: 'parts/carouselSingle.html'
+        restrict:'E',
+        link:function(scope,element,attrs){
+
+        },
+        templateUrl:'parts/inputFileArea.html'
     }
 });
 
-app.directive('activeThumb',function(){
+app.directive('inputCategoryFile',function($resource,$route,$upload){
     return{
-        restrict: 'E',
-        replace:true,
-        templateUrl: 'parts/carouselThumbActive.html'
+        restrict:'E',
+        link:function(scope,element,attrs){
+            var files;
+            scope.onFileSelect = function($files){
+                files = $files;
+                scope.files = [];
+                files.forEach(function(item){
+                    scope.upload = $upload.upload({
+                        url: 'addFilesTo/category',
+                        data: {titleEl : scope.fileType,
+                            category_title:scope.title
+                        },
+                        file: item
+                    }).progress(function(evt) {
+                            var progress = parseInt(100.0 * evt.loaded / evt.total);
+                            scope.progress = progress;
+
+                        }).success(function(data, status, headers, config) {
+                            scope.files.push(item);
+                            //$route.reload();
+                        });
+                });
+            };
+
+
+            scope.deleteCategoryFile = function(file){
+                var Todo = $resource('/deleteFileCategory/'+scope.fileType+'/'+file);
+                var info = Todo.query();
+                var indexOf = scope.files.indexOf(file);
+                scope.files.splice(indexOf, 1);
+            }
+        },
+
+        templateUrl:'parts/inputCategoryFile.html'
     }
 });
-app.directive('singleThumb',function(){
+
+app.directive('menuEquipment',function($resource){
     return{
-        restrict: 'E',
-        replace:true,
-        templateUrl: 'parts/carouselThumbSingle.html'
+        restrict:'E',
+        link:function(scope,element,attrs){
+            var todo_1 = $resource('/getCategoriesTotal');
+            var cats = todo_1.query(function(){
+                scope.cats = cats;
+            });
+
+            scope.collectData = function(cat){
+                var todo_2 = $resource('/getEquipmentsTotal/'+cat);
+                var equipments = todo_2.query(function(){
+                    scope.equipmentsInCat = equipments;
+                });
+            };
+        },
+        templateUrl:'parts/menuEquipment.html'
     }
 });
-app.directive('activeThumbBtn',function(){
+
+app.directive('youtube',function($resource,$routeParams,$sce){
     return{
-        restrict: 'E',
-        replace:true,
-        templateUrl: 'parts/activeBtn.html'
+        restrict:'E',
+        link:function(scope,element,attrs){
+
+            scope.videoSafe = $sce.trustAsResourceUrl(scope.video.videoLink);
+                /*if(video[0].videoLink.length!=1){
+                    video[0].videoLink.forEach(function(item){
+                        var trusted = $sce.trustAsResourceUrl(item);
+                        scope.videoLinks.push(trusted);
+                    });
+                }else{
+                    var trusted = $sce.trustAsResourceUrl(video[0].videoLink);
+                    scope.videoLinks.push(trusted);
+                }*/
+
+
+
+
+
+
+        },
+        templateUrl:'parts/youtube.html'
     }
 });
-app.directive('singleThumbBtn',function(){
+app.directive('activePhotoAreas',function(){
     return{
-        restrict: 'E',
-        replace:true,
-        templateUrl: 'parts/singleBtn.html'
+        restrict:'E',
+        link:function(scope,element,attrs){
+        },
+        templateUrl:'parts/activePhotoAreas.html'
     }
 });
-app.directive('repoThumb',function(){
+app.directive('singlePhotoAreas',function(){
     return{
-        restrict: 'E',
-        replace:true,
-        templateUrl: 'parts/repeatThumb.html'
+        restrict:'E',
+        link:function(scope,element,attrs){
+        },
+        templateUrl:'parts/singlePhotoAreas.html'
     }
 });
-*/
+app.directive('activePhotoEquipments',function(){
+    return{
+        restrict:'E',
+        link:function(scope,element,attrs){
+        },
+        templateUrl:'parts/activePhotoEquipments.html'
+    }
+});
+app.directive('singlePhotoEquipments',function(){
+    return{
+        restrict:'E',
+        link:function(scope,element,attrs){
+        },
+        templateUrl:'parts/singlePhotoEquipments.html'
+    }
+});
+
 
 
 

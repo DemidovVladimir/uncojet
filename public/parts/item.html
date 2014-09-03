@@ -15,85 +15,115 @@
         <!-- /.row -->
 
 
+        <div class="text-center">
+            <h2>{{totalInfo[0].equipment_name}}</h2>
+        </div>
+
+
 
         <!-- Portfolio Item Row -->
         <div class="row">
 
             <div class="col-md-8">
-                <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-                    <!-- Indicators -->
-                    <ol class="carousel-indicators">
-                        <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-                        <li data-target="#carousel-example-generic" data-slide-to="2"></li>
-                    </ol>
+                    <div id="carousel-item-equipment" class="carousel slide" data-ride="carousel">
+                        <!-- Indicators -->
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel-item-equipment" data-slide-to="0" class="active"></li>
+                            <li ng-show="totalInfo[0].equipment_photo.indexOf(item)!=totalInfo[0].equipment_photo.length-1" data-ng-repeat="item in totalInfo[0].equipment_photo" data-target="#carousel-item-equipment" data-slide-to="{{totalInfo[0].equipment_photo.indexOf(item)}}"></li>
+                        </ol>
 
-                    <!-- Wrapper for slides -->
-                    <div class="carousel-inner">
-                        <div class="item active">
-                            <img class="img-responsive" src="/uploaded/{{photosActive}}" alt="">
+                        <!-- Wrapper for slides -->
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img class="img-responsive img-thumbnail center" src="/uploaded/{{activePhoto}}" alt="">
+                            </div>
+                            <div class="item" data-ng-repeat="item in singlePhoto">
+                                <img class="img-responsive img-thumbnail center" src="/uploaded/{{item}}" alt="">
+                            </div>
                         </div>
-                        <div class="item" data-ng-repeat="photo in photosSingle">
-                            <img class="img-responsive" src="/uploaded/{{photo}}" alt="">
-                        </div>
+
+                        <!-- Controls -->
+                        <button type="button" class="left carousel-control" href="#carousel-item-equipment" data-slide="prev">
+                            <span class="glyphicon glyphicon-chevron-left"></span>
+                        </button>
+                        <button type="button" class="right carousel-control" href="#carousel-item-equipment" data-slide="next">
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        </button>
                     </div>
+            </div>
 
-                    <!-- Controls -->
-                    <button type="button" class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-                        <span class="glyphicon glyphicon-chevron-left"></span>
-                    </button>
-                    <button type="button" class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-                        <span class="glyphicon glyphicon-chevron-right"></span>
-                    </button>
+
+            <div ng-show="width>992" class="col-md-4">
+                <h3>Документы</h3>
+                    <h5 class="col-md-10 col-md-offset-2" data-ng-repeat="doc in totalInfo[0].equipment_documents"><a target="_self" href="/uploaded/{{doc}}" download="{{doc}}">{{doc}}</a></h5>
+                <h3>Видео</h3>
+                    <!--<youtube-video id="good-vid" video-url="videos[0].videoLink"></youtube-video>-->
+               <youtube class="col-md-10 col-md-offset-2" ng-repeat="video in videos"></youtube>
+            </div>
+        </div>
+        <!-- /.row -->
+        <div ng-show="width<992" class="col-sm-12 text-center">
+            <h3 class="text-center">Документы</h3>
+                <h5 data-ng-repeat="doc in totalInfo[0].equipment_documents"><a target="_self" href="/uploaded/{{doc}}" download="{{doc}}">{{doc}}</a></h5>
+            <h3>Видео</h3>
+            <!--<youtube-video id="good-vid" video-url="videos[0].videoLink"></youtube-video>-->
+            <youtube class="col-sm-6" ng-repeat="video in videos"></youtube>
+        </div>
+
+
+        <div class="row">
+            <div class="container">
+                <h2 class="text-center">Описание:</h2>
+                <h5>{{totalInfo[0].equipment_about}}</h5>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="container">
+                <h2 class="text-center">Спецификация:</h2>
+                <table class="table table-hover">
+                    <tr data-ng-repeat="spec in specs">
+                        <td>{{spec.title}}</td>
+                        <td>{{spec.value}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="container">
+                <h2 class="text-center">Примеры установок:</h2>
+            </div>
+        </div>
+
+        <div id="carousel-areas" class="carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <!--<ol class="carousel-indicators">
+                <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+                <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>-->
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                <div class="item active">
+                    <active-photo-areas data-ng-repeat="photo in activePhotoAreas"></active-photo-areas>
+                </div>
+                <div class="item">
+                    <single-photo-areas data-ng-repeat="photo in singlePhotoAreas"></single-photo-areas>
                 </div>
             </div>
 
-
-            <div class="col-md-4">
-                <h3>Краткое описание</h3>
-                <p>{{info[0].equipment_about}}</p>
-                <h3>Примеры установок</h3>
-                    <ul>
-                        <li data-ng-repeat="area in areas"><a ng-href="area{{area.area}}">{{area.area}}</a></li>
-                    </ul>
-            </div>
-
+            <!-- Controls -->
+            <button type="button" class="left carousel-control" href="#carousel-areas" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </button>
+            <button type="button" class="right carousel-control" href="#carousel-areas" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
         </div>
-        <!-- /.row -->
 
-        <!-- Related Projects Row -->
-        <div class="row">
-
-            <div class="col-lg-12">
-                <h3 class="page-header">В данной категории:</h3>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-            <div class="col-sm-3 col-xs-6">
-                <a href="#">
-                    <img class="img-responsive img-hover img-related" src="http://placehold.it/500x300" alt="">
-                </a>
-            </div>
-
-        </div>
-        <!-- /.row -->
 
         <hr>
 

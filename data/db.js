@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/ohara');
+mongoose.connect('mongodb://localhost/uncojet');
 
 var mongoose = require('mongoose');
 
@@ -49,21 +49,24 @@ var equipment = mongoose.Schema({
     },
     equipment_order:{
         type:String
+    },
+    equipment_popular:{
+        type:String
     }
 });
 exports.equipmentModel = mongoose.model('equipment',equipment);
 
 
 var categories = mongoose.Schema({
-    cat_name:{
+    cat_title:{
         type:String,
         unique:true
     },
-    cat_photo:{
+    cat_photos:{
         type:[],
         unique:false
     },
-    cat_brief:{
+    cat_about:{
         type:String
     },
     cat_areas:{
@@ -83,3 +86,28 @@ var categories = mongoose.Schema({
     }
 });
 exports.categoryModel = mongoose.model('categories',categories);
+
+
+var areas = mongoose.Schema({
+    area_title:{
+        type:String,
+        unique:true
+    },
+    area_about:{
+        type:String,
+        unique:false
+    },
+    area_photos:{
+        type:[],
+        unique:false
+    },
+    area_videos:{
+        type:[],
+        unique:false
+    },
+    area_equipment:{
+        type:[],
+        unique:false
+    }
+});
+exports.areaModel = mongoose.model('area',areas);

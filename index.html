@@ -20,52 +20,12 @@
 <style type="text/css" rel="slylesheet">
 /*Declaring fonts*/
 @font-face {
-    font-family: 'HelveticaNeueCyr-Bold';
-    src: url('fonts/HelveticaNeueCyr-Bold.otf');
-}
-@font-face {
-    font-family: 'HelveticaNeueCyr-BoldItalic';
-    src: url('fonts/HelveticaNeueCyr-BoldItalic.otf');
-}
-@font-face {
-    font-family: 'HelveticaNeueCyr-Italic';
-    src: url('fonts/HelveticaNeueCyr-Italic.otf');
-}
-@font-face {
-    font-family: 'HelveticaNeueCyr-Light';
-    src: url('fonts/HelveticaNeueCyr-Light.otf');
-}
-@font-face {
-    font-family: 'HelveticaNeueCyr-Roman';
-    src: url('fonts/HelveticaNeueCyr-Roman.otf');
-}
-@font-face {
-    font-family: 'HelveticaNeueCyr-Thin';
-    src: url('fonts/HelveticaNeueCyr-Thin.otf');
-}
-@font-face {
-    font-family: 'K_MyriadPro-It';
-    src: url('fonts/K_MyriadPro-It.otf');
-}
-@font-face {
-    font-family: 'K_MyriadPro-Light';
-    src: url('fonts/K_MyriadPro-Light.otf');
-}
-@font-face {
-    font-family: 'KosticSerif-Italic';
-    src: url('fonts/KosticSerif-Italic.otf');
-}
-@font-face {
-    font-family: 'KosticSerif-Regular';
-    src: url('fonts/KosticSerif-Regular.otf');
-}
-@font-face {
     font-family: 'Nautilus';
     src: url('fonts/Nautilus.otf');
 }
 @font-face {
-    font-family: 'Roboto-Thin';
-    src: url('fonts/Roboto-Thin.ttf');
+    font-family: 'gabriela';
+    src: url('fonts/Gabriela-Regular.ttf');
 }
 
 html, body {
@@ -73,7 +33,7 @@ html, body {
     overflow-x: hidden !important;
 }
 body{
-    font-family: "HelveticaNeueCyr";
+    font-family: "gabriela";
     background-image: url('/img/back.jpg');
     padding-top: 50px;
 }
@@ -115,11 +75,8 @@ body{
     margin-top: 20px;
 }
 .ourNavigation h5{
-    font-family: "HelveticaNeueCyr";
-    font-style: italic;
 }
 address p{
-    font-family: 'Roboto';
 }
 
 
@@ -293,7 +250,8 @@ address p{
     border-style: none;
 }
 footer{
-    margin:0;
+    margin-top:50px;
+    margin-bottom: 0;
 }
 
 .carousel-caption h3{
@@ -405,10 +363,62 @@ footer{
 .addToEquipmentList{
     margin-top: 15px;
 }
+.addToAreaList{
+    margin-top: 15px;
+    margin-bottom: 225px;
+}
+.addToCategoryList{
+    margin-top: 15px;
+    margin-bottom: 225px;
+}
+.suppliesContent{
+    margin-top: 15px;
+    margin-bottom: 225px;
+}
 .progress{
     margin-top: 30px;
 }
-
+#carousel-item-equipment .carousel-control.left{
+    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+#carousel-item-equipment .carousel-control.right{
+    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+#carousel-areas .carousel-control.left{
+    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+#carousel-areas .carousel-control.right{
+    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
+}
+.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
+    background-color: rgba(66,139,202,0.9);
+}
+.sendDataButton{
+    position: relative;
+    top:25px;
+    right:27px;
+}
+.inputFilter{
+    position: relative;
+    top:55px;
+    right:27px;
+}
+.allIncome{
+    position: relative;
+    top:85px;
+}
+.suppliesThumb{
+    border-color: rgba(255,255,255,0);
+    background-color: rgba(255,255,255,0);
+}
+.secondThumb{
+    position: relative;
+    top:-200px;
+}
+.thirdThumb{
+    position: relative;
+    top:-200px;
+}
 
 
 
@@ -432,7 +442,7 @@ footer{
 <script type="text/javascript" src="/lib/lodash/dist/lodash.min.js"></script>
 <script type="text/javascript" src="/lib/angular-google-maps/dist/angular-google-maps.min.js"></script>
 <script type="text/javascript" src="/lib/angular-animate/angular-animate.min.js"></script>
-
+<script type="text/javascript" src="/lib/angular-youtube-mb/dist/angular-youtube-embed.min.js"></script>
 </head>
 <body>
 <div data-ng-controller="total">
@@ -452,42 +462,30 @@ footer{
         </div>
         <div class="navbar-body collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
+
+
                 <li class="menu-item dropdown equipment"><a href="" class="dropdown-toggle" data-toggle="dropdown">Оборудование<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-click="collectData('ink jet')">Каплеструйные принтеры<b class="caret"></b></a>
+                        <li data-ng-repeat="cat in cats" class="menu-item dropdown dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" ng-click="collectData(cat.cat_title)">{{cat.cat_title}}<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="item{{equipment.equipment_name}}">{{equipment.equipment_name}}</a></li>
-                            </ul>
-                        </li>
-                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown" ng-click="collectData('laser jet')">Сиситемы лазерной маркировки<b class="caret"></b></a>
-                            <ul class="dropdown-menu">
-                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="item{{equipment.equipment_name}}">{{equipment.equipment_name}}</a></li>
+                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="/itemEquipment{{equipment.equipment_name}}">{{equipment.equipment_name}}</a></li>
                             </ul>
                         </li>
                     </ul>
                 </li>
 
-                <li class="menu-item dropdown areas"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Отрасли<b class="caret"></b></a>
+               <li class="menu-item dropdown areas"><a href="" class="dropdown-toggle" data-toggle="dropdown">Решения<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Продукты питания и напитки</a>
-                            <ul class="dropdown-menu">
-                                <li class="menu-item "><a href="#">Выпечка и крупы</a></li>
-                                <li class="menu-item "><a href="#">Напитки</a></li>
-                            </ul>
+                        <li data-ng-repeat="area in areas" class="menu-item dropdown dropdown-submenu"><a ng-href="/itemArea{{area.area_title}}" ng-click="refer(area.area_title)" class="dropdown-toggle" data-toggle="dropdown">{{area.area_title}}</a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="menu-item dropdown library"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Библиотека<b class="caret"></b></a>
+                <li class="menu-item dropdown library"><a href="" class="dropdown-toggle" data-toggle="dropdown">Дополнительно<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                        <li><a href="#">Часто задаваемые вопросы</a></li>
-                        <li><a href="#">Видео</a></li>
-                        <li class="menu-item dropdown dropdown-submenu"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Документы</a>
-                            <ul class="dropdown-menu">
-                                <li class="menu-item "><a href="#">Брошюры</a></li>
-                                <li class="menu-item "><a href="#">Спецификация оборудования</a></li>
-                            </ul>
-                        </li>
+                        <li><a ng-href="/supplies">Чернила, риббоны, запчасти</a></li>
+                        <li><a ng-href="/monitor">Отслеживание и контроль</a></li>
+                        <li><a ng-href="/assurance">Система Code Assurance</a></li>
                     </ul>
                 </li>
 
@@ -498,8 +496,8 @@ footer{
                 <li class="menu-item contacts"><a href="/contacts">Контакты</a></li>
             </ul>
             <ul class="visible-md visible-lg nav navbar-nav navbar-right search">
-                <li><form class="navbar-search navbar-form" method="get" action="">
-                    <input type="text" class="form-control" placeholder="Поиск" name="s">
+                <li><form ng-submit="searchFor(item)" class="navbar-search navbar-form">
+                    <input ng-model="item" type="text" class="form-control" placeholder="Нажмите интер">
                 </form>
                 </li>
             </ul>
@@ -507,8 +505,45 @@ footer{
     </div>
     </div>
 </div>
-</div>
+    <!-- Modal -->
+    <div class="modal fade" id="myMenuModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    Результаты поиска:
+                </div>
+                <div class="modal-body">
+                    <div ng-show="searchRes.equipment.length!=0">
+                        <div data-ng-repeat="item in searchRes.equipment">
+                            <a ng-href="/itemEquipment{{item.equipment_name}}">{{item.equipment_name}}</a>
+                        </div>
+                    </div>
 
+                    <div ng-show="searchRes.areas.length!=0">
+                        <div data-ng-repeat="item in searchRes.areas">
+                            <a ng-href="/itemArea{{item.area_title}}">{{item.area_title}}</a>
+                        </div>
+                    </div>
+
+                    <div ng-show="searchRes.categories.length!=0">
+                        <div data-ng-repeat="item in searchRes.categories">
+                            <a ng-href="/itemCategory{{item.cat_title}}">{{item.cat_title}}</a>
+                        </div>
+                    </div>
+                    <div ng-show="searchRes.areas.length==0 && searchRes.categories.length==0 && searchRes.equipment.length==0" class="alert alert-danger" role="alert">
+                        <h5>Ничего по данному запросу найденно не было!
+                            Поиск осуществляется по названию оборудования, названию отрасли либо
+                            по названию категории оборудования!</h5>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    Спасибо за внимание
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
 
     <div ng-view></div>
 
@@ -523,20 +558,8 @@ footer{
                 <a ng-href="/">
                     <h4>UNCOJET</h4>
                 </a>
-                <a ng-href="#" id="downHome">
-                    <h5>Оборудование</h5>
-                </a>
-                <a ng-href="#">
-                    <h5>Отрасли</h5>
-                </a>
-                <a ng-href="#">
-                    <h5>Библиотека</h5>
-                </a>
                 <a ng-href="/assist">
                     <h5>Тех Поддержка</h5>
-                </a>
-                <a ng-href="/contacts">
-                    <h5>Контакты</h5>
                 </a>
             </div>
             <div class="delivery col-md-4 col-sm-6 col-md-offset-2">

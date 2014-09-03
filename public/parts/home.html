@@ -87,7 +87,7 @@
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><a><i class="fa fa-fw fa-rocket"></i>ИННОВАЦИЯ В КАПЛЕСТРУЙНОЙ ПЕЧАТИ</a></h4>
+                    <h4><i class="fa fa-fw fa-rocket"></i>ИННОВАЦИЯ В КАПЛЕСТРУЙНОЙ ПЕЧАТИ</h4>
                 </div>
                 <div class="panel-body">
                     <p>Новые принтеры Videojet 1550/1650 разработаны для решения актуальных производственных задач. Сведите к минимуму простои, легко интегрируйте принтер в линию, а также сократите техническое обслуживание.</p>
@@ -97,7 +97,7 @@
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><a><i class="fa fa-fw fa-bullseye"></i> ВСЕГДА ПРАВИЛЬНАЯ МАРКИРОВКА</a></h4>
+                    <h4><i class="fa fa-fw fa-bullseye"></i> ВСЕГДА ПРАВИЛЬНАЯ МАРКИРОВКА</h4>
                 </div>
                 <div class="panel-body">
                     <p>Ознакомьтесь с системой Code Assurance на оборудовании Videojet и убедитесь, что на вашей продукции применяется верная маркировка.</p>
@@ -107,7 +107,7 @@
         <div class="col-sm-4">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h4><a><i class="fa fa-fw fa-gears"></i>ЗАПРОС ОБСЛУЖИВАНИЯ НА ПРОИЗВОДСТВЕ</a></h4>
+                    <h4><i class="fa fa-fw fa-gears"></i>ЗАПРОС ОБСЛУЖИВАНИЯ НА ПРОИЗВОДСТВЕ</h4>
                 </div>
                 <div class="panel-body">
                     <p>Нужен технический специалист? Подайте заявку на техническую поддержку специалистами Videojet на вашем производстве.</p>
@@ -125,19 +125,90 @@
 
 
 
+
         <div class="thumbnails col-md-12 col-sm-12">
-            <div class="col-sm-4 col-md-4 center">
+
+            <div ng-show="equipmentsFirst.length==3" data-ng-repeat="equipment in equipmentsFirst" class="col-sm-4 col-md-4 text-center">
                 <div class="thumbnail">
-                    <img ng-src="http://www.videojet.com/content/dam/img/335x200-web/335x200-1220-CIJ.jpg" alt="VJ 1220">
+                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
                     <div class="caption">
-                        <a ng-href="#" class="noStyle">
-                            <h3>Videojet 1220</h3>
-                            <p>Идеален для использования в течение нескольких рабочих смен на производственных линиях с умеренными скоростями.</p>
-                            <p class="visible-xs"><a ng-href="#" class="btn btn-info" role="button">Читать подробнее</a></p><!--Menu link-->
+                        <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
+                            <h3>{{equipment.title}}</h3>
+                            <p>{{equipment.about}}</p>
+                            <p class="visible-xs"><a ng-href="/itemEquipment{{equipment.title}}" class="btn btn-info" role="button">Читать подробнее</a></p><!--Menu link-->
                         </a>
                     </div>
                 </div>
             </div>
+
+            <div ng-show="equipmentsFirst.length==2" data-ng-repeat="equipment in equipmentsFirst" class="col-sm-6 col-md-6 text-center">
+                <div class="thumbnail">
+                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <div class="caption">
+                        <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
+                            <h3>{{equipment.title}}</h3>
+                            <p>{{equipment.about}}</p>
+                            <p class="visible-xs"><a ng-href="/itemEquipment{{equipment.title}}" class="btn btn-info" role="button">Читать подробнее</a></p><!--Menu link-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="equipmentsFirst.length==1" data-ng-repeat="equipment in equipmentsFirst" class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3 text-center">
+                <div class="thumbnail">
+                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <div class="caption">
+                        <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
+                            <h3>{{equipment.title}}</h3>
+                            <p>{{equipment.about}}</p>
+                            <p class="visible-xs"><a ng-href="/itemEquipment{{equipment.title}}" class="btn btn-info" role="button">Читать подробнее</a></p><!--Menu link-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div ng-show="equipmentsSecond.length==3" data-ng-repeat="equipment in equipmentsSecond" class="col-sm-4 col-md-4 text-center">
+                <div class="thumbnail">
+                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <div class="caption">
+                        <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
+                            <h3>{{equipment.title}}</h3>
+                            <p>{{equipment.about}}</p>
+                            <p class="visible-xs"><a ng-href="/itemEquipment{{equipment.title}}" class="btn btn-info" role="button">Читать подробнее</a></p><!--Menu link-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="equipmentsSecond.length==2" data-ng-repeat="equipment in equipmentsSecond" class="col-sm-6 col-md-6 text-center">
+                <div class="thumbnail">
+                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <div class="caption">
+                        <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
+                            <h3>{{equipment.title}}</h3>
+                            <p>{{equipment.about}}</p>
+                            <p class="visible-xs"><a ng-href="/itemEquipment{{equipment.title}}" class="btn btn-info" role="button">Читать подробнее</a></p><!--Menu link-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div ng-show="equipmentsSecond.length==1" data-ng-repeat="equipment in equipmentsSecond" class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3 text-center">
+                <div class="thumbnail">
+                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <div class="caption">
+                        <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
+                            <h3>{{equipment.title}}</h3>
+                            <p>{{equipment.about}}</p>
+                            <p class="visible-xs"><a ng-href="/itemEquipment{{equipment.title}}" class="btn btn-info" role="button">Читать подробнее</a></p><!--Menu link-->
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+            <!--
             <div class="col-sm-4 col-md-4 center">
                 <div class="thumbnail">
                     <img ng-src="http://www.videojet.com/content/dam/img/335x200-web/335x200-1620-CIJ.jpg" alt="VJ 1620">
@@ -173,7 +244,7 @@
                             <h3>Videojet 6250</h3>
                             <p>Идеально подходит для многих видов оборудования для фасовки и герметизации.</p>
                             <p class="visible-xs"><a ng-href="#" class="btn btn-info" role="button">Читать подробнее</a></p><!--Menu link-->
-                        </a>
+                       <!-- </a>
                     </div>
                 </div>
             </div>
@@ -201,7 +272,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+            -->
+
 
 
 

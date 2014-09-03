@@ -11,21 +11,70 @@
 app.controller('home',function($scope,$resource,$window){
     var todo = $resource('/getEquipmentsTotal');
     var equipments = todo.query(function(){
-
-        $scope.equipments = equipments;
+        var equipmentArrFirst = [];
+        var equipmentArrSecond = [];
+        for(var i=0; i<equipments.length; i++){
+            if(equipments[i].equipment_popular=='true'){
+                if(equipmentArrFirst.length<4){
+                    var equipmentObj = {};
+                    equipmentObj.title = equipments[i].equipment_name;
+                    equipmentObj.about = equipments[i].equipment_about;
+                    equipmentObj.photo = equipments[i].equipment_photo[0];
+                    equipmentArrFirst.push(equipmentObj);
+                }
+            }else if(equipmentArrFirst.length>3 && equipmentArrFirst.length<7){
+                var equipmentObj = {};
+                equipmentObj.title = equipments[i].equipment_name;
+                equipmentObj.about = equipments[i].equipment_about;
+                equipmentObj.photo = equipments[i].equipment_photo[0];
+                equipmentArrSecond.push(equipmentObj);
+            }
+        }
+        $scope.equipmentsFirst = equipmentArrFirst;
+        $scope.equipmentsSecond = equipmentArrSecond;
     });
 });
-app.controller('total',function($scope,$resource){
+app.controller('total',function($scope,$resource,$location){
+
+    $scope.refer = function(area){
+        $location.url('/itemArea'+area);
+        $('.menu-item').removeClass('open');
+    }
+
+    var todo_1 = $resource('/getCategoriesTotal');
+    var cats = todo_1.query(function(){
+        $scope.cats = cats;
+    });
+
+    var areasTodo = $resource('/getAreasTotal');
+    var areas = areasTodo.query(function(){
+        $scope.areas = areas;
+    });
+
     $scope.collectData = function(cat){
      var todo_2 = $resource('/getEquipmentsTotal/'+cat);
      var equipments = todo_2.query(function(){
 
      $scope.equipmentsInCat = equipments;
      });
-     }
+     };
+
+    $scope.searchFor = function(item){
+        //$scope.test = 'check';
+        var todo7 = $resource('/searchFor/'+item);
+        var searchs = todo7.get(function(){
+            $scope.searchRes = searchs;
+            $('#myMenuModal').modal('show');
+        });
+    };
+
+    $scope.$on('$routeChangeStart', function(next, current) {
+        $('#myMenuModal').modal('hide');
+    });
 
 
-    $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+
+   /* $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
         // Avoid following the href location when clicking
         event.preventDefault();
         // Avoid having the menu to close when clicking
@@ -33,8 +82,8 @@ app.controller('total',function($scope,$resource){
         // If a menu is already open we close it
         //$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
         // opening the one you clicked on
-        $('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
-        $(this).parent().toggleClass('open');
+       $('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+       $(this).parent().toggleClass('open');
 
         var menu = $(this).parent().find("ul");
         var menupos = menu.offset();
@@ -46,1857 +95,33 @@ app.controller('total',function($scope,$resource){
         }
         menu.css({ left:newpos });
 
-    });
-});
+    });*/
+    $('.dropdown').on('show.bs.dropdown', function () {
+        $('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+            // Avoid following the href location when clicking
+            event.preventDefault();
+            // Avoid having the menu to close when clicking
+            event.stopPropagation();
+            // If a menu is already open we close it
+            //$('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+            // opening the one you clicked on
+            $('ul.dropdown-menu [data-toggle=dropdown]').parent().removeClass('open');
+            $(this).parent().toggleClass('open');
 
+            var menu = $(this).parent().find("ul");
+            var menupos = menu.offset();
 
-
-/*
-app.controller('getMenu',function($scope,$resource,$document,$window){
-    $('.collapse li').mouseover(function(){
-        $(this).addClass('gradientMenu');
-    });
-    $('.collapse li').mouseout(function(){
-        $(this).removeClass('gradientMenu');
-    });
-    $scope.clickLeftSecond = function(){
-        $('#myCarousel_2 .left').trigger('click');
-    }
-
-    $scope.clickRightSecond = function(){
-        $('#myCarousel_2 .right').trigger('click');
-    }
-    $scope.clickLeftThird = function(){
-        $('#myCarousel_3 .left').trigger('click');
-    }
-
-    $scope.clickRightThird = function(){
-        $('#myCarousel_3 .right').trigger('click');
-    }
-
-
-
-    $scope.width = window.innerWidth;
-    var todo_2 = $resource('/photosVk');
-    var events = todo_2.query(function(){
-
-        $scope.totalEvents = events;
-
-        //Check window size
-        $scope.$watch('width', function(newValue, oldValue) {
-           if(newValue < 992){
-                var pictureArr = [];
-                for(var x=0; x<events.length; x++){
-                    var total = {};
-                    total.pic = events[x].photo;
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%2;
-                var devidedTot = picLength/2;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 2-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,2);
-                var set = [];
-               var nonSet = [];
-                set.push(itemsActive);
-                $scope.activeEvents = set[0];
-               //If items 3
-               var totLen = pictureArr.length/2;
-               totLen = parseInt(totLen);
-               var leftLen = pictureArr.length%2;
-
-
-               for(var i=0; i<totLen; i++){
-                   var itemsActive = pictureArr.splice(0,2);
-                   nonSet.push(itemsActive);
-               }
-               if(leftLen!=0){
-                   var itemsActive = pictureArr.splice(0,2);
-                   nonSet.push(itemsActive);
-               }
-               $scope.singleEvents = nonSet;
-
-               /*var leftLen = picLength-2;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.singleEvents = itemsResult;
-            }else{
-                var pictureArr = [];
-                for(var x=0; x<events.length; x++){
-                    var total = {};
-                    total.pic = events[x].photo;
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%3;
-                var devidedTot = picLength/3;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 3-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,3);
-                var set = [];
-                var nonSet = [];
-                set.push(itemsActive);
-                $scope.activeEvents = set[0];
-
-
-
-
-
-
-
-               //If items 3
-               var totLen = pictureArr.length/3;
-               totLen = parseInt(totLen);
-               var leftLen = pictureArr.length%3;
-
-
-               for(var i=0; i<totLen; i++){
-                   var itemsActive = pictureArr.splice(0,3);
-                    nonSet.push(itemsActive);
-               }
-               if(leftLen!=0){
-                   var itemsActive = pictureArr.splice(0,3);
-                   nonSet.push(itemsActive);
-               }
-               $scope.singleEvents = nonSet;
-           };
-        });
-    });
-               //$scope.rest = set;
-              /*  for(var t=0;t<pictureArr.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    var toE = t*3;
-                    var new_set = set_copy.splice(0,3);
-                    //set_copy.push(pictureArr[t]);
-                    set.push(new_set);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-    var todo = $resource('/getMenuByCat/хоспер');
-    var info = todo.query(function(){
-        var forRepo = info;
-
-        forRepo.forEach(function(repo){
-            if(repo.dish_brief == 'undefined'){
-                repo.dish_brief = '';
+            if ((menupos.left + menu.width()) + 30 > $(window).width()) {
+                var newpos = - menu.width();
+            } else {
+                var newpos = $(this).parent().width();
             }
-            if(repo.dish_about == 'undefined'){
-                repo.dish_about = '';
-            }
+            menu.css({ left:newpos });
+
         });
-
-        $scope.info = forRepo;
-        var lenka = info.length;
-
-
-
-
-
-
-        //Check window size
-        $scope.$watch('width', function(newValue, oldValue) {
-            if(newValue < 768){
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    if(!info[x].dish_photo[0] || info[x].dish_photo[0]=='undefined'){
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                    }else{
-                        total.pic = '/uploaded/'+info[x].dish_photo[0];
-                        total.mini = '/uploaded/mini_'+info[x].dish_photo[0];
-                    }
-                    if(info[x].dish_name!='undefined'){
-                        total.title = info[x].dish_name;
-                    }else{
-                        total.title = "";
-                    }
-                    if(info[x].dish_brief!='undefined'){
-                        total.brief = info[x].dish_brief;
-                    }else{
-                        total.brief = '';
-                    }
-                    pictureArr.push(total);
-                };
-                $scope.itemsSingle = pictureArr;
-            }else if(newValue < 992){
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    total.pic = '/uploaded/'+info[x].dish_photo[0];
-                    total.mini = '/uploaded/mini_'+info[x].dish_photo[0];
-                    if(info[x].dish_name!='undefined'){
-                        total.title = info[x].dish_name;
-                    }else{
-                        total.title = "";
-                    }
-
-                    if(info[x].dish_brief!='undefined'){
-                        total.brief = info[x].dish_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%4;
-                var devidedTot = picLength/4;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 4-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,4);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-4;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            }else{
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    if(!info[x].dish_photo[0] || info[x].dish_photo[0]=='undefined'){
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                    }else{
-                        total.pic = '/uploaded/'+info[x].dish_photo[0];
-                        total.mini = '/uploaded/mini_'+info[x].dish_photo[0];
-                    }
-                    if(info[x].dish_name!='undefined'){
-                        total.title = info[x].dish_name;
-                    }else{
-                        total.title = "";
-                    }
-
-                    if(info[x].dish_brief!='undefined'){
-                        total.brief = info[x].dish_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%5;
-                var devidedTot = picLength/5;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 5-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,5);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-5;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            };
-        });
-    });
-
-
-
-
-//Manipulating DOM
-
-
-
-
-    function tellAngular() {
-        $scope.$apply(function() {
-            $scope.width = window.innerWidth;
-           // location.reload();
-        });
-    }
-
-
-
-    //calling tellAngular on resize event
-    $window.onresize = tellAngular;
+    })
 });
 
-app.controller('menuCat',function($scope,$resource,$document,$window,$routeParams){
-    var category = $routeParams.category;
-    $('.content').ready(function(){
-
-
-        $('.collapse li').mouseover(function(){
-            $(this).addClass('gradientMenu');
-        });
-        $('.collapse li').mouseout(function(){
-            $(this).removeClass('gradientMenu');
-        });
-    });
-
-    $scope.width = window.innerWidth;
-
-    var todo = $resource('/getMenuByCat/'+category);
-    var info = todo.query(function(){
-        var forRepo = info;
-        forRepo.forEach(function(repo){
-            if(repo.dish_brief == 'undefined'){
-                repo.dish_brief = '';
-            }
-            if(repo.dish_about == 'undefined'){
-                repo.dish_about = '';
-            }
-        });
-
-        $scope.info = forRepo;
-        var lenka = info.length;
-
-
-
-
-
-
-        //Check window size
-        $scope.$watch('width', function(newValue, oldValue) {
-            if(newValue < 992){
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    if(!info[x].dish_photo[0] || info[x].dish_photo[0]=='undefined'){
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                    }else{
-                        total.pic = '/uploaded/'+info[x].dish_photo[0];
-                        total.mini = '/uploaded/mini_'+info[x].dish_photo[0];
-                    }
-                    if(info[x].dish_name!='undefined'){
-                        total.title = info[x].dish_name;
-                    }else{
-                        total.title = "";
-                    }
-
-                    if(info[x].dish_brief!='undefined'){
-                        total.brief = info[x].dish_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%4;
-                var devidedTot = picLength/4;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 4-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,4);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-4;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            }else{
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    if(!info[x].dish_photo[0] || info[x].dish_photo[0]=='undefined'){
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                    }else{
-                        total.pic = '/uploaded/'+info[x].dish_photo[0];
-                        total.mini = '/uploaded/mini_'+info[x].dish_photo[0];
-                    }
-                    if(info[x].dish_name!='undefined'){
-                        total.title = info[x].dish_name;
-                    }else{
-                        total.title = "";
-                    }
-
-                    if(info[x].dish_brief!='undefined'){
-                        total.brief = info[x].dish_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%5;
-                var devidedTot = picLength/5;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 5-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,5);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-5;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            };
-        });
-    });
-
-
-
-
-//Manipulating DOM
-
-
-
-
-    function tellAngular() {
-        $scope.$apply(function() {
-            $scope.width = window.innerWidth;
-            //location.reload();
-        });
-    }
-
-
-
-    //calling tellAngular on resize event
-    $(window).resize(tellAngular);
-
-
-
-
-
-
-
-//Manipulating DOM
-
-
-
-
-
-
-
-
-
-
-    $scope.clickLeftMenu = function(){
-        $('#myCarousel_7 .left').trigger('click');
-        $('#myCarousel_8 .left').trigger('click');
-    }
-
-    $scope.clickRightMenu = function(){
-        $('#myCarousel_7 .right').trigger('click');
-        $('#myCarousel_8 .right').trigger('click');
-    }
-
-
-    $scope.clickcontrol = function(event){
-        event.preventDefault();
-    };
-
-    /*#myCarousel_2 .thumbnail .btn-info{
-        position: relative;
-        bottom: -150px;
-    }
-
-
-});
-
-
-
-
-
-
-
-
-app.controller('addMenu', function ($scope, $fileUploader,$resource,$route, $location) {
-    $scope.path = 'http://oharapub.kz/menuAdmin';// Путь который контролит данный обработчик--------------------------------------
-
-
-    $scope.deleteTotalDish = function(dish){
-        var Todo = $resource('/deleteDishTotal/'+dish);
-        var info = Todo.query();
-        $route.reload();
-    }
-
-    //Post all data without picture--------------
-    $scope.postDataOutOfFile = function(){
-        var title = $scope.title;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var time = $scope.time;
-        var price = $scope.price;
-        var weight = $scope.weight;
-        var type = $scope.dish_type;
-        var category = $scope.dish_category;
-        var order = $scope.order;
-        if(title && title!='Данное поле является обязательным!!!'){
-            var inputTo = $resource('/postDishOutOfFile');
-
-            var input = new inputTo();
-            input.title = title;
-            input.about = about;
-            input.time = time;
-            input.brief = brief;
-            input.price = price;
-            input.weight = weight;
-            input.type = type;
-            input.category = category;
-            input.order = order;
-
-            input.$save();
-
-            $route.reload();
-        }else{
-            $scope.title = 'Данное поле является обязательным!!!';
-        }
-    }
-
-
-    var Todo = $resource('getMenuTotal');
-    $scope.incomings = [];
-    var info = Todo.query(function(){
-        info.forEach(function(data){
-            var incomeInfo = {};
-            incomeInfo.title = data.dish_name;
-            incomeInfo.photo = data.dish_photo;
-            incomeInfo.about = data.dish_about;
-            incomeInfo.brief = data.dish_brief;
-            incomeInfo.time = data.dish_prepare;
-            incomeInfo.price = data.dish_price;
-            incomeInfo.weight = data.dish_weight;
-            incomeInfo.order = data.dish_order;
-            $scope.incomings.push(incomeInfo);
-        });
-    });
-
-
-
-
-
-    //Photo uploader-----------------------------------------------------
-        var uploader = $scope.uploader = $fileUploader.create({
-            scope: $scope,
-            url: 'addDish'
-        });
-
-
-
-
-
-    uploader.bind('beforeupload', function (event, item) {
-        var title = $scope.title;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var time = $scope.time;
-        var price = $scope.price;
-        var weight = $scope.weight;
-        var type = $scope.dish_type;
-        var category = $scope.dish_category;
-        var order = $scope.order;
-        var info = {title:title,about:about,order:order,time:time,brief:brief,price:price,weight:weight,type:type,category:category};
-        item.formData.push(info);
-    });
-    uploader.bind('completeall', function (event, items) {
-        $route.reload();
-    });
-
-
-
-        // ADDING FILTERS
-
-        // Images only
-        uploader.filters.push(function(item /*{File|HTMLInputElement}) {
-            var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-            type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-            return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-        });
-
-
-        // REGISTER HANDLERS
-
-        uploader.bind('afteraddingfile', function (event, item) {
-            console.info('After adding a file', item);
-        });
-
-        uploader.bind('whenaddingfilefailed', function (event, item) {
-            console.info('When adding a file failed', item);
-        });
-
-        uploader.bind('afteraddingall', function (event, items) {
-            console.info('After adding all files', items);
-        });
-
-        uploader.bind('beforeupload', function (event, item) {
-            console.info('Before upload', item);
-        });
-
-        uploader.bind('progress', function (event, item, progress) {
-            console.info('Progress: ' + progress, item);
-        });
-
-        uploader.bind('success', function (event, xhr, item, response) {
-            console.info('Success', xhr, item, response);
-        });
-
-        uploader.bind('cancel', function (event, xhr, item) {
-            console.info('Cancel', xhr, item);
-        });
-
-        uploader.bind('error', function (event, xhr, item, response) {
-            console.info('Error', xhr, item, response);
-        });
-
-        uploader.bind('complete', function (event, xhr, item, response) {
-            console.info('Complete', xhr, item, response);
-        });
-
-        uploader.bind('progressall', function (event, progress) {
-            console.info('Total progress: ' + progress);
-        });
-
-        uploader.bind('completeall', function (event, items) {
-
-        });
-    });
-
-
-
-
-
-
-
-
-
-
-
-
-
-app.controller('oneDish', function ($scope,$fileUploader,$routeParams,$resource,$route,$location){
-    var dish = $routeParams.dish;
-    var Todo = $resource('/getDishInfo/'+dish);
-    var info = Todo.query(function(){
-        var data = info[0];
-        $scope.dishTitle = data.dish_name;
-        $scope.dishAbout = data.dish_about;
-        $scope.dishTime = data.dish_prepare;
-        $scope.dishPhoto = data.dish_photo;
-        $scope.dishBrief = data.dish_brief;
-        $scope.dishPrice = data.dish_price;
-        $scope.dishWeight = data.dish_weight;
-        $scope.dishOrder = data.dish_order;
-    });
-    $scope.deletePic = function(pic){
-        var toDo = $resource('/deletePicture/'+dish+'/'+pic);
-        var deleteStuf = toDo.query();
-        $route.reload();
-    };
-
-
-
-
-
-
-
-
-
-
-
-    //Post all data without picture
-    $scope.postDataOutOfFile = function(){
-        var title = $routeParams.dish;
-        var about = $scope.about;
-        var time = $scope.time;
-        var brief = $scope.brief;
-        var price = $scope.price;
-        var weight = $scope.weight;
-        var order = $scope.order;
-        var inputTo = $resource('/postDishDataOutOfFile');
-
-        var input = new inputTo();
-        input.title = title;
-        input.about = about;
-        input.time = time;
-        input.brief = brief;
-        input.price = price;
-        input.weight = weight;
-        input.order = order;
-
-        input.$save();
-
-        $route.reload();
-    };
-
-    ////Photo uploader------------------------------------------------------
-    var uploader = $scope.uploader = $fileUploader.create({
-        scope: $scope,
-        url: 'addDishPhoto'
-    });
-
-
-
-
-
-    uploader.bind('beforeupload', function (event, item) {
-        var title = $routeParams.dish;
-        var about = $scope.about;
-        var time = $scope.time;
-        var brief = $scope.brief;
-        var price = $scope.price;
-        var weight = $scope.weight;
-        var order = $scope.order;
-        var info = {title:title,order:order,about:about,brief:brief,time:time,price:price,weight:weight};
-        item.formData.push(info);
-    });
-    uploader.bind('completeall', function (event, items) {
-        $route.reload();
-    });
-
-
-
-    // ADDING FILTERS
-
-    // Images only
-    uploader.filters.push(function(item) {
-        var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-        type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-    });
-
-
-    // REGISTER HANDLERS
-
-    uploader.bind('afteraddingfile', function (event, item) {
-        console.info('After adding a file', item);
-    });
-
-    uploader.bind('whenaddingfilefailed', function (event, item) {
-        console.info('When adding a file failed', item);
-    });
-
-    uploader.bind('afteraddingall', function (event, items) {
-        console.info('After adding all files', items);
-    });
-
-    uploader.bind('beforeupload', function (event, item) {
-        console.info('Before upload', item);
-    });
-
-    uploader.bind('progress', function (event, item, progress) {
-        console.info('Progress: ' + progress, item);
-    });
-
-    uploader.bind('success', function (event, xhr, item, response) {
-        console.info('Success', xhr, item, response);
-    });
-
-    uploader.bind('cancel', function (event, xhr, item) {
-        console.info('Cancel', xhr, item);
-    });
-
-    uploader.bind('error', function (event, xhr, item, response) {
-        console.info('Error', xhr, item, response);
-    });
-
-    uploader.bind('complete', function (event, xhr, item, response) {
-        console.info('Complete', xhr, item, response);
-    });
-
-    uploader.bind('progressall', function (event, progress) {
-        console.info('Total progress: ' + progress);
-    });
-
-    uploader.bind('completeall', function (event, items) {
-
-    });
-});
-
-
-app.controller('addNews',function($scope,$fileUploader,$routeParams,$resource,$route,$location){
-    $scope.path = 'http://oharapub.kz/newsAdmin';// Путь который контролит данный обработчик--------------------------------------
-
-
-    $scope.deleteTotalNews = function(news){
-        var Todo = $resource('/deleteNewsTotal/'+news);
-        var info = Todo.query();
-        $route.reload();
-    }
-
-    //Post all data without picture--------------
-    $scope.postDataOutOfFile = function(){
-        var title = $scope.title;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var dateOf = $scope.dateOf;
-        if(title && title!='Данное поле является обязательным!!!'){
-            var inputTo = $resource('/postNewsOutOfFile');
-
-            var input = new inputTo();
-            input.title = title;
-            input.about = about;
-            input.brief = brief;
-            input.dateOf = dateOf;
-
-            input.$save();
-
-            $route.reload();
-        }else{
-            $scope.title = 'Данное поле является обязательным!!!';
-        }
-    }
-
-
-    var Todo = $resource('getNewsTotal');
-    $scope.incomings = [];
-    var info = Todo.query(function(){
-        info.forEach(function(data){
-            var incomeInfo = {};
-            incomeInfo.title = data.news_name;
-            incomeInfo.photo = data.news_photo;
-            incomeInfo.about = data.news_about;
-            incomeInfo.brief = data.news_brief;
-            incomeInfo.dateOf = data.news_date;
-            $scope.incomings.push(incomeInfo);
-        });
-    });
-
-
-
-
-
-    //Photo uploader-----------------------------------------------------
-    var uploader = $scope.uploader = $fileUploader.create({
-        scope: $scope,
-        url: 'addNews'
-    });
-
-
-
-
-
-    uploader.bind('beforeupload', function (event, item) {
-        var title = $scope.title;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var dateOf = $scope.dateOf;
-        var info = {title:title,about:about,brief:brief,dateOf:dateOf};
-        item.formData.push(info);
-    });
-    uploader.bind('completeall', function (event, items) {
-        $route.reload();
-    });
-
-
-
-    // ADDING FILTERS
-
-    // Images only
-    uploader.filters.push(function(item /*{File|HTMLInputElement}) {
-        var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-        type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-    });
-
-
-    // REGISTER HANDLERS
-
-    uploader.bind('afteraddingfile', function (event, item) {
-        console.info('After adding a file', item);
-    });
-
-    uploader.bind('whenaddingfilefailed', function (event, item) {
-        console.info('When adding a file failed', item);
-    });
-
-    uploader.bind('afteraddingall', function (event, items) {
-        console.info('After adding all files', items);
-    });
-
-    uploader.bind('beforeupload', function (event, item) {
-        console.info('Before upload', item);
-    });
-
-    uploader.bind('progress', function (event, item, progress) {
-        console.info('Progress: ' + progress, item);
-    });
-
-    uploader.bind('success', function (event, xhr, item, response) {
-        console.info('Success', xhr, item, response);
-    });
-
-    uploader.bind('cancel', function (event, xhr, item) {
-        console.info('Cancel', xhr, item);
-    });
-
-    uploader.bind('error', function (event, xhr, item, response) {
-        console.info('Error', xhr, item, response);
-    });
-
-    uploader.bind('complete', function (event, xhr, item, response) {
-        console.info('Complete', xhr, item, response);
-    });
-
-    uploader.bind('progressall', function (event, progress) {
-        console.info('Total progress: ' + progress);
-    });
-
-    uploader.bind('completeall', function (event, items) {
-
-    });
-});
-
-
-
-app.controller('addEvent',function($scope,$fileUploader,$routeParams,$resource,$route,$location){
-    $scope.path = 'http://oharapub.kz/eventsAdmin';// Путь который контролит данный обработчик--------------------------------------
-
-
-    $scope.deleteTotalEvent = function(event){
-        var Todo = $resource('/deleteEventTotal/'+event);
-        var info = Todo.query();
-        $route.reload();
-    }
-
-    //Post all data without picture--------------
-    $scope.postDataOutOfFile = function(){
-        var title = $scope.title;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var dateOf = $scope.dateOf;
-        if(title && title!='Данное поле является обязательным!!!'){
-            var inputTo = $resource('/postEventOutOfFile');
-
-            var input = new inputTo();
-            input.title = title;
-            input.about = about;
-            input.brief = brief;
-            input.dateOf = dateOf;
-
-            input.$save();
-
-            $route.reload();
-        }else{
-            $scope.title = 'Данное поле является обязательным!!!';
-        }
-    }
-
-
-    var Todo = $resource('getEventsTotal');
-    $scope.incomings = [];
-    var info = Todo.query(function(){
-        info.forEach(function(data){
-            var incomeInfo = {};
-            incomeInfo.title = data.event_name;
-            incomeInfo.photo = data.event_photo;
-            incomeInfo.about = data.event_about;
-            incomeInfo.brief = data.event_brief;
-            incomeInfo.dateOf = data.event_date;
-            $scope.incomings.push(incomeInfo);
-        });
-    });
-
-
-
-
-
-    //Photo uploader-----------------------------------------------------
-    var uploader = $scope.uploader = $fileUploader.create({
-        scope: $scope,
-        url: 'addEvent'
-    });
-
-
-
-
-
-    uploader.bind('beforeupload', function (event, item) {
-        var title = $scope.title;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var dateOf = $scope.dateOf;
-        var info = {title:title,about:about,brief:brief,dateOf:dateOf};
-        item.formData.push(info);
-    });
-    uploader.bind('completeall', function (event, items) {
-        $route.reload();
-    });
-
-
-
-    // ADDING FILTERS
-
-    // Images only
-    uploader.filters.push(function(item /*{File|HTMLInputElement}) {
-        var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-        type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-    });
-
-
-    // REGISTER HANDLERS
-
-    uploader.bind('afteraddingfile', function (event, item) {
-        console.info('After adding a file', item);
-    });
-
-    uploader.bind('whenaddingfilefailed', function (event, item) {
-        console.info('When adding a file failed', item);
-    });
-
-    uploader.bind('afteraddingall', function (event, items) {
-        console.info('After adding all files', items);
-    });
-
-    uploader.bind('beforeupload', function (event, item) {
-        console.info('Before upload', item);
-    });
-
-    uploader.bind('progress', function (event, item, progress) {
-        console.info('Progress: ' + progress, item);
-    });
-
-    uploader.bind('success', function (event, xhr, item, response) {
-        console.info('Success', xhr, item, response);
-    });
-
-    uploader.bind('cancel', function (event, xhr, item) {
-        console.info('Cancel', xhr, item);
-    });
-
-    uploader.bind('error', function (event, xhr, item, response) {
-        console.info('Error', xhr, item, response);
-    });
-
-    uploader.bind('complete', function (event, xhr, item, response) {
-        console.info('Complete', xhr, item, response);
-    });
-
-    uploader.bind('progressall', function (event, progress) {
-        console.info('Total progress: ' + progress);
-    });
-
-    uploader.bind('completeall', function (event, items) {
-
-    });
-});
-
-
-
-
-app.controller('oneNews',function($scope,$fileUploader,$routeParams,$resource,$route,$location){
-    var news = $routeParams.news;
-    var Todo = $resource('/getNewsInfo/'+news);
-    var info = Todo.query(function(){
-        var data = info[0];
-        $scope.newsTitle = data.news_name;
-        $scope.newsAbout = data.news_about;
-        $scope.newsTime = data.news_prepare;
-        $scope.newsPhoto = data.news_photo;
-        $scope.newsBrief = data.news_brief;
-        $scope.newsDate = data.news_date;
-    });
-    $scope.deletePic = function(pic){
-        var toDo = $resource('/deleteNewsPicture/'+news+'/'+pic);
-        var deleteStuf = toDo.query();
-        $route.reload();
-    };
-
-
-
-
-
-
-
-
-
-
-
-    //Post all data without picture
-    $scope.postDataOutOfFile = function(){
-        var title = $routeParams.news;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var dateOf = $scope.dateOf;
-        var inputTo = $resource('/postNewsDataOutOfFile');
-
-        var input = new inputTo();
-        input.title = title;
-        input.about = about;
-        input.brief = brief;
-        input.dateOf = dateOf;
-
-        input.$save();
-
-        $route.reload();
-    };
-
-    ////Photo uploader------------------------------------------------------
-    var uploader = $scope.uploader = $fileUploader.create({
-        scope: $scope,
-        url: 'addNewsPhoto'
-    });
-
-
-
-
-
-    uploader.bind('beforeupload', function (event, item) {
-        var title = $routeParams.news;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var dateOf = $scope.dateOf;
-        var info = {title:title,about:about,brief:brief, dateOf:dateOf};
-        item.formData.push(info);
-    });
-    uploader.bind('completeall', function (event, items) {
-        $route.reload();
-    });
-
-
-
-    // ADDING FILTERS
-
-    // Images only
-    uploader.filters.push(function(item) {
-        var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-        type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-    });
-
-
-    // REGISTER HANDLERS
-
-    uploader.bind('afteraddingfile', function (event, item) {
-        console.info('After adding a file', item);
-    });
-
-    uploader.bind('whenaddingfilefailed', function (event, item) {
-        console.info('When adding a file failed', item);
-    });
-
-    uploader.bind('afteraddingall', function (event, items) {
-        console.info('After adding all files', items);
-    });
-
-    uploader.bind('beforeupload', function (event, item) {
-        console.info('Before upload', item);
-    });
-
-    uploader.bind('progress', function (event, item, progress) {
-        console.info('Progress: ' + progress, item);
-    });
-
-    uploader.bind('success', function (event, xhr, item, response) {
-        console.info('Success', xhr, item, response);
-    });
-
-    uploader.bind('cancel', function (event, xhr, item) {
-        console.info('Cancel', xhr, item);
-    });
-
-    uploader.bind('error', function (event, xhr, item, response) {
-        console.info('Error', xhr, item, response);
-    });
-
-    uploader.bind('complete', function (event, xhr, item, response) {
-        console.info('Complete', xhr, item, response);
-    });
-
-    uploader.bind('progressall', function (event, progress) {
-        console.info('Total progress: ' + progress);
-    });
-
-    uploader.bind('completeall', function (event, items) {
-
-    });
-});
-
-
-app.controller('oneEvent',function($scope,$fileUploader,$routeParams,$resource,$route,$location){
-    var event = $routeParams.event;
-    var Todo = $resource('/getEventInfo/'+event);
-    var info = Todo.query(function(){
-        var data = info[0];
-        $scope.eventTitle = data.event_name;
-        $scope.eventAbout = data.event_about;
-        $scope.eventPhoto = data.event_photo;
-        $scope.eventBrief = data.event_brief;
-        $scope.eventDate = data.event_date;
-    });
-    $scope.deletePic = function(pic){
-        var toDo = $resource('/deleteEventPicture/'+event+'/'+pic);
-        var deleteStuf = toDo.query();
-        $route.reload();
-    };
-
-
-
-
-
-
-
-
-
-
-
-    //Post all data without picture
-    $scope.postDataOutOfFile = function(){
-        var title = $routeParams.event;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var dateOf = $scope.dateOf;
-        var inputTo = $resource('/postEventDataOutOfFile');
-
-        var input = new inputTo();
-        input.title = title;
-        input.about = about;
-        input.brief = brief;
-        input.dateOf = dateOf;
-
-        input.$save();
-
-        $route.reload();
-    };
-
-    ////Photo uploader------------------------------------------------------
-    var uploader = $scope.uploader = $fileUploader.create({
-        scope: $scope,
-        url: 'addEventPhoto'
-    });
-
-
-
-
-
-    uploader.bind('beforeupload', function (event, item) {
-        var title = $routeParams.event;
-        var about = $scope.about;
-        var brief = $scope.brief;
-        var dateOf = $scope.dateOf;
-        var info = {title:title,about:about,brief:brief, dateOf:dateOf};
-        item.formData.push(info);
-    });
-    uploader.bind('completeall', function (event, items) {
-        $route.reload();
-    });
-
-
-
-    // ADDING FILTERS
-
-    // Images only
-    uploader.filters.push(function(item) {
-        var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-        type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-    });
-
-
-    // REGISTER HANDLERS
-
-    uploader.bind('afteraddingfile', function (event, item) {
-        console.info('After adding a file', item);
-    });
-
-    uploader.bind('whenaddingfilefailed', function (event, item) {
-        console.info('When adding a file failed', item);
-    });
-
-    uploader.bind('afteraddingall', function (event, items) {
-        console.info('After adding all files', items);
-    });
-
-    uploader.bind('beforeupload', function (event, item) {
-        console.info('Before upload', item);
-    });
-
-    uploader.bind('progress', function (event, item, progress) {
-        console.info('Progress: ' + progress, item);
-    });
-
-    uploader.bind('success', function (event, xhr, item, response) {
-        console.info('Success', xhr, item, response);
-    });
-
-    uploader.bind('cancel', function (event, xhr, item) {
-        console.info('Cancel', xhr, item);
-    });
-
-    uploader.bind('error', function (event, xhr, item, response) {
-        console.info('Error', xhr, item, response);
-    });
-
-    uploader.bind('complete', function (event, xhr, item, response) {
-        console.info('Complete', xhr, item, response);
-    });
-
-    uploader.bind('progressall', function (event, progress) {
-        console.info('Total progress: ' + progress);
-    });
-
-    uploader.bind('completeall', function (event, items) {
-
-    });
-});
-
-
-
-app.controller('viewDish',function($scope,$fileUploader,$routeParams,$resource,$window,$document){
-    var dish = $routeParams.dish;
-    var todo = $resource('/getDishInfo/'+dish);
-    var dishInfo = todo.query(function(){
-        $scope.in = dishInfo;
-        $scope.dish = dishInfo[0].dish_name;
-        $scope.price = dishInfo[0].dish_price;
-        $scope.about = dishInfo[0].dish_about;
-        $scope.photo = dishInfo[0].dish_photo[0];
-        $scope.weight = dishInfo[0].dish_weight;
-    });
-    $scope.clickLeftSecond = function (){
-        $('#myCarousel_2 .left').trigger('click');
-    }
-
-    $scope.clickRightSecond = function (){
-        $('#myCarousel_2 .right').trigger('click');
-    }
-
-
-
-    $scope.width = window.innerWidth;
-    var todo = $resource('/getHosperTotal');
-    var info = todo.query(function(){
-        var forRepo = info;
-
-        forRepo.forEach(function(repo){
-            if(repo.dish_brief == 'undefined'){
-                repo.dish_brief = '';
-            }
-            if(repo.dish_about == 'undefined'){
-                repo.dish_about = '';
-            }
-        });
-
-        $scope.info = forRepo;
-        var lenka = info.length;
-
-
-
-
-
-
-        //Check window size
-        $scope.$watch('width', function(newValue, oldValue) {
-            if(newValue < 768){
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    total.pic = '/uploaded/'+info[x].dish_photo[0];
-                    total.mini = '/uploaded/mini_'+info[x].dish_photo[0];
-                    if(info[x].dish_name!='undefined'){
-                        total.title = info[x].dish_name;
-                    }else{
-                        total.title = "";
-                    }
-                    if(info[x].dish_brief!='undefined'){
-                        total.brief = info[x].dish_brief;
-                    }else{
-                        total.brief = '';
-                    }
-                    pictureArr.push(total);
-                };
-                $scope.itemsSingle = pictureArr;
-            }else if(newValue < 992){
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    total.pic = '/uploaded/'+info[x].dish_photo[0];
-                    total.mini = '/uploaded/mini_'+info[x].dish_photo[0];
-                    if(info[x].dish_name!='undefined'){
-                        total.title = info[x].dish_name;
-                    }else{
-                        total.title = "";
-                    }
-
-                    if(info[x].dish_brief!='undefined'){
-                        total.brief = info[x].dish_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%4;
-                var devidedTot = picLength/4;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 4-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,4);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-4;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            }else{
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    total.pic = '/uploaded/'+info[x].dish_photo[0];
-                    total.mini = '/uploaded/mini_'+info[x].dish_photo[0];
-                    if(info[x].dish_name!='undefined'){
-                        total.title = info[x].dish_name;
-                    }else{
-                        total.title = "";
-                    }
-
-                    if(info[x].dish_brief!='undefined'){
-                        total.brief = info[x].dish_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%5;
-                var devidedTot = picLength/5;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 5-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,5);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-5;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            };
-        });
-    });
-
-
-
-
-//Manipulating DOM
-
-
-
-
-    function tellAngular() {
-        $scope.$apply(function() {
-            $scope.width = window.innerWidth;
-            // location.reload();
-        });
-    }
-
-
-
-    //calling tellAngular on resize event
-    $window.onresize = tellAngular;
-});
-
-app.controller('news',function($scope,$routeParams,$resource,$window,$document){
-    $('.collapse li').mouseover(function(){
-        $(this).addClass('gradientMenu');
-    });
-    $('.collapse li').mouseout(function(){
-        $(this).removeClass('gradientMenu');
-    });
-    $scope.clickLeftMenu = function (){
-        $('#myCarousel_10 .left').trigger('click');
-    }
-
-    $scope.clickRightMenu = function (){
-        $('#myCarousel_10 .right').trigger('click');
-    }
-    $scope.width = window.innerWidth;
-    var todo_2 = $resource('/getNewsTotal');
-    var news = todo_2.query(function(){
-
-        $scope.totalNews = news;
-
-
-
-                var pictureArr = [];
-                for(var x=0; x<news.length; x++){
-                    var total = {};
-                    total.pic = '/uploaded/'+news[x].news_photo[0];
-                    total.mini = '/uploaded/mini_'+news[x].news_photo[0];
-                    total.dateOf = news[x].news_date;
-                    total.date = news[x].news_date.split(' ');
-                    total.day = total.date[0];
-                    total.mongth = total.date[1];
-                    total.year = total.date[2];
-                    total.title = news[x].news_name;
-                    total.brief = news[x].news_brief;
-                    total.about = news[x].news_about;
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%6;
-                var devidedTot = picLength/6;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 6-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.dateOf = '';
-                        total.title = '';
-                        total.brief = '';
-                        total.about = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,6);
-                var set = [];
-                set.push(itemsActive);
-                $scope.activeNews = set[0];
-                var leftLen = picLength-6;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.singleNews = itemsResult;
-
-    });
-});
-
-
-app.controller('viewNews',function($scope,$fileUploader,$routeParams,$resource,$window,$document){
-    var news = $routeParams.news;
-    var todo = $resource('/getNewsInfo/'+news);
-    var newsInfo = todo.query(function(){
-        $scope.news = newsInfo;
-        var date = newsInfo[0].news_date;
-        date = date.split(' ');
-        if(date[1]=='undefined' || !date[1]){
-            $scope.day = date[0];
-            $scope.year = null;
-        }else{
-            $scope.day = date[0];
-            $scope.year = date[1]+' '+date[2];
-        }
-
-    });
-});
-
-
-app.controller('viewEvent',function($scope,$fileUploader,$routeParams,$resource,$window,$document){
-    var event = $routeParams.event;
-    var todo = $resource('/getEventInfo/'+event);
-    var eventInfo = todo.query(function(){
-        $scope.event = eventInfo;
-        var date = eventInfo[0].event_date;
-        date = date.split(' ');
-        if(date[0]){
-            $scope.day = date[0];
-        }else{
-            $scope.day = '';
-        }
-        if(date[1] && date[2]){
-            $scope.year = date[1]+' '+date[2];
-        }else{
-            $scope.year = '';
-        }
-
-    });
-});
-
-app.controller('events',function($scope,$resource){
-    $('.collapse li').mouseover(function(){
-        $(this).addClass('gradientMenu');
-    });
-    $('.collapse li').mouseout(function(){
-        $(this).removeClass('gradientMenu');
-    });
-    $scope.clickLeftMenu = function (){
-        $('#myCarousel_11 .left').trigger('click');
-    }
-
-    $scope.clickRightMenu = function (){
-        $('#myCarousel_11 .right').trigger('click');
-    }
-
-
-
-    var todo = $resource('/photosVk');
-    var body = todo.query(function(){
-        $scope.totalActs = body;
-        var pictureArr = [];
-        for(var x=0; x<body.length; x++){
-            var total = {};
-            total.pic = body[x].photo;
-            pictureArr.push(total);
-        };
-
-        var picLength = pictureArr.length;
-        var leftPic = picLength%12;
-        var devidedTot = picLength/12;
-        var devidedInt = parseInt(devidedTot);
-
-        var itemsActive = [];
-        itemsActive = pictureArr.splice(0,12);
-        $scope.activeActs = itemsActive;
-        var setActive = [];
-        for(var i =0; i<3; i++){
-            var activeset = itemsActive.splice(0,4);
-            setActive.push(activeset);
-        }
-        $scope.activeSet = setActive;
-
-
-
-
-
-
-        var set = [];
-        for (var i = 0; i<devidedInt; i++){
-            var newEnter = pictureArr.splice(0,12);
-            set.push(newEnter);
-        }
-        $scope.singleActs = set;
-        var singleSet = [];
-        set.forEach(function(setIn){
-            var setSingle = [];
-            for(var i=0;i<3;i++){
-                var setSingleEach = setIn.splice(0,4);
-                setSingle.push(setSingleEach);
-            };
-            singleSet.push(setSingle);
-        });
-        $scope.singleSet = singleSet;
-    });
-});
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-*/
 //INs
 app.controller('contacts',function($scope,$resource){
     $scope.submitIt = function(){
@@ -2070,30 +295,6 @@ app.controller('assistTech',function($scope){
 
 
 
-
-
-
-
-               /* if(msgUser!='UncoTech ' && msgBody){
-                    var check = users.indexOf(msgUser);
-
-
-
-                    if(check===-1){
-                        users.push(msgUser);
-                    }
-
-                    $scope.users = users;
-                    //users.forEach(function(user){
-                       // $('#to').html('');
-                    //});
-                    //$('#messages').append($('<li style="color: green">').text(msg));
-
-
-                }else{
-                    $('#messages').append($('<li>').text(msg));
-                }*/
-
         });
 
         var pageHeight = window.innerHeight;
@@ -2104,91 +305,484 @@ app.controller('assistTech',function($scope){
 
 
 
-app.controller('addEquipment', function ($scope,$resource,$route,$upload,$location) {
+app.controller('addEquipment', function ($scope,$resource,$route,$upload,$location,$window) {
+    var files=[];
+
+    $scope.popular = 'false';
+    if(sessionStorage.pass=='dushes05'){
+        $scope.specs = [];
+        $scope.addSpec = function(){
+            $scope.specs.push({title:'',value:''});
+        }
+
+        $scope.areas = [];
+        $scope.addArea = function(){
+                $scope.areas.push({title:''});
+        }
+
+        $scope.filesInput = [];
+        $scope.newInput = function(){
+            $scope.filesInput.push({title:''});
+        }
 
 
-    $scope.specs = [];
-    $scope.addSpec = function(){
-        $scope.specs.push({title:'',value:''});
-    }
 
-    $scope.areas = [];
-    $scope.addArea = function(){
-        $scope.areas.push({area:''});
-    }
-
-    $scope.videoLinks = [];
-    $scope.addVideoLink = function(){
-        $scope.videoLinks.push({videoLink:''});
-    }
+        $scope.videoLinks = [];
+        $scope.addVideoLink = function(){
+            $scope.videoLinks.push({videoLink:''});
+        }
 
 
 
 
-    $scope.path = 'http://localhost/equipmentAdmin';// Путь который контролит данный обработчик--------------------------------------
+        $scope.path = 'http://104.131.239.73/equipmentAdmin';// Путь который контролит данный обработчик--------------------------------------
 
 
-    $scope.deleteTotalEquipment = function(equipment){
-        var Todo = $resource('/deleteEquipmentTotal/'+equipment);
-        var info = Todo.query();
-        $route.reload();
-    }
+        $scope.deleteTotalEquipment = function(equipment){
+            var Todo = $resource('/deleteEquipmentTotal/'+equipment);
+            var info = Todo.query();
+            $route.reload();
+        }
 
 
-    var Todo = $resource('getEquipmentsTotal');
-    $scope.incomings = [];
-    var info = Todo.query(function(){
-        info.forEach(function(data){
-            var incomeInfo = {};
-            incomeInfo.title = data.equipment_name;
-            incomeInfo.photo = data.equipment_photo;
-            incomeInfo.about = data.equipment_about;
-            incomeInfo.some = data.equipment_some;
-            incomeInfo.price = data.equipment_price;
-            incomeInfo.benefit = data.equipment_benefits;
-            incomeInfo.category = data.eqiupment_category;
-            incomeInfo.specs = data.equipment_spec;
-            incomeInfo.specs = JSON.parse(incomeInfo.specs);
-            incomeInfo.areas = data.equipment_areas;
-            incomeInfo.areas = JSON.parse(incomeInfo.areas);
-            incomeInfo.videoLinks = data.equipment_videos;
-            incomeInfo.videoLinks = JSON.parse(incomeInfo.videoLinks);
-            incomeInfo.order = data.equipment_order;
-            $scope.incomings.push(incomeInfo);
+        var Todo = $resource('getEquipmentsTotal');
+        $scope.cats = [];
+        var Todo2 = $resource('getCategoriesTotal');
+        var info2 = Todo2.query(function(){
+            info2.forEach(function(cat){
+                $scope.cats.push(cat.cat_title);
+            });
         });
-    });
+        $scope.incomings = [];
+        var info = Todo.query(function(){
+            info.forEach(function(data){
 
-    var files='';
+                var incomeInfo = {};
+                incomeInfo.title = data.equipment_name;
+                incomeInfo.photo = data.equipment_photo;
+                incomeInfo.about = data.equipment_about;
+                incomeInfo.some = data.equipment_some;
+                incomeInfo.price = data.equipment_price;
+                incomeInfo.benefit = data.equipment_benefits;
 
-    $scope.onFileSelect = function($files){
-        files = $files;
-    };
+                if(data.equipment_spec.length!=0){
+                    incomeInfo.specs = data.equipment_spec;
+                    incomeInfo.specs = JSON.parse(incomeInfo.specs);
+                }
+                if(data.equipment_areas && data.equipment_areas!=null && data.equipment_areas.length!=0){
+                    incomeInfo.areas = data.equipment_areas;
+                    incomeInfo.areas = JSON.parse(incomeInfo.areas);
+                }
+                if(data.equipment_videos.length!=0){
+                    incomeInfo.videoLinks = data.equipment_videos;
+                    incomeInfo.videoLinks = JSON.parse(incomeInfo.videoLinks);
+                }
+                incomeInfo.order = data.equipment_order;
+                $scope.incomings.push(incomeInfo);
+            });
+        });
 
 
-    $scope.sendData = function() {
-        if(files==''){
+
+
+
+        $scope.sendData = function() {
+
+
+                var title = $scope.title;
+                var about = $scope.about;
+                var some = $scope.some;
+                var price = $scope.price;
+                var benefit = $scope.benefit;
+                var category = $scope.category;
+                var specs = $scope.specs;
+                var areas = $scope.areas;
+                var videoLinks = $scope.videoLinks;
+                var order = $scope.order;
+                var popular = $scope.popular;
+                if(title && title!='Данное поле является обязательным!!!'){
+                    var inputTo = $resource('/postEquipmentOutOfFile');
+
+                    var input = new inputTo();
+                    input.title = title;
+                    input.about = about;
+                    input.some = some;
+                    input.price = price;
+                    input.benefit = benefit;
+                    input.category = category;
+                    input.specs = specs;
+                    input.specs = JSON.stringify(input.specs);
+                    input.areas = areas;
+                    input.areas = JSON.stringify(input.areas);
+                    input.videoLinks = videoLinks;
+                    input.videoLinks = JSON.stringify(input.videoLinks);
+                    input.order = order;
+                    input.popular = popular;
+
+                    input.$save();
+
+                    $route.reload();
+                }else{
+                    $scope.title = 'Данное поле является обязательным!!!';
+                }
+        }
+
+
+    }else{
+        $window.location.href='/admin';
+    }
+});
+
+app.controller('addArea',function($scope,$routeParams,$resource,$route){
+    var files=[];
+    if(sessionStorage.pass=='dushes05'){
+
+
+        $scope.equipments = [];
+        $scope.addEquipment = function(){
+            $scope.equipments.push({title:''});
+        }
+        $scope.filesInput = [];
+        $scope.newInput = function(){
+            $scope.filesInput.push({title:''});
+        }
+
+        $scope.videoLinks = [];
+        $scope.addVideoLink = function(){
+            $scope.videoLinks.push({videoLink:''});
+        }
+
+
+
+
+        $scope.path = 'http://104.131.239.73/areaAdmin';// Путь который контролит данный обработчик--------------------------------------
+
+
+        $scope.deleteTotalArea = function(area){
+            var Todo = $resource('/deleteAreaTotal/'+area);
+            var info = Todo.query();
+            $route.reload();
+        }
+
+
+        var Todo = $resource('getAreasTotal');
+        $scope.incomings = [];
+        var info = Todo.query(function(){
+            info.forEach(function(data){
+                var incomeInfo = {};
+                incomeInfo.title = data.area_title;
+                incomeInfo.photo = data.area_photos;
+                incomeInfo.about = data.area_about;
+                if(data.area_equipment && data.area_equipment!=null && data.area_equipment.length!=0){
+                    incomeInfo.equipments = data.area_equipment;
+                    incomeInfo.equipments = JSON.parse(incomeInfo.equipments);
+                }
+                $scope.incomings.push(incomeInfo);
+            });
+        });
+
+
+
+
+
+        $scope.sendData = function() {
+
+
             var title = $scope.title;
             var about = $scope.about;
-            var some = $scope.some;
-            var price = $scope.price;
-            var benefit = $scope.benefit;
-            var category = $scope.category;
-            var specs = $scope.specs;
-            var areas = $scope.areas;
+            var equipments = $scope.equipments;
             var videoLinks = $scope.videoLinks;
-            var order = $scope.order;
             if(title && title!='Данное поле является обязательным!!!'){
-                var inputTo = $resource('/postEquipmentOutOfFile');
+                var inputTo = $resource('/postAreaOutOfFile');
 
                 var input = new inputTo();
                 input.title = title;
                 input.about = about;
-                input.some = some;
-                input.price = price;
-                input.benefit = benefit;
-                input.category = category;
-                input.specs = specs;
-                input.specs = JSON.stringify(input.specs);
+                input.equipments = equipments;
+                input.equipments = JSON.stringify(input.equipments);
+                input.videoLinks = videoLinks;
+                input.videoLinks = JSON.stringify(input.videoLinks);
+                input.$save();
+
+                $route.reload();
+            }else{
+                $scope.title = 'Данное поле является обязательным!!!';
+            }
+        }
+
+
+    }else{
+        $window.location.href='/admin';
+    }
+});
+
+
+app.controller('itemEquipment',function($scope,$routeParams,$resource){
+    var equipment = $routeParams.equipment_name;
+    $scope.width = window.innerWidth;
+    $scope.itemCur = equipment;
+    var todo = $resource('/getEquipmentTotal/'+equipment);
+    var equipments = todo.query(function(){
+        $scope.totalInfo = equipments;
+        $scope.lenka = equipments[0].equipment_photo.length;
+        $scope.activePhoto = equipments[0].equipment_photo[0];
+        $scope.singlePhoto = [];
+        for(var i=1; i<$scope.lenka; i++){
+            $scope.singlePhoto.push(equipments[0].equipment_photo[i]);
+        }
+        var video = equipments[0].equipment_videos;
+        video = JSON.parse(video);
+        var specs = equipments[0].equipment_spec;
+        specs = JSON.parse(specs);
+        $scope.specs = specs;
+
+        $scope.videos = video;
+    });
+    $scope.$watch('width', function(newValue, oldValue) {
+        if(newValue < 992){
+            var areasData = [];
+            var todo2 = $resource('/getAreasTotalByEquipment/'+equipment);
+            var areas = todo2.query(function(){
+                if(areas!='no result'){
+                    areas.forEach(function(area){
+                        if(areas.indexOf(area)==areas.length-1){
+                            var areaObj = {};
+                            areaObj.title = area.title;
+                            areaObj.photo = area.photos[0];
+                            areasData.push(areaObj);
+                            $scope.areas = areasData;
+                            //Check window size
+                            $scope.activePhotoAreas = $scope.areas.splice(0,2);
+                            $scope.singlePhotoAreas = $scope.areas;
+                        }else{
+                            var areaObj = {};
+                            areaObj.title = area.title;
+                            areaObj.photo = area.photos[0];
+                            areasData.push(areaObj);
+                        }
+                    });
+                }
+            });
+        }else if(newValue > 992){
+            var areasData = [];
+            var todo2 = $resource('/getAreasTotalByEquipment/'+equipment);
+            var areas = todo2.query(function(){
+                if(areas!='no result'){
+                areas.forEach(function(area){
+                    if(areas.indexOf(area)==areas.length-1){
+                        var areaObj = {};
+                        areaObj.title = area.title;
+                        areaObj.photo = area.photos[0];
+                        areasData.push(areaObj);
+                        $scope.areas = areasData;
+                        //Check window size
+                        $scope.activePhotoAreas = $scope.areas.splice(0,4);
+                        $scope.singlePhotoAreas = $scope.areas;
+                    }else{
+                        var areaObj = {};
+                        areaObj.title = area.title;
+                        areaObj.photo = area.photos[0];
+                        areasData.push(areaObj);
+                    }
+                });
+                }
+
+            });
+        };
+    });
+
+
+
+    function tellAngular() {
+        $scope.$apply(function() {
+            $scope.width = window.innerWidth;
+            //location.reload();
+        });
+    }
+
+
+
+    //calling tellAngular on resize event
+    $(window).resize(tellAngular);
+});
+
+app.controller('itemArea',function($scope,$routeParams,$resource){
+    var area = $routeParams.area_title;
+    $scope.area = area;
+    $scope.width = window.innerWidth;
+
+
+
+
+    $scope.$watch('width', function(newValue, oldValue) {
+        if(newValue < 992){
+            var equipmentsData = [];
+            var todo = $resource('/getEquipmentsTotalByArea/'+area);
+            var equipments = todo.query(function(){
+
+                if(equipments!='no result'){
+                    equipments.forEach(function(equipment){
+                        if(equipments.indexOf(equipment)==equipments.length-1){
+                            var equipmentObj = {};
+                            equipmentObj.title = equipment.title;
+                            equipmentObj.photo = equipment.photo;
+                            equipmentsData.push(equipmentObj);
+                            $scope.equipments = equipmentsData;
+                            //Check window size
+                            $scope.activePhotoEquipments = $scope.equipments.splice(0,2);
+                            $scope.singlePhotoEquipments = $scope.equipments;
+                        }else{
+                            var equipmentObj = {};
+                            equipmentObj.title = equipment.title;
+                            equipmentObj.photo = equipment.photo;
+                            equipmentsData.push(equipmentObj);
+                        }
+                    });
+                }
+            });
+        }else if(newValue > 992){
+            var equipmentsData = [];
+            var todo = $resource('/getEquipmentsTotalByArea/'+area);
+            var equipments = todo.query(function(){
+
+                if(equipments!='no result'){
+                    equipments.forEach(function(equipment){
+                        if(equipments.indexOf(equipment)==equipments.length-1){
+                            var equipmentObj = {};
+                            equipmentObj.title = equipment.title;
+                            equipmentObj.photo = equipment.photo;
+                            equipmentsData.push(equipmentObj);
+                            $scope.equipments = equipmentsData;
+                            //Check window size
+                            $scope.activePhotoEquipments = $scope.equipments.splice(0,4);
+                            $scope.singlePhotoEquipments = $scope.equipments;
+                        }else{
+                            var equipmentObj = {};
+                            equipmentObj.title = equipment.title;
+                            equipmentObj.photo = equipment.photo;
+                            equipmentsData.push(equipmentObj);
+                        }
+                    });
+                }
+            });
+        };
+    });
+
+
+
+
+
+
+
+
+
+    var todo2 = $resource('/getAreaTotal/'+area);
+    var areaInfo = todo2.query(function(){
+        $scope.areaInfo = areaInfo[0];
+        $scope.activeAreaPhoto = areaInfo[0].area_photos[0];
+        $scope.singleAreaPhotos = [];
+        for(var i=1; i<areaInfo[0].area_photos.length; i++){
+            $scope.singleAreaPhotos.push(areaInfo[0].area_photos[i]);
+        }
+        var videos = areaInfo[0].area_videos;
+        videos = JSON.parse(videos);
+        $scope.videos = videos;
+       // $scope.singleAreaPhotos = areaInfo[0].area_photos;
+
+
+
+
+
+    });
+
+
+    function tellAngular() {
+        $scope.$apply(function() {
+            $scope.width = window.innerWidth;
+            //location.reload();
+        });
+    }
+
+
+
+    //calling tellAngular on resize event
+    $(window).resize(tellAngular);
+});
+
+
+app.controller('addCategory', function ($scope,$resource,$route,$upload,$location,$window) {
+    var files=[];
+    if(sessionStorage.pass=='dushes05'){
+        $scope.areas = [];
+        $scope.addArea = function(){
+            $scope.areas.push({title:''});
+        }
+
+        $scope.filesInput = [];
+        $scope.newInput = function(){
+            $scope.filesInput.push({title:''});
+        }
+
+
+
+        $scope.videoLinks = [];
+        $scope.addVideoLink = function(){
+            $scope.videoLinks.push({videoLink:''});
+        }
+
+
+
+
+        $scope.path = 'http://104.131.239.73/categoryAdmin';// Путь который контролит данный обработчик--------------------------------------
+
+
+        $scope.deleteTotalCategory = function(category){
+            var Todo = $resource('/deleteCategoryTotal/'+category);
+            var info = Todo.query();
+            $route.reload();
+        }
+
+
+        var Todo = $resource('getCategoriesTotal');
+        $scope.incomings = [];
+        var info = Todo.query(function(){
+            info.forEach(function(data){
+                var incomeInfo = {};
+                incomeInfo.title = data.cat_title;
+                incomeInfo.photo = data.cat_photos;
+                incomeInfo.about = data.cat_about;
+                incomeInfo.documents = data.cat_documents;
+                if(data.cat_areas && data.cat_areas!=null && data.cat_areas.length!=0){
+                    incomeInfo.areas = data.cat_areas;
+                    incomeInfo.areas = JSON.parse(incomeInfo.areas);
+                }
+                if(data.cat_videos.length!=0){
+                    incomeInfo.videoLinks = data.cat_videos;
+                    incomeInfo.videoLinks = JSON.parse(incomeInfo.videoLinks);
+                }
+                incomeInfo.order = data.equipment_order;
+                $scope.incomings.push(incomeInfo);
+            });
+        });
+
+
+
+
+
+        $scope.sendData = function() {
+
+
+            var title = $scope.title;
+            var about = $scope.about;
+            var areas = $scope.areas;
+            var videoLinks = $scope.videoLinks;
+            var order = $scope.order;
+            if(title && title!='Данное поле является обязательным!!!'){
+                var inputTo = $resource('/postCategoryOutOfFile');
+
+                var input = new inputTo();
+                input.title = title;
+                input.about = about;
                 input.areas = areas;
                 input.areas = JSON.stringify(input.areas);
                 input.videoLinks = videoLinks;
@@ -2201,76 +795,14 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
             }else{
                 $scope.title = 'Данное поле является обязательным!!!';
             }
-        }else{
-            var specs = $scope.specs;
-            specs = JSON.stringify(specs);
-            var areas = $scope.areas;
-            areas = JSON.stringify(areas);
-            var videoLinks = $scope.videoLinks;
-            videoLinks = JSON.stringify(videoLinks);
-            //$files: an array of files selected, each file has name, size, and type.
-            for (var i = 0; i < files.length; i++) {
-                var file = files[i];
-                $scope.upload = $upload.upload({
-                    url: 'addEquipment', //upload.php script, node.js route, or servlet url
-                    //method: 'POST' or 'PUT',
-                    //headers: {'header-key': 'header-value'},
-                    //withCredentials: true,
-
-                    data: {title : $scope.title,
-                        about : $scope.about,
-                        some : $scope.some,
-                        price : $scope.price,
-                        benefit : $scope.benefit,
-                        category : $scope.category,
-                        specs : specs,
-                        areas : areas,
-                        videoLinks : videoLinks,
-                        order : $scope.order},
-
-                    file: file // or list of files ($files) for html5 only
-                    //fileName: 'doc.jpg' or ['1.jpg', '2.jpg', ...] // to modify the name of the file(s)
-                    // customize file formData name ('Content-Desposition'), server side file variable name.
-                    //fileFormDataName: myFile, //or a list of names for multiple files (html5). Default is 'file'
-                    // customize how data is added to formData. See #40#issuecomment-28612000 for sample code
-                    //formDataAppender: function(formData, key, val){}
-                }).progress(function(evt) {
-                        var progress = parseInt(100.0 * evt.loaded / evt.total);
-                        $scope.progress = progress;
-
-                    }).success(function(data, status, headers, config) {
-                        // file is uploaded successfully
-                        //console.log(data);
-                        $route.reload();
-                    });
-                //.error(...)
-                //.then(success, error, progress);
-                // access or attach event listeners to the underlying XMLHttpRequest.
-                //.xhr(function(xhr){xhr.upload.addEventListener(...)})
-            }
-            /* alternative way of uploading, send the file binary with the file's content-type.
-             Could be used to upload files to CouchDB, imgur, etc... html5 FileReader is needed.
-             It could also be used to monitor the progress of a normal http post/put request with large data*/
-            // $scope.upload = $upload.http({...})  see 88#issuecomment-31366487 for sample code.
-
-        };
         }
-});
 
 
-app.controller('item',function($scope,$routeParams,$resource){
-    var equipment = $routeParams.equipment_name;
-    var Todo = $resource('/getEquipmentTotal/'+equipment);
-    var info = Todo.query(function(){
-        $scope.info = info;
-        var areas = info[0].equipment_areas;
-        areas = JSON.parse(areas);
-        $scope.areas = areas;
-        var photos = info[0].equipment_photo;
-        $scope.photosActive = photos.shift();
-        $scope.photosSingle = photos;
-    });
+    }else{
+        $window.location.href='/admin';
+    }
 });
+
 
 
 app.controller('test',function($scope){
@@ -2284,686 +816,31 @@ app.controller('test',function($scope){
     }
 });
 
-
-
-//INs
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-
-
-
-app.controller('bar',function($scope,$resource,$document,$window){
-    $('.content').ready(function(){
-
-
-        $('.collapse li').mouseover(function(){
-            $(this).addClass('gradientMenu');
-        });
-        $('.collapse li').mouseout(function(){
-            $(this).removeClass('gradientMenu');
-        });
-    });
-    $scope.width = window.innerWidth;
-
-
-
-
-
-
-
-    var todo = $resource('/getBarTotal');
-    var info = todo.query(function(){
-
-        var forRepo = info;
-
-        forRepo.forEach(function(repo){
-            if(repo.category_brief == 'undefined'){
-                repo.category_brief = '';
-            }
-        });
-
-
-        var totalItems = [];
-        info.forEach(function(item){
-            var itemObj = {};
-            itemObj.title = item.category_tytle;
-            if(item.category_brief){
-                itemObj.brief = item.category_brief;
-            }else{
-                itemObj.brief = '';
-            }
-            if(item.category_photo){
-                itemObj.photo = '/uploaded/'+item.category_photo;
-                itemObj.mini = '/uploaded/mini_'+item.category_photo;
-            }else{
-                itemObj.photo = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                itemObj.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-            }
-            totalItems.push(itemObj);
-        });
-
-
-
-        $scope.total = totalItems;
-
-        $scope.info = forRepo;
-
-
-        var lenka = info.length;
-
-
-
-
-
-        //Check window size
-        $scope.$watch('width', function(newValue, oldValue) {
-            if(newValue < 992){
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    if(!info[x].category_photo || info[x].category_photo=='undefined'){
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                    }else{
-                        total.pic = '/uploaded/'+info[x].category_photo;
-                        total.mini = '/uploaded/mini_'+info[x].category_photo;
-                    }
-                    total.title = info[x].category_tytle;
-
-                    if(info[x].category_brief!='undefined'){
-                        total.brief = info[x].category_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%4;
-                var devidedTot = picLength/4;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 4-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,4);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-4;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            }else{
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    if(!info[x].category_photo || info[x].category_photo=='undefined'){
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                    }else{
-                        total.pic = '/uploaded/'+info[x].category_photo;
-                        total.mini = '/uploaded/mini_'+info[x].category_photo;
-                    }
-                    total.title = info[x].category_tytle;
-
-                    if(info[x].category_brief!='undefined'){
-                        total.brief = info[x].category_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%5;
-                var devidedTot = picLength/5;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 5-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,5);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-5;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            };
-        });
-    });
-
-
-
-
-//Manipulating DOM
-
-
-
-
-    function tellAngular() {
-        $scope.$apply(function() {
-            $scope.width = window.innerWidth;
-            //location.reload();
-        });
+app.controller('admin',function($scope,$location,$window){
+    var pageHeight = window.innerHeight;
+    var approxHeight = pageHeight - 280;
+    $('.adminPan').height(approxHeight);
+    $('#myModal').modal('show');
+    $scope.closeAdmin = function(){
+        $window.location.href = '/';
     }
-
-
-
-    //calling tellAngular on resize event
-    $(window).resize(tellAngular);
-
-
-
-
-
-
-
-//Manipulating DOM
-
-
-
-
-
-
-
-
-
-
-    $scope.clickLeftMenu = function(){
-        $('#myCarousel_7 .left').trigger('click');
-        $('#myCarousel_8 .left').trigger('click');
-    }
-
-    $scope.clickRightMenu = function(){
-        $('#myCarousel_7 .right').trigger('click');
-        $('#myCarousel_8 .right').trigger('click');
-    }
-
-
-    $scope.clickcontrol = function(event){
-        event.preventDefault();
-    };
-
-    /*#myCarousel_2 .thumbnail .btn-info{
-     position: relative;
-     bottom: -150px;
-     }
-
-
-});
-
-app.controller('maintainCategory',function($scope,$resource,$fileUploader,$route){
-    var todo_1 = $resource('/getCategoriesInfo');
-    var out = todo_1.query(function(){
-        $scope.output = out;
-    });
-
-    var todo = $resource('/getCategoriesTotal');
-    var info = todo.query(function(){
-        $scope.info = info;
-    });
-
-    //Post all data without picture
-    $scope.postDataOutOfFile = function(){
-        var title = $scope.category;
-        var brief = $scope.brief;
-        var inputTo = $resource('/postCategoryDataOutOfFile');
-
-        var input = new inputTo();
-        input.title = title;
-        input.brief = brief;
-
-        input.$save();
-
-        $route.reload();
-    };
-
-
-    ////Photo uploader------------------------------------------------------
-    var uploader = $scope.uploader = $fileUploader.create({
-        scope: $scope,
-        url: 'addCategoryPhoto'
-    });
-
-
-
-
-
-    uploader.bind('beforeupload', function (event, item) {
-        var brief = $scope.brief;
-        var tytle = $scope.category;
-        var input={
-            brief:brief,
-            tytle:tytle
+    $scope.checkPass = function(){
+        if($scope.pass=='dushes05'){
+            sessionStorage.pass = $scope.pass;
+            $('#myModal').modal('hide');
+        }else{
+            $('#myModal').modal('show');
+            $scope.errorPass = 'Вы ввели не верный пароль!'
         }
-        item.formData.push(input);
-    });
-    uploader.bind('completeall', function (event, items) {
-        $route.reload();
-    });
-
-
-
-    // ADDING FILTERS
-
-    // Images only
-    uploader.filters.push(function(item) {
-        var type = uploader.isHTML5 ? item.type : '/' + item.value.slice(item.value.lastIndexOf('.') + 1);
-        type = '|' + type.toLowerCase().slice(type.lastIndexOf('/') + 1) + '|';
-        return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-    });
-
-
-    // REGISTER HANDLERS
-
-    uploader.bind('afteraddingfile', function (event, item) {
-        console.info('After adding a file', item);
-    });
-
-    uploader.bind('whenaddingfilefailed', function (event, item) {
-        console.info('When adding a file failed', item);
-    });
-
-    uploader.bind('afteraddingall', function (event, items) {
-        console.info('After adding all files', items);
-    });
-
-    uploader.bind('beforeupload', function (event, item) {
-        console.info('Before upload', item);
-    });
-
-    uploader.bind('progress', function (event, item, progress) {
-        console.info('Progress: ' + progress, item);
-    });
-
-    uploader.bind('success', function (event, xhr, item, response) {
-        console.info('Success', xhr, item, response);
-    });
-
-    uploader.bind('cancel', function (event, xhr, item) {
-        console.info('Cancel', xhr, item);
-    });
-
-    uploader.bind('error', function (event, xhr, item, response) {
-        console.info('Error', xhr, item, response);
-    });
-
-    uploader.bind('complete', function (event, xhr, item, response) {
-        console.info('Complete', xhr, item, response);
-    });
-
-    uploader.bind('progressall', function (event, progress) {
-        console.info('Total progress: ' + progress);
-    });
-
-    uploader.bind('completeall', function (event, items) {
-
-    });
-
-});
-
-
-
-
-
-app.controller('food',function($scope,$resource,$document,$window){
-    $('.content').ready(function(){
-
-
-        $('.collapse li').mouseover(function(){
-            $(this).addClass('gradientMenu');
-        });
-        $('.collapse li').mouseout(function(){
-            $(this).removeClass('gradientMenu');
-        });
-    });
-    $scope.width = window.innerWidth;
-
-
-
-
-
-
-
-    var todo = $resource('/getFoodTotal');
-    var info = todo.query(function(){
-
-        var forRepo = info;
-
-        forRepo.forEach(function(repo){
-            if(repo.category_brief == 'undefined'){
-                repo.category_brief = '';
-            }
-        });
-
-        var totalItems = [];
-        info.forEach(function(item){
-            var itemObj = {};
-            itemObj.title = item.category_tytle;
-            if(item.category_brief){
-                itemObj.brief = item.category_brief;
-            }else{
-                itemObj.brief = '';
-            }
-            if(item.category_photo){
-                itemObj.photo = '/uploaded/'+item.category_photo;
-                itemObj.mini = '/uploaded/mini_'+item.category_photo;
-            }else{
-                itemObj.photo = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                itemObj.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-            }
-            totalItems.push(itemObj);
-        });
-
-
-
-        $scope.total = totalItems;
-        $scope.info = forRepo;
-        var lenka = info.length;
-
-
-
-
-
-        //Check window size
-        $scope.$watch('width', function(newValue, oldValue) {
-            if(newValue < 992){
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    if(!info[x].category_photo || info[x].category_photo=='undefined'){
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                    }else{
-                        total.pic = '/uploaded/'+info[x].category_photo;
-                        total.mini = '/uploaded/mini_'+info[x].category_photo;
-                    }
-                    total.title = info[x].category_tytle;
-
-                    if(info[x].category_brief!='undefined'){
-                        total.brief = info[x].category_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%4;
-                var devidedTot = picLength/4;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 4-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,4);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-4;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            }else{
-                var pictureArr = [];
-                for(var x=0; x<lenka; x++){
-                    var total = {};
-                    if(!info[x].category_photo || info[x].category_photo=='undefined'){
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                    }else{
-                        total.pic = '/uploaded/'+info[x].category_photo;
-                        total.mini = '/uploaded/mini_'+info[x].category_photo;
-                    }
-                    total.title = info[x].category_tytle;
-
-                    if(info[x].category_brief!='undefined'){
-                        total.brief = info[x].category_brief;
-                    }else{
-                        total.brief = '';
-                    }
-
-
-                    pictureArr.push(total);
-                };
-                var picLength = pictureArr.length;
-                var leftPic = picLength%5;
-                var devidedTot = picLength/5;
-                var devidedInt = parseInt(devidedTot);
-
-                if(leftPic!=0 && devidedInt==0){
-                    var nesPic = 5-leftPic;
-                    for(var i=0;i<nesPic;i++){
-                        var total = {};
-                        total.pic = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.mini = "http://placehold.it/500/bbbbbb/fff&amp;text=4";
-                        total.title = "";
-                        total.brief = '';
-                        pictureArr.push(total);
-                    };
-                }
-
-                var itemsActive = pictureArr.splice(0,5);
-                var set = [];
-                set.push(itemsActive);
-                $scope.active = set[0];
-                var leftLen = picLength-5;
-                var itemsSingle = [];
-                itemsSingle = pictureArr.slice(0);
-
-                for(var t=0;t<itemsSingle.length;t++){
-                    var set_copy = [];
-                    set_copy = set[t].slice(0);
-                    set_copy.splice(0,1);
-                    set_copy.push(itemsSingle[t]);
-                    set.push(set_copy);
-                };
-
-                var itemsResult = [];
-                for(var d=0;d<set.length-1;d++){
-                    itemsResult.push(set[d+1]);
-                }
-                $scope.itemsSingle = itemsResult;
-            };
-        });
-    });
-
-
-
-
-//Manipulating DOM
-
-
-
-
-    function tellAngular() {
-        $scope.$apply(function() {
-            $scope.width = window.innerWidth;
-            //location.reload();
-        });
     }
-
-
-
-    //calling tellAngular on resize event
-    $(window).resize(tellAngular);
-
-
-
-
-
-
-
-//Manipulating DOM
-
-
-
-
-
-
-
-
-
-
-    $scope.clickLeftMenu = function(){
-        $('#myCarousel_7 .left').trigger('click');
-        $('#myCarousel_8 .left').trigger('click');
-    }
-
-    $scope.clickRightMenu = function(){
-        $('#myCarousel_7 .right').trigger('click');
-        $('#myCarousel_8 .right').trigger('click');
-    }
-
-
-    $scope.clickcontrol = function(event){
-        event.preventDefault();
-    };
-
-    /*#myCarousel_2 .thumbnail .btn-info{
-     position: relative;
-     bottom: -150px;
-     }
-
-
 });
 
-
-app.controller('bear',function($scope, $resource){
-    var todo = $resource('/getBearMenuTotal');
-    var info = todo.query(function(){
-        $scope.result = info;
-    });
-});
-
-app.controller('launch',function($scope, $resource){
-    var todo = $resource('/getLaunchMenuTotal');
-    var info = todo.query(function(){
-        info.forEach(function(inf){
-            if(!inf.dish_weight || inf.dish_weight=='undefined'){
-                inf.dish_weight = null;
-            }
-        });
-        $scope.result = info;
-    });
-});
-
-app.controller('branch',function($scope, $resource){
-    var todo = $resource('/getBranchMenuTotal');
-    var info = todo.query(function(){
-        info.forEach(function(inf){
-            inf.dish_weight = null;
-        });
-        $scope.result = info;
-    });
-});
-
-
-app.controller('aboutUs',function($scope){
+app.controller('supplies',function($scope){
 
 });
-app.controller('brewery',function($scope){
-    $("#myCarousel_1").swipe( {
-        //Generic swipe handler for all directions
-        swipeRight:function(event, distance, duration, fingerCount, fingerData) {
-            $('#myCarousel_1 .left').trigger('click');
-        },
-        swipeLeft:function(event, distance, duration, fingerCount, fingerData) {
-            $('#myCarousel_1 .right').trigger('click');
-        },
-        //Default is 75px, set to 0 for demo so any distance triggers swipe
-        threshold:0
-    });
-});
-app.controller('allMenu',function($scope){
+app.controller('monitor',function($scope){
 
 });
-app.controller('delivery',function($scope){
+app.controller('assurance',function($scope){
 
 });
-    */
