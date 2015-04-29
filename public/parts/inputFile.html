@@ -7,6 +7,9 @@
     <div class="float-left" data-ng-repeat="file in files">
         <img ng-show="fileType=='photos' || !fileType" src="uploaded/{{file.name}}" width="250px">
         <h3 ng-show="fileType=='docs'">{{file.name}}</h3>
+            <custom-video ng-show="fileType=='video'" ng-init="video.title = file.name" class="col-md-10 col-md-offset-2"></custom-video>
+
+
         <br>
         <div class="text-center">
             <button ng-click="deleteEquipmentFile(file.name)" type="button" class="btn btn-warning btn-sm">Удалить</button>

@@ -1,51 +1,49 @@
 var mongoose = require('mongoose');
+var options = {
+    user: 'uncojet',
+    pass: 'videojet'
+}
 mongoose.connect('mongodb://localhost/uncojet');
 
 var mongoose = require('mongoose');
 
 var equipment = mongoose.Schema({
-    equipment_name:{
+    equipment_title:{
         type:String,
         unique:true
     },
     equipment_photo:{
-        type:[],
-        unique:false
+        type:[]
     },
     equipment_about:{
         type:String
     },
     equipment_some:{
-        type:String,
-        unique:false
+        type:String
     },
     equipment_spec:{
-        type:[],
-        unique:false
+        type:[]
     },
     equipment_price:{
-        type:String,
-        unique:false
+        type:String
     },
     equipment_benefits:{
-        type:String,
-        unique:false
+        type:String
     },
     equipment_areas:{
-        type:[],
-        unique:false
+        type:[]
     },
     equipment_documents:{
-        type:[],
-        unique:false
+        type:[]
     },
     equipment_videos:{
-        type:[],
-        unique:false
+        type:[]
+    },
+    equipment_videos_custom:{
+        type:[]
     },
     equipment_category:{
-        type:String,
-        unique:false
+        type:String
     },
     equipment_order:{
         type:String
@@ -81,6 +79,10 @@ var categories = mongoose.Schema({
         type:[],
         unique:false
     },
+    cat_videos_custom:{
+        type:[],
+        unique:false
+    },
     cat_order:{
         type:Number
     }
@@ -102,6 +104,14 @@ var areas = mongoose.Schema({
         unique:false
     },
     area_videos:{
+        type:[],
+        unique:false
+    },
+    area_videos_custom:{
+        type:[],
+        unique:false
+    },
+    area_documents:{
         type:[],
         unique:false
     },

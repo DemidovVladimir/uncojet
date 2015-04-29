@@ -16,7 +16,7 @@
         <div class="item active">
             <img width="100%" src="http://www.videojet.com/content/dam/img/website-images/wb-7510-us.jpg" alt="opa1">
             <div class="carousel-caption">
-                <h3>Новый 50Вт волоконный лазер</h3>
+                <h3>Новый 50Вт оптоволоконный лазер</h3>
                 <button type="button" class="btn btn-sm btn-primary" href="getSome">Читать подробнее...</button>
             </div>
         </div>
@@ -81,7 +81,7 @@
     <div class="row">
         <div class="col-lg-12">
             <h1 class="page-header">
-                Добро пожаловать на страничку ТОО Uncojet
+                Добро пожаловать на страничку ТОО UNCO JET
             </h1>
         </div>
         <div class="col-sm-4">
@@ -120,7 +120,7 @@
     <!-- Portfolio Section -->
     <div class="row">
         <div class="col-lg-12">
-            <h2 class="page-header">Популярное</h2>
+            <h2 class="page-header">Акции компании:</h2>
         </div>
 
 
@@ -130,7 +130,7 @@
 
             <div ng-show="equipmentsFirst.length==3" data-ng-repeat="equipment in equipmentsFirst" class="col-sm-4 col-md-4 text-center">
                 <div class="thumbnail">
-                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <img ng-show="equipment.photo" ng-src="/uploaded/mini_{{equipment.photo}}" alt="mini_{{equipment.title}}">
                     <div class="caption">
                         <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
                             <h3>{{equipment.title}}</h3>
@@ -143,7 +143,7 @@
 
             <div ng-show="equipmentsFirst.length==2" data-ng-repeat="equipment in equipmentsFirst" class="col-sm-6 col-md-6 text-center">
                 <div class="thumbnail">
-                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <img ng-show="equipment.photo" ng-src="/uploaded/mini_{{equipment.photo}}" alt="mini_{{equipment.title}}">
                     <div class="caption">
                         <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
                             <h3>{{equipment.title}}</h3>
@@ -156,7 +156,7 @@
 
             <div ng-show="equipmentsFirst.length==1" data-ng-repeat="equipment in equipmentsFirst" class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3 text-center">
                 <div class="thumbnail">
-                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <img ng-show="equipment.photo" ng-src="/uploaded/mini_{{equipment.photo}}" alt="mini_{{equipment.title}}">
                     <div class="caption">
                         <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
                             <h3>{{equipment.title}}</h3>
@@ -170,7 +170,7 @@
 
             <div ng-show="equipmentsSecond.length==3" data-ng-repeat="equipment in equipmentsSecond" class="col-sm-4 col-md-4 text-center">
                 <div class="thumbnail">
-                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <img ng-show="equipment.photo" ng-src="/uploaded/mini_{{equipment.photo}}" alt="mini_{{equipment.title}}">
                     <div class="caption">
                         <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
                             <h3>{{equipment.title}}</h3>
@@ -183,7 +183,7 @@
 
             <div ng-show="equipmentsSecond.length==2" data-ng-repeat="equipment in equipmentsSecond" class="col-sm-6 col-md-6 text-center">
                 <div class="thumbnail">
-                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <img ng-show="equipment.photo" ng-src="/uploaded/mini_{{equipment.photo}}" alt="mini_{{equipment.title}}">
                     <div class="caption">
                         <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
                             <h3>{{equipment.title}}</h3>
@@ -196,7 +196,7 @@
 
             <div ng-show="equipmentsSecond.length==1" data-ng-repeat="equipment in equipmentsSecond" class="col-sm-6 col-md-6 col-sm-offset-3 col-md-offset-3 text-center">
                 <div class="thumbnail">
-                    <img ng-src="/uploaded/mini_{{equipment.photo}}" alt="{{equipment.title}}">
+                    <img ng-show="equipment.photo" ng-src="/uploaded/mini_{{equipment.photo}}" alt="mini_{{equipment.title}}">
                     <div class="caption">
                         <a ng-href="/itemEquipment{{equipment.title}}" class="noStyle">
                             <h3>{{equipment.title}}</h3>

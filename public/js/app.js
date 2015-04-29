@@ -63,6 +63,18 @@ var app = angular.module('myApp',['ngRoute','ngResource','angularFileUpload','go
                 templateUrl:"/parts/assistTech.html",
                 controller:'assistTech'
             })
+            .when('/maintainCategory:category',{
+                templateUrl:'/parts/maintainCategory.html',
+                controller:'maintainCategory'
+            })
+            .when('/maintainArea:area',{
+                templateUrl:'/parts/maintainArea.html',
+                controller:'maintainArea'
+            })
+            .when('/maintainEquipment:equipment',{
+                templateUrl:'/parts/maintainEquipment.html',
+                controller:'maintainEquipment'
+            })
             .otherwise({
                 redirectTo: '/'
             });

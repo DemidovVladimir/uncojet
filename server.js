@@ -27,7 +27,7 @@ var io = require('socket.io')(http);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.use(favicon());
+app.use(favicon(path.join(__dirname, 'public/img/mini_logo.ico')));
 app.use(logger('dev'));
 app.use(express.bodyParser());
 app.use(cookieParser());
@@ -48,21 +48,35 @@ app.use(app.router);
 
 
 
-io.on('connection',function(socket){
-   // socket.broadcast.emit('chat message','Make_beep');
-    socket.on('disconnect', function(){
-        //socket.broadcast.emit('chat message','Спасибо за помощь!');
-    });
-    socket.on('chat message', function(msg){
-        io.emit('chat message', msg);
-    });
-});
+
 
 
 
 
 app.post('/sendEmail',api.sendEmail);
 app.post('/addFilesTo/:element',api.addFilesTo);
+app.post('/deleteCategoryVideoYoutube',api.deleteCategoryVideoYoutube);
+app.post('/deleteCategoryVideoFile',api.deleteCategoryVideoFile);
+app.post('/deleteCategoryDoc',api.deleteCategoryDoc);
+app.post('/deleteCategoryArea',api.deleteCategoryArea);
+app.post('/deleteCategoryPhoto',api.deleteCategoryPhoto);
+app.post('/makeCategoryChanges',api.makeCategoryChanges);
+
+app.post('/deleteAreaEquipment',api.deleteAreaEquipment);
+app.post('/deleteAreaDoc',api.deleteAreaDoc);
+app.post('/deleteAreaVideoFile',api.deleteAreaVideoFile);
+app.post('/deleteAreaVideoYoutube',api.deleteAreaVideoYoutube);
+app.post('/deleteAreaPhoto',api.deleteAreaPhoto);
+app.post('/makeAreaChanges',api.makeAreaChanges);
+
+app.post('/deleteEquipmentVideoFile',api.deleteEquipmentVideoFile);
+app.post('/deleteEquipmentVideoYoutube',api.deleteEquipmentVideoYoutube);
+app.post('/deleteEquipmentDoc',api.deleteEquipmentDoc);
+app.post('/deleteEquipmentArea',api.deleteEquipmentArea);
+app.post('/deleteEquipmentSpec',api.deleteEquipmentSpec);
+app.post('/deleteEquipmentPhoto',api.deleteEquipmentPhoto);
+app.post('/makeEquipmentChanges',api.makeEquipmentChanges);
+
 
 app.get('/deleteFileEquipment/:type/:file',api.deleteFileEquipment);
 app.get('/deleteFileArea/:file',api.deleteFileArea);
@@ -78,6 +92,9 @@ app.get('/getEquipmentsTotal',api.getEquipmentsTotal);
 app.get('/getAreasTotal',api.getAreasTotal);
 app.get('/getAreaTotal/:area',api.getAreaTotal);
 app.get('/getCategoriesTotal',api.getCategoriesTotal);
+app.get('/getCategory/:category',api.getCategory);
+app.get('/getArea/:area',api.getArea);
+app.get('/getEquipment/:equipment',api.getEquipment);
 app.get('/getEquipmentTotal/:equipment',api.getEquipmentTotal);
 app.get('/getEquipmentsTotal/:bycat',api.getEquipmentsTotalByCat);
 app.get('/getEquipmentsTotalByArea/:area',api.getEquipmentsTotalByArea);

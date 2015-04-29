@@ -116,7 +116,7 @@ app.directive('inputFile',function($resource,$route,$upload){
                         scope.upload = $upload.upload({
                             url: 'addFilesTo/equipment',
                              data: {titleEl : scope.fileType,
-                             equipment_title:scope.title
+                             equipment_title: scope.title
                              },
                             file: item
                         }).progress(function(evt) {
@@ -153,7 +153,8 @@ app.directive('inputArea',function($resource,$route,$upload){
                     scope.upload = $upload.upload({
                         url: 'addFilesTo/areas',
                         data: {
-                            area_title:scope.title
+                            area_title:scope.title,
+                            titleEl : scope.fileType
                         },
                         file: item
                     }).progress(function(evt) {
@@ -195,6 +196,7 @@ app.directive('inputCategoryFile',function($resource,$route,$upload){
         link:function(scope,element,attrs){
             var files;
             scope.onFileSelect = function($files){
+                //alert($files);
                 files = $files;
                 scope.files = [];
                 files.forEach(function(item){
@@ -254,15 +256,9 @@ app.directive('youtube',function($resource,$routeParams,$sce){
         link:function(scope,element,attrs){
 
             scope.videoSafe = $sce.trustAsResourceUrl(scope.video.videoLink);
-                /*if(video[0].videoLink.length!=1){
-                    video[0].videoLink.forEach(function(item){
-                        var trusted = $sce.trustAsResourceUrl(item);
-                        scope.videoLinks.push(trusted);
-                    });
-                }else{
-                    var trusted = $sce.trustAsResourceUrl(video[0].videoLink);
-                    scope.videoLinks.push(trusted);
-                }*/
+
+
+
 
 
 
@@ -271,6 +267,31 @@ app.directive('youtube',function($resource,$routeParams,$sce){
 
         },
         templateUrl:'parts/youtube.html'
+    }
+});
+app.directive('customVideo',function($resource,$routeParams,$sce){
+    return{
+        restrict:'E',
+        link:function(scope,element,attrs){
+
+            scope.videoSafe = $sce.trustAsResourceUrl('uploaded/'+scope.video.title);
+            /*if(video[0].videoLink.length!=1){
+             video[0].videoLink.forEach(function(item){
+             var trusted = $sce.trustAsResourceUrl(item);
+             scope.videoLinks.push(trusted);
+             });
+             }else{
+             var trusted = $sce.trustAsResourceUrl(video[0].videoLink);
+             scope.videoLinks.push(trusted);
+             }*/
+
+
+
+
+
+
+        },
+        templateUrl:'parts/customVideo.html'
     }
 });
 app.directive('activePhotoAreas',function(){

@@ -22,70 +22,98 @@
     <favorites_list name="uncojet" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.49062756">
-      <split-first>
-        <leaf>
-          <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/public/js/app.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="40" column="14" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1170">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="itemArea.html" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/public/parts/itemArea.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="81" column="0" selection-start="2975" selection-end="2975" vertical-scroll-proportion="0.0" vertical-offset="1215" max-vertical-offset="1755">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="activePhotoEquipments.html" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/public/parts/activePhotoEquipments.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="18" column="0" selection-start="1197" selection-end="2423" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="615">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="singlePhotoEquipments.html" pinned="false" current="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/public/parts/singlePhotoEquipments.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="31" column="33" selection-start="2052" selection-end="2052" vertical-scroll-proportion="0.7487923" vertical-offset="0" max-vertical-offset="630">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.js" pinned="false" current="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/api/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="348" column="25" selection-start="15634" selection-end="15634" vertical-scroll-proportion="0.0" vertical-offset="4916" max-vertical-offset="10230">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf>
-          <file leaf-file-name="controller.js" pinned="false" current="true" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/public/js/controller.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state line="586" column="19" selection-start="19127" selection-end="19127" vertical-scroll-proportion="0.49401197" vertical-offset="8460" max-vertical-offset="12765">
-                  <folding />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf>
+      <file leaf-file-name="index.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api/index.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="833" column="46" selection-start="30559" selection-end="30566" vertical-scroll-proportion="0.33333334" vertical-offset="12300" max-vertical-offset="16830">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="server.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="0" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="2025">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="youtube.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/parts/youtube.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1" column="0" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="105">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="directives.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/directives.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="252" column="18" selection-start="8429" selection-end="8432" vertical-scroll-proportion="0.0" vertical-offset="3581" max-vertical-offset="5145">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="app.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/app.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="42" selection-start="37" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="controller.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/js/controller.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="248" column="36" selection-start="7712" selection-end="7712" vertical-scroll-proportion="0.0" vertical-offset="4305" max-vertical-offset="18330">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="home.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/parts/home.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="70" column="19" selection-start="3799" selection-end="3805" vertical-scroll-proportion="0.0" vertical-offset="1050" max-vertical-offset="4920">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="db.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/data/db.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="35" column="25" selection-start="644" selection-end="644" vertical-scroll-proportion="0.0" vertical-offset="525" max-vertical-offset="1935">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="439" column="0" selection-start="8035" selection-end="8082" vertical-scroll-proportion="0.0" vertical-offset="6555" max-vertical-offset="10005">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="customVideo.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/public/parts/customVideo.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="5" column="0" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -106,41 +134,47 @@
         <option value="$PROJECT_DIR$/public/parts/areaAdmin.html" />
         <option value="$PROJECT_DIR$/public/parts/test.html" />
         <option value="$PROJECT_DIR$/public/parts/inputFileNoData" />
-        <option value="$PROJECT_DIR$/public/parts/inputFileArea.html" />
-        <option value="$PROJECT_DIR$/public/parts/admin.html" />
-        <option value="$PROJECT_DIR$/public/parts/inputCategoryFile.html" />
         <option value="$PROJECT_DIR$/public/parts/menuEquipment.html" />
         <option value="$PROJECT_DIR$/public/parts/videoLink.html" />
-        <option value="$PROJECT_DIR$/public/parts/youtube.html" />
         <option value="$PROJECT_DIR$/public/parts/maintain_news.html" />
-        <option value="$PROJECT_DIR$/public/parts/inputFile.html" />
-        <option value="$PROJECT_DIR$/public/parts/item.html" />
         <option value="$PROJECT_DIR$/public/parts/singlePhotoAreas.html" />
-        <option value="$PROJECT_DIR$/public/js/directives.js" />
-        <option value="$PROJECT_DIR$/public/parts/add_area.html" />
-        <option value="$PROJECT_DIR$/public/parts/add_category.html" />
         <option value="$PROJECT_DIR$/public/parts/supplies.html" />
         <option value="$PROJECT_DIR$/public/parts/monitor.html" />
-        <option value="$PROJECT_DIR$/public/js/app.js" />
         <option value="$PROJECT_DIR$/public/parts/assurance.html" />
-        <option value="$PROJECT_DIR$/index.html" />
-        <option value="$PROJECT_DIR$/data/db.js" />
-        <option value="$PROJECT_DIR$/public/parts/add_equipment.html" />
-        <option value="$PROJECT_DIR$/api/index.js" />
-        <option value="$PROJECT_DIR$/public/parts/home.html" />
         <option value="$PROJECT_DIR$/public/parts/activePhotoAreas.html" />
-        <option value="$PROJECT_DIR$/server.js" />
-        <option value="$PROJECT_DIR$/public/js/controller.js" />
-        <option value="$PROJECT_DIR$/public/parts/itemArea.html" />
         <option value="$PROJECT_DIR$/public/parts/activePhotoEquipments.html" />
         <option value="$PROJECT_DIR$/public/parts/singlePhotoEquipments.html" />
+        <option value="$PROJECT_DIR$/mongodb.conf" />
+        <option value="$PROJECT_DIR$/public/parts/admin.html" />
+        <option value="$PROJECT_DIR$/public/parts/inputFileArea.html" />
+        <option value="$PROJECT_DIR$/public/parts/add_category.html" />
+        <option value="$PROJECT_DIR$/public/parts/customVideo.html" />
+        <option value="$PROJECT_DIR$/public/parts/maintainCategory.html" />
+        <option value="$PROJECT_DIR$/public/parts/add_area.html" />
+        <option value="$PROJECT_DIR$/public/parts/inputFile.html" />
+        <option value="$PROJECT_DIR$/public/parts/inputCategoryFile.html" />
+        <option value="$PROJECT_DIR$/public/parts/maintainArea.html" />
+        <option value="$PROJECT_DIR$/public/parts/add_equipment.html" />
+        <option value="$PROJECT_DIR$/public/js/app.js" />
+        <option value="$PROJECT_DIR$/public/parts/youtube.html" />
+        <option value="$PROJECT_DIR$/public/parts/maintainEquipment.html" />
+        <option value="$PROJECT_DIR$/public/js/directives.js" />
+        <option value="$PROJECT_DIR$/public/parts/item.html" />
+        <option value="$PROJECT_DIR$/public/parts/itemArea.html" />
+        <option value="$PROJECT_DIR$/data/db.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/api/index.js" />
+        <option value="$PROJECT_DIR$/public/parts/home.html" />
+        <option value="$PROJECT_DIR$/public/js/controller.js" />
+        <option value="$PROJECT_DIR$/server.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="y" value="22" />
-    <option name="width" value="1440" />
-    <option name="height" value="821" />
+    <option name="x" value="21" />
+    <option name="y" value="23" />
+    <option name="width" value="1419" />
+    <option name="height" value="790" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -219,6 +253,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uncojet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="uncojet" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="public" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="js" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -236,11 +288,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/public/img" />
+      <recent name="$PROJECT_DIR$/stuff" />
       <recent name="$PROJECT_DIR$/public/fonts" />
       <recent name="$PROJECT_DIR$" />
       <recent name="$PROJECT_DIR$/public/parts" />
-      <recent name="$PROJECT_DIR$/public/css" />
-      <recent name="$PROJECT_DIR$/public" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/public" />
@@ -296,11 +348,11 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="22" width="1440" height="821" extended-state="1" />
-    <editor active="false" />
+    <frame x="21" y="23" width="1419" height="790" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13530655" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.17453505" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -337,114 +389,31 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/public/parts/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="58" selection-start="849" selection-end="849" vertical-scroll-proportion="0.0" vertical-offset="91" max-vertical-offset="2970" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="32" selection-start="394" selection-end="394" vertical-scroll-proportion="0.0" vertical-offset="165" max-vertical-offset="1770" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="0" selection-start="14" selection-end="14" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="38505">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/add_equipment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="92" selection-start="955" selection-end="972" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="4200" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="7" column="0" selection-start="190" selection-end="190" vertical-scroll-proportion="0.0" vertical-offset="105" max-vertical-offset="195">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="20" selection-start="587" selection-end="587" vertical-scroll-proportion="0.0" vertical-offset="315" max-vertical-offset="1800" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/data/db.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="0" selection-start="291" selection-end="291" vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="270" />
+        <state line="657" column="11" selection-start="21917" selection-end="21917" vertical-scroll-proportion="0.0" vertical-offset="9204" max-vertical-offset="18330" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="368" column="16" selection-start="8772" selection-end="8772" vertical-scroll-proportion="0.0" vertical-offset="5520" max-vertical-offset="25545">
+        <state line="33" column="1" selection-start="1001" selection-end="1001" vertical-scroll-proportion="0.0" vertical-offset="495" max-vertical-offset="9915" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/db.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="21" selection-start="595" selection-end="595" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="1935" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="36" selection-start="399" selection-end="399" vertical-scroll-proportion="0.0" vertical-offset="150" max-vertical-offset="2145" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="520" column="38" selection-start="20662" selection-end="20662" vertical-scroll-proportion="0.0" vertical-offset="7800" max-vertical-offset="16080">
           <folding />
         </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/lib/angular-google-maps/example/example.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="256.25" vertical-offset="6150" max-vertical-offset="6795" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/factory.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="35" selection-start="594" selection-end="594" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="420" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/express/lib/router/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="-2.0264318" vertical-offset="1380" max-vertical-offset="4905" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/mongo_install.bash">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="32" selection-start="233" selection-end="233" vertical-scroll-proportion="-1.8" vertical-offset="0" max-vertical-offset="135" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/my.conf.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1365" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="3" selection-start="358" selection-end="358" vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="360" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/config.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="681" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/assist.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="22" selection-start="837" selection-end="837" vertical-scroll-proportion="0.0" vertical-offset="210" max-vertical-offset="450">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/node_modules/nodemailer/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="23" selection-start="25" selection-end="25" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="1095" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/assistTech.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="21" selection-start="1117" selection-end="1126" vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="480">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/applications.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="261" column="21" selection-start="6024" selection-end="6024" vertical-scroll-proportion="0.33279744" vertical-offset="3708" max-vertical-offset="5550" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/bower.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="634" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/.bowerrc">
@@ -462,26 +431,9 @@
         <state line="13" column="0" selection-start="622" selection-end="622" vertical-scroll-proportion="0.31400967" vertical-offset="0" max-vertical-offset="621" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/inputCategoryFile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="6" selection-start="956" selection-end="956" vertical-scroll-proportion="-15.0" vertical-offset="0" max-vertical-offset="450" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/parts/menuEquipment.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="105" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/inputFileArea.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="0" selection-start="334" selection-end="334" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="225" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/admin.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="29" selection-start="108" selection-end="108" vertical-scroll-proportion="0.06987578" vertical-offset="0" max-vertical-offset="644">
-          <folding />
-        </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/parts/maintain_news.html">
@@ -489,41 +441,14 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2190" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/youtube.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="67" selection-start="67" selection-end="67" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="657" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/inputFile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="6" selection-start="989" selection-end="989" vertical-scroll-proportion="0.5797101" vertical-offset="0" max-vertical-offset="621" />
-      </provider>
-    </entry>
     <entry file="jar://$APPLICATION_HOME_DIR$/lib/webstorm.jar!/resources/html5-schema/sectional.rnc">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="78" column="21" selection-start="1703" selection-end="1703" vertical-scroll-proportion="0.33233532" vertical-offset="948" max-vertical-offset="2655">
-          <folding />
-        </state>
+        <state line="78" column="21" selection-start="1703" selection-end="1703" vertical-scroll-proportion="0.33233532" vertical-offset="948" max-vertical-offset="2655" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/parts/singlePhotoAreas.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="1166" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="621" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/directives.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="302" column="43" selection-start="9771" selection-end="9771" vertical-scroll-proportion="0.0" vertical-offset="4080" max-vertical-offset="4830" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/add_area.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="0" selection-start="2812" selection-end="2812" vertical-scroll-proportion="0.0" vertical-offset="797" max-vertical-offset="1425" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/add_category.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="99" column="133" selection-start="3807" selection-end="3807" vertical-scroll-proportion="0.0" vertical-offset="1485" max-vertical-offset="1695" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/parts/supplies.html">
@@ -541,81 +466,202 @@
         <state line="135" column="242" selection-start="4592" selection-end="4592" vertical-scroll-proportion="0.9068323" vertical-offset="1441" max-vertical-offset="2175" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
+    <entry file="file://$PROJECT_DIR$/public/parts/activePhotoAreas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="483" column="16" selection-start="11582" selection-end="11582" vertical-scroll-proportion="0.0" vertical-offset="6995" max-vertical-offset="9690">
-          <folding />
-        </state>
+        <state line="18" column="101" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="435" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/singlePhotoEquipments.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="25" selection-start="1089" selection-end="1089" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="630" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/activePhotoEquipments.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="0" selection-start="1197" selection-end="2423" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="615" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/assist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="22" selection-start="837" selection-end="837" vertical-scroll-proportion="0.32608697" vertical-offset="0" max-vertical-offset="644" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/stuff/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1785" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/admin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="20" selection-start="892" selection-end="1334" vertical-scroll-proportion="0.0" vertical-offset="151" max-vertical-offset="795" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/maintain_category.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="4256" vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="1605" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/add_category.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="67" selection-start="2593" selection-end="2593" vertical-scroll-proportion="-12.5" vertical-offset="705" max-vertical-offset="1695" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/add_area.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="55" column="0" selection-start="2480" selection-end="2480" vertical-scroll-proportion="0.33789954" vertical-offset="603" max-vertical-offset="1470" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/uploaded/mini_mini_logo.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/inputFile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="51" selection-start="478" selection-end="478" vertical-scroll-proportion="-5.625" vertical-offset="0" max-vertical-offset="495" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/inputFileArea.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="39" selection-start="337" selection-end="337" vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="240" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/parts/add_equipment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="255" column="37" selection-start="10823" selection-end="10823" vertical-scroll-proportion="0.0" vertical-offset="3646" max-vertical-offset="4665" />
+        <state line="140" column="12" selection-start="5665" selection-end="5709" vertical-scroll-proportion="-13.125" vertical-offset="1785" max-vertical-offset="2715" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/api/index.js">
+    <entry file="file://$PROJECT_DIR$/public/parts/maintainEquipment.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="348" column="25" selection-start="15634" selection-end="15634" vertical-scroll-proportion="0.0" vertical-offset="4916" max-vertical-offset="10230">
+        <state line="66" column="10" selection-start="2759" selection-end="2759" vertical-scroll-proportion="0.5479452" vertical-offset="630" max-vertical-offset="2775" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/item.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="102" column="40" selection-start="4691" selection-end="4691" vertical-scroll-proportion="-11.833333" vertical-offset="1246" max-vertical-offset="1935" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/itemArea.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="67" column="41" selection-start="2708" selection-end="2708" vertical-scroll-proportion="0.0" vertical-offset="1005" max-vertical-offset="1755" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/back.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/cert.jpg">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/img/cert.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/data/local.ns">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="668" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/maintainCategory.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="76" column="0" selection-start="2562" selection-end="2562" vertical-scroll-proportion="0.0" vertical-offset="480" max-vertical-offset="2025" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/inputCategoryFile.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="4" selection-start="96" selection-end="200" vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="465" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/maintainArea.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="56" column="17" selection-start="2382" selection-end="2382" vertical-scroll-proportion="0.0" vertical-offset="690" max-vertical-offset="1575" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mongo_install.bash">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3" column="32" selection-start="233" selection-end="233" vertical-scroll-proportion="0.06859756" vertical-offset="0" max-vertical-offset="656" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mongodb.conf">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="13" selection-start="749" selection-end="749" vertical-scroll-proportion="0.6631098" vertical-offset="75" max-vertical-offset="1365" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/app.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="42" selection-start="37" selection-end="42" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1350">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/maintain_equipment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="154" column="10" selection-start="6333" selection-end="6335" vertical-scroll-proportion="0.0" vertical-offset="2310" max-vertical-offset="2520" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/home.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="19" selection-start="3799" selection-end="3805" vertical-scroll-proportion="0.0" vertical-offset="844" max-vertical-offset="4920">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/parts/customVideo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="0" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" vertical-offset="75" max-vertical-offset="165">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="439" column="0" selection-start="8035" selection-end="8082" vertical-scroll-proportion="0.0" vertical-offset="6555" max-vertical-offset="10005">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/data/db.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="6" selection-start="828" selection-end="828" vertical-scroll-proportion="0.0" vertical-offset="540" max-vertical-offset="1785" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/home.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="196" column="99" selection-start="10064" selection-end="10064" vertical-scroll-proportion="0.0" vertical-offset="2536" max-vertical-offset="4920" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/activePhotoAreas.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="101" selection-start="1268" selection-end="1268" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="435" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="14" selection-start="2719" selection-end="2719" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1770" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/item.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="100" column="11" selection-start="4395" selection-end="4395" vertical-scroll-proportion="-5.9166665" vertical-offset="1358" max-vertical-offset="2025" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="14" selection-start="1420" selection-end="1420" vertical-scroll-proportion="0.0" vertical-offset="465" max-vertical-offset="1170">
+        <state line="35" column="25" selection-start="644" selection-end="644" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1935">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controller.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="586" column="19" selection-start="19127" selection-end="19127" vertical-scroll-proportion="0.49401197" vertical-offset="8460" max-vertical-offset="12765">
+        <state line="248" column="36" selection-start="7712" selection-end="7712" vertical-scroll-proportion="0.0" vertical-offset="4305" max-vertical-offset="18330">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/itemArea.html">
+    <entry file="file://$PROJECT_DIR$/server.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="81" column="0" selection-start="2975" selection-end="2975" vertical-scroll-proportion="0.0" vertical-offset="1215" max-vertical-offset="1755">
+        <state line="50" column="0" selection-start="831" selection-end="831" vertical-scroll-proportion="0.0" vertical-offset="750" max-vertical-offset="2025">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/activePhotoEquipments.html">
+    <entry file="file://$PROJECT_DIR$/public/parts/youtube.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="0" selection-start="1197" selection-end="2423" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="615">
+        <state line="1" column="0" selection-start="132" selection-end="132" vertical-scroll-proportion="0.0" vertical-offset="15" max-vertical-offset="105">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/parts/singlePhotoEquipments.html">
+    <entry file="file://$PROJECT_DIR$/public/js/directives.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="33" selection-start="2052" selection-end="2052" vertical-scroll-proportion="0.7487923" vertical-offset="0" max-vertical-offset="630">
+        <state line="252" column="18" selection-start="8429" selection-end="8432" vertical-scroll-proportion="0.0" vertical-offset="3581" max-vertical-offset="5145">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="833" column="46" selection-start="30559" selection-end="30566" vertical-scroll-proportion="0.33333334" vertical-offset="12300" max-vertical-offset="16830">
           <folding />
         </state>
       </provider>

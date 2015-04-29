@@ -91,9 +91,6 @@ address p{
 .contacts a:hover{
     color:white;
 }
-.contacts .cell_phone{
-    margin-top: 2%;
-}
 .contacts .phone{
     margin-top: 2%;
 }
@@ -255,7 +252,9 @@ footer{
 }
 
 .carousel-caption h3{
-    color:white;
+    color: rgb(1, 1, 3);
+    background-color: rgba(66,139,202,0.7);;
+    border-radius: 15px
 }
 .carousel-indicators li{
     border-color:white;
@@ -274,10 +273,10 @@ footer{
 }
 
 .navbar-default .navbar-nav>li>a:hover{
-    color:white;
+    color:black;
 }
 .navbar-default .navbar-nav>li>a:active{
-    color:white;
+    color:black;
 }
 .navbar-default .navbar-nav>li>a:visited{
     color:rgba(66,139,202,0.9);
@@ -289,13 +288,13 @@ footer{
     color:white;
 }
 .navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{
-    color:white;
+    color:black;
 }
 .dropdown-menu>li>a{
     color:rgba(66,139,202,0.9);
 }
 .dropdown-menu>li>a:hover{
-    color:white;
+    color:black;
 }
 
 
@@ -420,8 +419,22 @@ footer{
     top:-200px;
 }
 
-
-
+a {
+    cursor: pointer;
+}
+.addfile{
+    margin-top: 15px;
+    text-align: center;
+}
+.addArea{
+    margin-top: 15px;
+}
+.makechanges{
+    margin-top: 15px;
+}
+.catimgs{
+    margin-top: 10px;
+}
 </style>
 <script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
 <script src="/socket.io/socket.io.js"></script>
@@ -432,7 +445,6 @@ footer{
 <script type="text/javascript" src="/js/controller.js"></script>
 <script type="text/javascript" src="/js/directives.js"></script>
 <script type="text/javascript" src="/js/factory.js"></script>
-<script type="text/javascript" src="/lib/jqmobile/jquery.mobile-1.4.3.min.js"></script>
 <script type="text/javascript" src="/lib/lightbox/js/lightbox.min.js"></script>
 <script type="text/javascript" src="/lib/swipe/jquery.touchSwipe.min.js"></script>
 <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -458,7 +470,7 @@ footer{
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#"><i class="icon-home icon-white"> </i>UNCOJET</a>
+            <a class="navbar-brand" href="/"><i class="icon-home icon-white"> </i>UNCO JET</a>
         </div>
         <div class="navbar-body collapse navbar-collapse navbar-ex1-collapse">
             <ul class="nav navbar-nav">
@@ -468,7 +480,7 @@ footer{
                     <ul class="dropdown-menu">
                         <li data-ng-repeat="cat in cats" class="menu-item dropdown dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" ng-click="collectData(cat.cat_title)">{{cat.cat_title}}<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="/itemEquipment{{equipment.equipment_name}}">{{equipment.equipment_name}}</a></li>
+                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="/itemEquipment{{equipment.equipment_title}}">{{equipment.equipment_title}}</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -515,18 +527,21 @@ footer{
                 <div class="modal-body">
                     <div ng-show="searchRes.equipment.length!=0">
                         <div data-ng-repeat="item in searchRes.equipment">
-                            <a ng-href="/itemEquipment{{item.equipment_name}}">{{item.equipment_name}}</a>
+                            <h3>Найденное оборудование:</h3>
+                            <a ng-href="/itemEquipment{{item.equipment_title}}">{{item.equipment_title}}</a>
                         </div>
                     </div>
 
-                    <div ng-show="searchRes.areas.length!=0">
-                        <div data-ng-repeat="item in searchRes.areas">
+                    <div ng-show="searchRes.area.length!=0">
+                        <div data-ng-repeat="item in searchRes.area">
+                            <h3>Найденные области применения:</h3>
                             <a ng-href="/itemArea{{item.area_title}}">{{item.area_title}}</a>
                         </div>
                     </div>
 
-                    <div ng-show="searchRes.categories.length!=0">
-                        <div data-ng-repeat="item in searchRes.categories">
+                    <div ng-show="searchRes.category.length!=0">
+                        <div data-ng-repeat="item in searchRes.category">
+                            <h3>Найденные категории:</h3>
                             <a ng-href="/itemCategory{{item.cat_title}}">{{item.cat_title}}</a>
                         </div>
                     </div>
@@ -556,7 +571,7 @@ footer{
         <div class="container">
             <div class="ourNavigation col-md-1 col-md-offset-1">
                 <a ng-href="/">
-                    <h4>UNCOJET</h4>
+                    <h4 class="text-center"><span class="glyphicon glyphicon-home"></span></h4>
                 </a>
                 <a ng-href="/assist">
                     <h5>Тех Поддержка</h5>
@@ -564,7 +579,7 @@ footer{
             </div>
             <div class="delivery col-md-4 col-sm-6 col-md-offset-2">
                 <a ng-href="delivery">
-                    <h4 class="center">ДОСТАВКА</h4>
+                    <h4 class="text-center"><span class="glyphicon glyphicon-send"></span></h4>
                 </a>
                     <p>
 Доставка осуществляется транспортной компанией. Передача заказанных единиц со склада транспортной компании осуществляется на следующий день с момента поступления заявки.
@@ -594,7 +609,7 @@ footer{
             </div>
             <address class="contacts_bot col-md-3 col-sm-6 col-xs-12 col-md-offset-1">
                 <a>
-                    <h4 class="center">КОНТАКТЫ</h4>
+                    <h4 class="text-center"><span class="glyphicon glyphicon-envelope"></span></h4>
                 </a>
                 <div class="row">
                     <div class="map-marker col-md-3 col-sm-3 col-sm-offset-0 col-xs-3 col-xs-offset-1">
@@ -611,21 +626,27 @@ footer{
                         <i class="fa fa-phone fa-2x"></i>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-8">
-                        <p>
-                            8 (7273) 819 824
-                        </p>
+                        <h6>
+                            8 (727) 381 98 24
+                        </h6>
+                        <h6>
+                            8 (727) 381 98 15
+                        </h6>
+                        <h6>
+                            8 (727) 381 96 67
+                        </h6>
                     </div>
                 </div>
-                <div class="row cell_phone ">
+                <!--<div class="row cell_phone ">
                     <div class="col-md-3 col-sm-3 col-sm-offset-0 col-xs-3 col-xs-offset-1">
                         <i class="fa fa-mobile fa-2x"></i>
                     </div>
                     <div class="col-md-9 col-sm-9 col-xs-8">
-                        <p>
+                        <h6>
                             8 701 915 78 34
-                        </p>
+                        </h6>
                     </div>
-                </div>
+                </div>-->
             </address>
 
 
