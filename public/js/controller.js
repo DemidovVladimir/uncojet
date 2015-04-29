@@ -310,75 +310,76 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
 
     $scope.session = JSON.parse($window.localStorage.getItem('session'));
     $scope.popular = 'false';
-    if($scope.session.pwd=='dushes05'){
-        $scope.specs = [];
-        $scope.addSpec = function(){
-            $scope.specs.push({title:'',value:''});
-        }
+    if($scope.session){
+        if($scope.session.pwd=='dushes05'){
+            $scope.specs = [];
+            $scope.addSpec = function(){
+                $scope.specs.push({title:'',value:''});
+            }
 
-        $scope.areas = [];
-        $scope.addArea = function(){
+            $scope.areas = [];
+            $scope.addArea = function(){
                 $scope.areas.push({title:''});
-        }
+            }
 
-        $scope.filesInput = [];
-        $scope.newInput = function(){
-            $scope.filesInput.push({title:''});
-        }
-
-
-
-        $scope.videoLinks = [];
-        $scope.addVideoLink = function(){
-            $scope.videoLinks.push({videoLink:''});
-        }
+            $scope.filesInput = [];
+            $scope.newInput = function(){
+                $scope.filesInput.push({title:''});
+            }
 
 
 
-
-        //$scope.path = 'http://104.131.239.73/equipmentAdmin';// Путь который контролит данный обработчик--------------------------------------
-
-
-        $scope.deleteTotalEquipment = function(equipment){
-            var Todo = $resource('/deleteEquipmentTotal/'+equipment);
-            var info = Todo.query();
-            $window.location.reload();
-        }
+            $scope.videoLinks = [];
+            $scope.addVideoLink = function(){
+                $scope.videoLinks.push({videoLink:''});
+            }
 
 
-        var Todo = $resource('getEquipmentsTotal');
-        $scope.cats = [];
-        var Todo2 = $resource('getCategoriesTotal');
-        var info2 = Todo2.query(function(){
-            info2.forEach(function(cat){
-                $scope.cats.push(cat.cat_title);
+
+
+            //$scope.path = 'http://104.131.239.73/equipmentAdmin';// Путь который контролит данный обработчик--------------------------------------
+
+
+            $scope.deleteTotalEquipment = function(equipment){
+                var Todo = $resource('/deleteEquipmentTotal/'+equipment);
+                var info = Todo.query();
+                $window.location.reload();
+            }
+
+
+            var Todo = $resource('getEquipmentsTotal');
+            $scope.cats = [];
+            var Todo2 = $resource('getCategoriesTotal');
+            var info2 = Todo2.query(function(){
+                info2.forEach(function(cat){
+                    $scope.cats.push(cat.cat_title);
+                });
             });
-        });
-        $scope.incomings = [];
-        var info = Todo.query(function(){
-            info.forEach(function(data){
+            $scope.incomings = [];
+            var info = Todo.query(function(){
+                info.forEach(function(data){
 
-                var incomeInfo = {};
-                incomeInfo.title = data.equipment_title;
-                incomeInfo.photo = data.equipment_photo;
-                incomeInfo.about = data.equipment_about;
-                incomeInfo.some = data.equipment_some;
-                incomeInfo.price = data.equipment_price;
-                incomeInfo.benefit = data.equipment_benefits;
+                    var incomeInfo = {};
+                    incomeInfo.title = data.equipment_title;
+                    incomeInfo.photo = data.equipment_photo;
+                    incomeInfo.about = data.equipment_about;
+                    incomeInfo.some = data.equipment_some;
+                    incomeInfo.price = data.equipment_price;
+                    incomeInfo.benefit = data.equipment_benefits;
 
                     incomeInfo.specs = data.equipment_spec;
                     incomeInfo.areas = data.equipment_areas;
                     incomeInfo.videoLinks = data.equipment_videos;
-                incomeInfo.order = data.equipment_order;
-                $scope.incomings.push(incomeInfo);
+                    incomeInfo.order = data.equipment_order;
+                    $scope.incomings.push(incomeInfo);
+                });
             });
-        });
 
 
 
 
 
-        $scope.sendData = function() {
+            $scope.sendData = function() {
 
 
                 var title = $scope.title;
@@ -417,9 +418,12 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
                 }else{
                     $scope.title = 'Данное поле является обязательным!!!';
                 }
+            }
+
+
+        }else{
+            $window.location.href='/admin';
         }
-
-
     }else{
         $window.location.href='/admin';
     }
@@ -428,85 +432,88 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
 app.controller('addArea',function($scope,$routeParams,$resource,$route,$window){
     var files=[];
     $scope.session = JSON.parse($window.localStorage.getItem('session'));
-    if($scope.session.pwd=='dushes05'){
-
-
-        $scope.equipments = [];
-        $scope.addEquipment = function(){
-            $scope.equipments.push({title:''});
-        }
-        $scope.filesInput = [];
-        $scope.newInput = function(){
-            $scope.filesInput.push({title:''});
-        }
-
-        $scope.videoLinks = [];
-        $scope.addVideoLink = function(){
-            $scope.videoLinks.push({videoLink:''});
-        }
-
-
-
-
-        $scope.path = 'http://104.131.239.73/areaAdmin';// Путь который контролит данный обработчик--------------------------------------
-
-
-        $scope.deleteTotalArea = function(area){
-            var Todo = $resource('/deleteAreaTotal/'+area);
-            var info = Todo.query();
-            $window.location.reload();
-        }
-
-
-        var Todo = $resource('getAreasTotal');
-        $scope.incomings = [];
-        var info = Todo.query(function(){
-            info.forEach(function(data){
-                var incomeInfo = {};
-                incomeInfo.title = data.area_title;
-                incomeInfo.photo = data.area_photos;
-                incomeInfo.about = data.area_about;
-                if(data.area_equipment && data.area_equipment!=null && data.area_equipment.length!=0){
-                    incomeInfo.equipments = data.area_equipment;
-                   // incomeInfo.equipments = JSON.parse(incomeInfo.equipments);
-                }
-                $scope.incomings.push(incomeInfo);
-            });
-        });
-
-
-
-
-
-        $scope.sendData = function() {
-
-
-            var title = $scope.title;
-            var about = $scope.about;
-            var equipments = $scope.equipments;
-            var videoLinks = $scope.videoLinks;
-            if(title && title!='Данное поле является обязательным!!!'){
-                var inputTo = $resource('/postAreaOutOfFile');
-
-                var input = new inputTo();
-                input.title = title;
-                input.about = about;
-                input.equipments = equipments;
-                //input.equipments = JSON.stringify(input.equipments);
-                input.videoLinks = videoLinks;
-                //input.videoLinks = JSON.stringify(input.videoLinks);
-                input.$save();
-
-                $window.location.reload();
-            }else{
-                $scope.title = 'Данное поле является обязательным!!!';
+    if($scope.session){
+        if($scope.session.pwd=='dushes05'){
+            $scope.equipments = [];
+            $scope.addEquipment = function(){
+                $scope.equipments.push({title:''});
             }
+            $scope.filesInput = [];
+            $scope.newInput = function(){
+                $scope.filesInput.push({title:''});
+            }
+
+            $scope.videoLinks = [];
+            $scope.addVideoLink = function(){
+                $scope.videoLinks.push({videoLink:''});
+            }
+
+
+
+
+            $scope.path = 'http://104.131.239.73/areaAdmin';// Путь который контролит данный обработчик--------------------------------------
+
+
+            $scope.deleteTotalArea = function(area){
+                var Todo = $resource('/deleteAreaTotal/'+area);
+                var info = Todo.query();
+                $window.location.reload();
+            }
+
+
+            var Todo = $resource('getAreasTotal');
+            $scope.incomings = [];
+            var info = Todo.query(function(){
+                info.forEach(function(data){
+                    var incomeInfo = {};
+                    incomeInfo.title = data.area_title;
+                    incomeInfo.photo = data.area_photos;
+                    incomeInfo.about = data.area_about;
+                    if(data.area_equipment && data.area_equipment!=null && data.area_equipment.length!=0){
+                        incomeInfo.equipments = data.area_equipment;
+                        // incomeInfo.equipments = JSON.parse(incomeInfo.equipments);
+                    }
+                    $scope.incomings.push(incomeInfo);
+                });
+            });
+
+
+
+
+
+            $scope.sendData = function() {
+
+
+                var title = $scope.title;
+                var about = $scope.about;
+                var equipments = $scope.equipments;
+                var videoLinks = $scope.videoLinks;
+                if(title && title!='Данное поле является обязательным!!!'){
+                    var inputTo = $resource('/postAreaOutOfFile');
+
+                    var input = new inputTo();
+                    input.title = title;
+                    input.about = about;
+                    input.equipments = equipments;
+                    //input.equipments = JSON.stringify(input.equipments);
+                    input.videoLinks = videoLinks;
+                    //input.videoLinks = JSON.stringify(input.videoLinks);
+                    input.$save();
+
+                    $window.location.reload();
+                }else{
+                    $scope.title = 'Данное поле является обязательным!!!';
+                }
+            }
+
+
+        }else{
+            $window.location.href='/admin';
         }
-
-
     }else{
         $window.location.href='/admin';
     }
+
 });
 
 
@@ -708,84 +715,89 @@ app.controller('itemArea',function($scope,$routeParams,$resource){
 app.controller('addCategory', function ($scope,$resource,$route,$upload,$location,$window) {
     var files=[];
     $scope.session = JSON.parse($window.localStorage.getItem('session'));
-    if($scope.session.pwd=='dushes05'){
-        $scope.areas = [];
-        $scope.addArea = function(){
-            $scope.areas.push({title:''});
-        }
-
-        $scope.filesInput = [];
-        $scope.newInput = function(){
-            $scope.filesInput.push({title:''});
-        }
-
-
-
-        $scope.videoLinks = [];
-        $scope.addVideoLink = function(){
-            $scope.videoLinks.push({videoLink:''});
-        }
-
-
-
-
-      //  $scope.path = 'http://localhost/categoryAdmin';// Путь который контролит данный обработчик--------------------------------------
-
-
-        $scope.deleteTotalCategory = function(category){
-            var Todo = $resource('/deleteCategoryTotal/'+category);
-            var info = Todo.query();
-            $window.location.reload();
-        }
-
-
-        var Todo = $resource('getCategoriesTotal');
-        $scope.incomings = [];
-        var info = Todo.query(function(){
-            info.forEach(function(data){
-                var incomeInfo = {};
-                incomeInfo.title = data.cat_title;
-                incomeInfo.photo = data.cat_photos;
-                $scope.incomings.push(incomeInfo);
-            });
-        });
-
-
-
-
-
-        $scope.sendData = function() {
-
-
-            var title = $scope.title;
-            var about = $scope.about;
-            var areas = $scope.areas;
-            var videoLinks = $scope.videoLinks;
-            var order = $scope.order;
-            if(title && title!='Данное поле является обязательным!!!'){
-                var inputTo = $resource('/postCategoryOutOfFile');
-
-                var input = new inputTo();
-                input.title = title;
-                input.about = about;
-                input.areas = areas;
-                //input.areas = JSON.stringify(input.areas);
-                input.videoLinks = videoLinks;
-                //input.videoLinks = JSON.stringify(input.videoLinks);
-                input.order = order;
-
-                input.$save();
-
-                $window.location.reload();
-            }else{
-                $scope.title = 'Данное поле является обязательным!!!';
+    if($scope.session){
+        if($scope.session.pwd=='dushes05'){
+            $scope.areas = [];
+            $scope.addArea = function(){
+                $scope.areas.push({title:''});
             }
+
+            $scope.filesInput = [];
+            $scope.newInput = function(){
+                $scope.filesInput.push({title:''});
+            }
+
+
+
+            $scope.videoLinks = [];
+            $scope.addVideoLink = function(){
+                $scope.videoLinks.push({videoLink:''});
+            }
+
+
+
+
+            //  $scope.path = 'http://localhost/categoryAdmin';// Путь который контролит данный обработчик--------------------------------------
+
+
+            $scope.deleteTotalCategory = function(category){
+                var Todo = $resource('/deleteCategoryTotal/'+category);
+                var info = Todo.query();
+                $window.location.reload();
+            }
+
+
+            var Todo = $resource('getCategoriesTotal');
+            $scope.incomings = [];
+            var info = Todo.query(function(){
+                info.forEach(function(data){
+                    var incomeInfo = {};
+                    incomeInfo.title = data.cat_title;
+                    incomeInfo.photo = data.cat_photos;
+                    $scope.incomings.push(incomeInfo);
+                });
+            });
+
+
+
+
+
+            $scope.sendData = function() {
+
+
+                var title = $scope.title;
+                var about = $scope.about;
+                var areas = $scope.areas;
+                var videoLinks = $scope.videoLinks;
+                var order = $scope.order;
+                if(title && title!='Данное поле является обязательным!!!'){
+                    var inputTo = $resource('/postCategoryOutOfFile');
+
+                    var input = new inputTo();
+                    input.title = title;
+                    input.about = about;
+                    input.areas = areas;
+                    //input.areas = JSON.stringify(input.areas);
+                    input.videoLinks = videoLinks;
+                    //input.videoLinks = JSON.stringify(input.videoLinks);
+                    input.order = order;
+
+                    input.$save();
+
+                    $window.location.reload();
+                }else{
+                    $scope.title = 'Данное поле является обязательным!!!';
+                }
+            }
+
+
+        }else{
+            $window.location.href='/admin';
         }
-
-
     }else{
         $window.location.href='/admin';
     }
+
 });
 
 
@@ -806,11 +818,16 @@ app.controller('admin',function($scope,$location,$window){
     var pageHeight = window.innerHeight;
     var approxHeight = pageHeight - 280;
     $('.adminPan').height(approxHeight);
-    if($scope.session.pwd=='dushes05'){
-        $('#myModal').modal('hide');
+    if($scope.session){
+        if($scope.session.pwd=='dushes05'){
+            $('#myModal').modal('hide');
+        }else{
+            $('#myModal').modal('show');
+        }
     }else{
         $('#myModal').modal('show');
     }
+
     $scope.closeAdmin = function(){
         $window.location.href = '/';
     }
