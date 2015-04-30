@@ -89,6 +89,16 @@ var categories = mongoose.Schema({
 });
 exports.categoryModel = mongoose.model('categories',categories);
 
+var action = mongoose.Schema({
+    title:String,
+    about:String,
+    startDate:{ type: Date, default: Date.now },
+    endDate:Date,
+    pictures:[]
+});
+
+exports.actionModel = mongoose.model('actions',action);
+
 
 var areas = mongoose.Schema({
     area_title:{

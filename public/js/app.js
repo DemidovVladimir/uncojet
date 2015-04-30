@@ -1,4 +1,24 @@
-var app = angular.module('myApp',['ngRoute','ngResource','angularFileUpload','google-maps','ngAnimate','youtube-embed']);
+//angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
+//    .controller('CarouselController', ['$scope', '$timeout', '$transition', '$q', function ($scope, $timeout, $transition, $q) {
+//    }]).directive('carousel', [function() {
+//        return {
+//            restrict:'E',
+//            link:function(scope,element,attrs){
+//
+//            }
+//        }
+//    }]);
+
+var app = angular.module('myApp',[
+    'ngRoute',
+    'ngResource',
+    'angularFileUpload',
+    'google-maps',
+    'ngAnimate',
+    'youtube-embed',
+    'ui.bootstrap',
+    'ui.date'
+]);
 
 
 
@@ -34,6 +54,10 @@ var app = angular.module('myApp',['ngRoute','ngResource','angularFileUpload','go
             .when('/areaAdmin',{
                 templateUrl:'parts/add_area.html',
                 controller:'addArea'
+            })
+            .when('/actionAdmin',{
+                templateUrl:'parts/add_action.html',
+                controller:'addAction'
             })
             .when('/categoryAdmin',{
                 templateUrl:'parts/add_category.html',

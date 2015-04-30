@@ -6,7 +6,229 @@ var async = require('async');
 var request = require('request');
 
 
+exports.addPictureAction = function(req,res,next){
+    var titleAction = req.body.title;
+    var order = req.body.order;
+    var picsArr;
 
+    async.series([
+        function(callback){
+            db.actionModel.find({title:titleAction},function(err,data){
+                if(err) return next(err);
+                if(!data){
+                    picsArr = [];
+                    picsArr.push(req.files.file.originalFilename);
+                    callback(null,'making proper array');
+                }else{
+                    if(data.length==0){
+                        picsArr = [];
+                        picsArr.push(req.files.file.originalFilename);
+                        callback(null,'making proper array');
+                    }else{
+                        if(!data[0].pictures){
+                            picsArr = [];
+                            picsArr.push(req.files.file.originalFilename);
+                            callback(null,'making proper array');
+                        }else{
+                            if(data[0].pictures.length==0){
+                                picsArr = [];
+                                picsArr.push(req.files.file.originalFilename);
+                                callback(null,'making proper array');
+                            }else{
+                                if(order){
+                                    if(order>data[0].pictures.length){
+                                        picsArr = data[0].pictures;
+                                        picsArr.push(req.files.file.originalFilename);
+                                        callback(null,'making proper array');
+                                    }else{
+                                        order -= 1;
+                                        picsArr = data[0].pictures;
+                                        picsArr.splice(order, 0, req.files.file.originalFilename);
+                                        callback(null,'making proper array');
+                                    }
+                                }else{
+                                    picsArr = data[0].pictures;
+                                    picsArr.push(req.files.file.originalFilename);
+                                    callback(null,'making proper array');
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+        },
+        function(callback){
+            db.actionModel.update({title:titleAction},
+                {pictures:picsArr},{upsert:true},
+                function(err){
+                    if(err) return next(err);
+                    fs.createReadStream(req.files.file.path)
+                        .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+                    gm('public/uploaded/'+req.files.file.originalFilename)
+                        .resize(300)
+                        .write('public/uploaded/mini_'+req.files.file.originalFilename, function (err) {
+                            if (!err) console.log('Files are loaded!');
+                            callback(null,'updated db');
+                        });
+                }
+            )
+        }
+    ],function(err,results){
+        if(err) return next(err);
+        res.send(200);
+    })
+}
+
+exports.getActions = function(req,res){
+    db.actionModel.find({},function(err,data){
+        if(err) return next(err);
+        res.send(200,data);
+    })
+}
+
+exports.deleteAction = function(req,res,next){
+    var title = req.params.title;
+    var allPictures;
+    var allPicsEquipment;
+    var allPicsCategories;
+    var allPicsAreas;
+
+
+
+
+    async.series([
+        function(callback){
+            db.actionModel.aggregate(
+                {$match: {'title': title}},
+                {$unwind:'$pictures'},
+                {$group:{_id:'$pictures',count: { $sum: 1 }}},
+                function(err,data){
+                    if(err) return next(err);
+                    allPictures = data;
+                    callback(null,'unwindedActions');
+                });
+        },
+        function(callback){
+            db.equipmentModel.aggregate(
+                {$unwind:'$equipment_photo'},
+                {$group:{_id:'$equipment_photo'}},
+                function(err,data){
+                    if(err) return next(err);
+                    allPicsEquipment = data;
+                    callback(null,'unwindedEquipment');
+                });
+        },
+        function(callback){
+            db.areaModel.aggregate(
+                {$unwind:'$area_photos'},
+                {$group:{_id:'$area_photos'}},
+                function(err,data){
+                    if(err) return next(err);
+                    allPicsAreas = data;
+                    callback(null,'unwindedAreas');
+                });
+        },
+        function(callback){
+            db.categoryModel.aggregate(
+                {$unwind:'$cat_photos'},
+                {$group:{_id:'$cat_photos'}},
+                function(err,data){
+                    if(err) return next(err);
+                    allPicsCategories = data;
+                    callback(null,'unwindedCategories');
+                });
+        },
+        function(callback){
+            db.actionModel.find({title:title},function(err,data){
+                if(err) return next(err);
+                if(data[0].pictures!=0){
+                    for(var i= 0, picsTotal = data[0].pictures.length; i<picsTotal; i++){
+                        if(i==picsTotal-1){
+                            var objCheck = {_id:data[0].pictures[i]};
+                            objCheck = JSON.stringify(objCheck);
+                            allPicsEquipment = JSON.stringify(allPicsEquipment);
+                            var indexOfEquipment = allPicsEquipment.indexOf(objCheck);
+
+                            allPicsAreas = JSON.stringify(allPicsAreas);
+                            var indexOfArea = allPicsAreas.indexOf(objCheck);
+
+                            allPicsCategories = JSON.stringify(allPicsCategories);
+                            var indexOfCategory = allPicsCategories.indexOf(objCheck);
+
+
+                            allPictures.forEach(function(unwinded){
+                                if(unwinded._id==data[0].pictures[i]){
+                                    if(unwinded.count==1 && indexOfEquipment==-1 && indexOfArea==-1 && indexOfCategory==-1){
+                                        var bitch = data[0].pictures[i];
+                                        fs.unlink(__dirname+'/../public/uploaded/'+bitch,function(err){
+                                            if(err) return next(err);
+                                            fs.unlink(__dirname+'/../public/uploaded/mini_'+bitch,function(err){
+                                                if(err) return next(err);
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                            callback(null,'deleting pics');
+                        }else{
+                            var objCheck = {_id:data[0].pictures[i]};
+                            objCheck = JSON.stringify(objCheck);
+                            allPicsEquipment = JSON.stringify(allPicsEquipment);
+                            var indexOfEquipment = allPicsEquipment.indexOf(objCheck);
+
+                            allPicsAreas = JSON.stringify(allPicsAreas);
+                            var indexOfArea = allPicsAreas.indexOf(objCheck);
+
+                            allPicsCategories = JSON.stringify(allPicsCategories);
+                            var indexOfCategory = allPicsCategories.indexOf(objCheck);
+
+
+                            allPictures.forEach(function(unwinded){
+                                if(unwinded._id==data[0].pictures[i]){
+                                    if(unwinded.count==1 && indexOfEquipment==-1 && indexOfArea==-1 && indexOfCategory==-1){
+                                        var bitch = data[0].pictures[i];
+                                        fs.unlink(__dirname+'/../public/uploaded/'+bitch,function(err){
+                                            if(err) return next(err);
+                                            fs.unlink(__dirname+'/../public/uploaded/mini_'+bitch,function(err){
+                                                if(err) return next(err);
+                                            });
+                                        });
+                                    }
+                                }
+                            });
+                        }
+                    }
+                }else{
+                    callback(null,'deleting pics');
+                }
+            })
+        },
+        function(callback){
+            db.actionModel.remove({title:title},function(err){
+                if(err) return next(err);
+                callback(null,'deleted db');
+            });
+        }
+    ],function(err,results){
+        if(err) return next(err);
+        res.send(200);
+    });
+
+}
+
+exports.postActionData = function(req,res){
+    db.actionModel.update({title:req.body.title},
+        {
+            title:req.body.title,
+            about:req.body.about,
+            startDate:req.body.startDate,
+            endDate:req.body.endDate
+        },{upsert:true},
+        function(err){
+            res.send(200);
+        }
+    )
+}
 
 //Ready block for dding files anywhere
 exports.addFilesTo = function(req,res,next){

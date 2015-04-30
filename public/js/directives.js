@@ -103,6 +103,40 @@ app
     }]);
 
 
+app.directive('inputActionPicture',function($resource,$route,$upload){
+    return{
+        restrict:'E',
+        templateUrl:'parts/inputPictureAction.html',
+        scope: {
+            progres: "=",
+            title: "=",
+            order:"="
+        },
+        link:function(scope,element,attrs){
+            var files;
+            scope.onFileSelect = function($files){
+                scope.progres.value = 0;
+                files = $files;
+                files.forEach(function(item){
+                    scope.upload = $upload.upload({
+                        url: 'addPictureTo/action',
+                        data: {
+                            title : scope.title,
+                            order: scope.order
+                        },
+                        file: item
+                    }).progress(function(evt) {
+                        scope.progres.value = parseInt(100.0 * evt.loaded / evt.total);
+                    }).success(function(data, status, headers, config) {
+                        scope.files.push(item);
+                        scope.progres.value = 0;
+                    });
+                });
+            };
+        }
+    }
+});
+
 
 app.directive('inputFile',function($resource,$route,$upload){
         return{

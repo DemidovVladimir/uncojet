@@ -9,6 +9,11 @@
 
 
 app.controller('home',function($scope,$resource,$window){
+    var actionsTodo = $resource('/getActions/');
+    var actions = actionsTodo.query(function(){
+        $scope.actions = actions;
+    });
+
     var todo = $resource('/getEquipmentsTotal');
     var equipments = todo.query(function(){
         var equipmentArrFirst = [];
@@ -428,6 +433,59 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
         $window.location.href='/admin';
     }
 });
+
+app.controller('addAction',function($scope,$routeParams,$resource,$route,$window){
+    $scope.session = JSON.parse($window.localStorage.getItem('session'));
+    $scope.progress = {value:0};
+    if($scope.session){
+        if($scope.session.pwd=='dushes05'){
+
+            var Todo = $resource('/getActions/');
+            var info = Todo.query(function(){
+                $scope.actions = info;
+            });
+
+
+            $scope.deleteAction = function(title){
+                var Todo = $resource('/deleteAction/'+title);
+                var info = Todo.query();
+                $window.location.reload();
+            }
+
+
+            $scope.startingDate = 'Введите данные в формате: 00/00/0000 (день/месяц/год)';
+            $scope.endingDate = 'Введите данные в формате: 00/00/0000 (день/месяц/год)';
+            $scope.filesInput = [];
+
+            $scope.newInput = function(){
+                $scope.filesInput = [''];
+            }
+
+            $scope.submit = function(){
+                var inputTo = $resource('/postActionData');
+                var input = new inputTo();
+                input.title = $scope.title;
+                input.about = $scope.about;
+                input.startDate = $scope.startingDate;
+                input.endDate = $scope.endingDate;
+                input.$save(function(){
+                    $window.location.reload();
+                });
+            }
+
+            $scope.dateOptions = {
+                changeYear: true,
+                changeMonth: true,
+                minDate: 0,
+                maxDate: "+1Y"
+            };
+        }else{
+            $window.location.href='/admin';
+        }
+    }else{
+        $window.location.href='/admin';
+    }
+})
 
 app.controller('addArea',function($scope,$routeParams,$resource,$route,$window){
     var files=[];

@@ -55,6 +55,10 @@ app.use(app.router);
 
 app.post('/sendEmail',api.sendEmail);
 app.post('/addFilesTo/:element',api.addFilesTo);
+app.post('/addPictureTo/action',api.addPictureAction);
+app.post('/postActionData',api.postActionData);
+app.get('/getActions',api.getActions);
+app.get('/deleteAction/:title',api.deleteAction);
 app.post('/deleteCategoryVideoYoutube',api.deleteCategoryVideoYoutube);
 app.post('/deleteCategoryVideoFile',api.deleteCategoryVideoFile);
 app.post('/deleteCategoryDoc',api.deleteCategoryDoc);
