@@ -699,6 +699,7 @@ exports.postCategoryOutOfFile = function(req,res,next){
 exports.getEquipmentsTotal = function(req,res,next){
     db.equipmentModel.aggregate({$sort:{equipment_order:1}},function(err,data){
         if(err) return next(err);
+        console.log(data);
         res.send(data);
     });
 }
