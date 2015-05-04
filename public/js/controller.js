@@ -352,7 +352,7 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
             }
 
 
-            var Todo = $resource('getEquipmentsTotal');
+
             $scope.cats = [];
             var Todo2 = $resource('getCategoriesTotal');
             var info2 = Todo2.query(function(){
@@ -361,8 +361,9 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
                 });
             });
             $scope.incomings = [];
-            var info = Todo.query(function(){
-                info.forEach(function(data){
+            var getEquipments = $resource('getEquipmentsTotal');
+            var infoEquipments = getEquipments.query(function(){
+                infoEquipments.forEach(function(data){
 
                     var incomeInfo = {};
                     incomeInfo.title = data.equipment_title;
