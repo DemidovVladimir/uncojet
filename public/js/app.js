@@ -23,10 +23,16 @@ var app = angular.module('myApp',[
 ]);
 
 
+angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
+    .controller('CarouselController', ['$scope', '$timeout', '$transition', '$q', function ($scope, $timeout, $transition, $q) {
+    }]).directive('carousel', [function() {
+        return { }
+    }]);
 
-    app.config(function($routeProvider,$locationProvider,$animateProvider)
+
+
+    app.config(function($routeProvider,$locationProvider)
     {
-        $animateProvider.classNameFilter(/carousel/);
         $locationProvider.html5Mode(true);
         // Register routes with the $routeProvider
         $routeProvider

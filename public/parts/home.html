@@ -206,8 +206,6 @@
     </div>
     <!-- /.row -->
 
-
-
 <!-- Portfolio Section -->
 <div class="row">
     <div class="col-md-12">
@@ -218,16 +216,50 @@
             <h3 class="text-center">{{action.title}}</h3>
         </div>
 
-        <div class="col-md-6 col-md-offset-3" style="height: 305px">
-            <carousel interval="myInterval">
-                <slide ng-repeat="slide in action.pictures track by $id(slide)" active="slide.active">
-                    <img class="img-responsive" ng-src="/uploaded/{{slide}}" style="margin:auto;">
-                    <div class="carousel-caption">
-                        <h4>Slide {{$index}}</h4>
+
+
+
+
+
+        <div id="carousel-{{action.title}}" class="col-md-6 col-md-offset-3 actionCarousel carousel slide" data-ride="carousel">
+            <!-- Indicators -->
+            <ol class="carousel-indicators">
+                <li data-target="#carousel-{{action.title}}" data-slide-to="{{action.pictures.indexOf(pic)}}" ng-class="{'active':action.pictures.indexOf(pic)==0}" ng-repeat="pic in action.pictures"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div style="max-height:350px" class="carousel-inner">
+                <div class="item" ng-class="{'active':action.pictures.indexOf(pic)==0}" ng-repeat="pic in action.pictures">
+                    <!--<img style="max-height: 100%;" ng-src='/uploaded/{{pic}}' alt="opa1">-->
+                    <div style="background:url('/uploaded/{{pic}}') center center;
+                        background-size:contain; background-repeat: no-repeat;" class="slider-size">
                     </div>
-                </slide>
-            </carousel>
+                </div>
+            </div>
+
+            <!-- Controls -->
+            <button type="button" class="left carousel-control" href="#carousel-{{action.title}}" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left"></span>
+            </button>
+            <button type="button" class="right carousel-control" href="#carousel-{{action.title}}" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right"></span>
+            </button>
         </div>
+        <!-- /.carousel -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         <!--<h3 class="text-center">{{action.title}}</h3>-->
         <!--&lt;!&ndash;Carousel of Actions&ndash;&gt;-->
         <!--<div>-->
@@ -255,7 +287,7 @@
                     <!--<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>-->
                 <!--</button>-->
             <!--</div>-->
-        <div class="aboutAction col-md-6 col-md-offset-3 well" ng-class="{aboutActionFirst:actions.indexOf(action)==0}">
+        <div class="col-md-6 col-md-offset-3 well">
             <h4>{{action.about}}</h4>
         </div>
         </div>

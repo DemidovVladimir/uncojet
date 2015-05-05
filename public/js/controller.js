@@ -12,12 +12,14 @@ app.controller('home',function($scope,$resource,$window){
     var actionsTodo = $resource('/getActions/');
     var actions = actionsTodo.query(function(){
         $scope.actions = actions;
-
-        $scope.myInterval = 5000;
-        var slides = $scope.slides = $scope.actions[0].pictures;
+        //var activeArr = [];
+        //$scope.actions.forEach(function(item){
+        //    activeArr.push(item.pictures.splice(0,1).pop());
+        //});
+        //$scope.activeSlidesActions = activeArr;
     });
 
-
+    $scope.foo = '100';
 
 
     var todo = $resource('/getEquipmentsTotal');

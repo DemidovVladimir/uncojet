@@ -371,3 +371,5 @@ app.directive('singlePhotoEquipments',function(){
 
 
 
+
+
