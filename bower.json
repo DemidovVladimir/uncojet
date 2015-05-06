@@ -8,6 +8,7 @@
     "angular": "latest",
     "angular-route": "latest",
     "angular-youtube-mb": "~0.1.0",
-    "jqueri-ui": "~1.11.4"
+    "jqueri-ui": "~1.11.4",
+    "angular-bootstrap": "~0.13.0"
   }
 }
