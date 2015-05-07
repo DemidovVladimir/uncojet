@@ -10,6 +10,7 @@ exports.addPictureAction = function(req,res,next){
     var titleAction = req.body.title;
     var order = req.body.order;
     var picsArr;
+    var fileName = req.files.file.path.split('tmp/').pop();
 
     async.series([
         function(callback){
@@ -17,38 +18,38 @@ exports.addPictureAction = function(req,res,next){
                 if(err) return next(err);
                 if(!data){
                     picsArr = [];
-                    picsArr.push(req.files.file.originalFilename);
+                    picsArr.push(fileName);
                     callback(null,'making proper array');
                 }else{
                     if(data.length==0){
                         picsArr = [];
-                        picsArr.push(req.files.file.originalFilename);
+                        picsArr.push(fileName);
                         callback(null,'making proper array');
                     }else{
                         if(!data[0].pictures){
                             picsArr = [];
-                            picsArr.push(req.files.file.originalFilename);
+                            picsArr.push(fileName);
                             callback(null,'making proper array');
                         }else{
                             if(data[0].pictures.length==0){
                                 picsArr = [];
-                                picsArr.push(req.files.file.originalFilename);
+                                picsArr.push(fileName);
                                 callback(null,'making proper array');
                             }else{
                                 if(order){
                                     if(order>data[0].pictures.length){
                                         picsArr = data[0].pictures;
-                                        picsArr.push(req.files.file.originalFilename);
+                                        picsArr.push(fileName);
                                         callback(null,'making proper array');
                                     }else{
                                         order -= 1;
                                         picsArr = data[0].pictures;
-                                        picsArr.splice(order, 0, req.files.file.originalFilename);
+                                        picsArr.splice(order, 0, fileName);
                                         callback(null,'making proper array');
                                     }
                                 }else{
                                     picsArr = data[0].pictures;
-                                    picsArr.push(req.files.file.originalFilename);
+                                    picsArr.push(fileName);
                                     callback(null,'making proper array');
                                 }
                             }
@@ -63,10 +64,10 @@ exports.addPictureAction = function(req,res,next){
                 function(err){
                     if(err) return next(err);
                     fs.createReadStream(req.files.file.path)
-                        .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
-                    gm('public/uploaded/'+req.files.file.originalFilename)
+                        .pipe(fs.createWriteStream('public/uploaded/'+fileName));
+                    gm('public/uploaded/'+fileName)
                         .resize(300)
-                        .write('public/uploaded/mini_'+req.files.file.originalFilename, function (err) {
+                        .write('public/uploaded/mini_'+fileName, function (err) {
                             if (!err) console.log('Files are loaded!');
                             callback(null,'updated db');
                         });
@@ -235,41 +236,42 @@ exports.addFilesTo = function(req,res,next){
     var element = req.params.element;
     var titleEl = req.body.titleEl;
     var equipmentTitle = req.body.equipment_title;
+    var fileName = req.files.file.path.split('tmp/').pop();
     if(element=='equipment'){
         if(!req.body.equipment_title){
             res.send(200);
         }else{
             if(titleEl=='docs'){
                 db.equipmentModel.update({equipment_title:equipmentTitle},
-                    {$push:{'equipment_documents':req.files.file.originalFilename}},{upsert:true},
+                    {$push:{'equipment_documents':fileName}},{upsert:true},
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
                         if (!err) console.log('Files are loaded!');
                         res.send(200);
                     }
                 )
             }else if(titleEl=='video'){
                 db.equipmentModel.update({equipment_title:equipmentTitle},
-                    {$push:{'equipment_videos_custom':{title:req.files.file.originalFilename}}},{upsert:true},
+                    {$push:{'equipment_videos_custom':{title:fileName}}},{upsert:true},
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
                         res.send(200);
                     }
                 )
             }else if(titleEl=='photos'){
                 db.equipmentModel.update({equipment_title:equipmentTitle},
-                    {$push:{'equipment_photo':req.files.file.originalFilename}},{upsert:true},
+                    {$push:{'equipment_photo':fileName}},{upsert:true},
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
-                        gm('public/uploaded/'+req.files.file.originalFilename)
+                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
+                        gm('public/uploaded/'+fileName)
                             .resize(170, 140)
-                            .write('public/uploaded/mini_'+req.files.file.originalFilename, function (err) {
+                            .write('public/uploaded/mini_'+fileName, function (err) {
                                 if (!err) console.log('Files are loaded!');
                                 res.send(200);
                             });
@@ -283,24 +285,24 @@ exports.addFilesTo = function(req,res,next){
         }else{
             if(titleEl=='docs'){
                 db.areaModel.update({area_title:req.body.area_title},
-                    {$push:{'area_documents':req.files.file.originalFilename}},{upsert:true},
+                    {$push:{'area_documents':fileName}},{upsert:true},
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
                         res.send(200);
                     }
                 )
             }else if(titleEl=='photos'){
                 db.areaModel.update({area_title:req.body.area_title},
-                    {$push:{'area_photos':req.files.file.originalFilename}},{upsert:true},
+                    {$push:{'area_photos':fileName}},{upsert:true},
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
-                        gm('public/uploaded/'+req.files.file.originalFilename)
+                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
+                        gm('public/uploaded/'+fileName)
                             .resize(170, 140)
-                            .write('public/uploaded/mini_'+req.files.file.originalFilename, function (err) {
+                            .write('public/uploaded/mini_'+fileName, function (err) {
                                 if (!err) console.log('Files are loaded!');
                                 res.send(200);
                             });
@@ -308,11 +310,11 @@ exports.addFilesTo = function(req,res,next){
                 )
             }else if(titleEl=='video'){
                 db.areaModel.update({area_title:req.body.area_title},
-                    {$push:{'area_videos_custom':{title:req.files.file.originalFilename}}},{upsert:true},
+                    {$push:{'area_videos_custom':{title:fileName}}},{upsert:true},
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
                         res.send(200);
                     }
                 )
@@ -324,35 +326,35 @@ exports.addFilesTo = function(req,res,next){
         }else{
             if(titleEl=='docs'){
                 db.categoryModel.update({cat_title:req.body.category_title},
-                    {$push:{'cat_documents':req.files.file.originalFilename}},{upsert:true},
+                    {$push:{'cat_documents':fileName}},{upsert:true},
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
                         if (!err) console.log('Files are loaded!');
                         res.send(200);
                     }
                 )
             }else if(titleEl=='photos'){
                 db.categoryModel.update({cat_title:req.body.category_title},
-                    {$push:{'cat_photos':req.files.file.originalFilename}},{upsert:true},
+                    {$push:{'cat_photos':fileName}},{upsert:true},
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
-                        gm('public/uploaded/'+req.files.file.originalFilename)
+                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
+                        gm('public/uploaded/'+fileName)
                             .resize(170, 140)
-                            .write('public/uploaded/mini_'+req.files.file.originalFilename, function (err) {
+                            .write('public/uploaded/mini_'+fileName, function (err) {
                                 if (!err) console.log('Files are loaded!');
                                 res.send(200);
                             });
                     }
                 )
             }else if(titleEl == 'video'){
-                db.categoryModel.update({cat_title:req.body.category_title},{$push:{cat_videos_custom:{title:req.files.file.originalFilename}}},{upsert:true},function(err){
+                db.categoryModel.update({cat_title:req.body.category_title},{$push:{cat_videos_custom:{title:fileName}}},{upsert:true},function(err){
                     if(err) return next(err);
                     fs.createReadStream(req.files.file.path)
-                        .pipe(fs.createWriteStream('public/uploaded/'+req.files.file.originalFilename));
+                        .pipe(fs.createWriteStream('public/uploaded/'+fileName));
                     res.send(200);
                 });
             }
@@ -445,8 +447,8 @@ exports.deleteEquipmentTotal = function(req,res,next){
     var equipmentTitle = req.params.equipment;
     db.equipmentModel.find({equipment_title:equipmentTitle},function(err,data){
         if(err) return next(err);
-        if(data.equipment_photo && data.equipment_photo.length!=0){
-            data.equipment_photo.forEach(function(pic){
+        if(data[0].equipment_photo && data[0].equipment_photo.length!=0){
+            data[0].equipment_photo.forEach(function(pic){
                 fs.unlink(__dirname+'/../public/uploaded/'+pic,function(err){
                     if(err) return next(err);
                     fs.unlink(__dirname+'/../public/uploaded/mini_'+pic,function(err){
@@ -455,8 +457,8 @@ exports.deleteEquipmentTotal = function(req,res,next){
                 })
             });
         }
-        if(data.equipment_documents && data.equipment_documents.length!=0){
-            data.equipment_documents.forEach(function(doc){
+        if(data[0].equipment_documents && data[0].equipment_documents.length!=0){
+            data[0].equipment_documents.forEach(function(doc){
                 fs.unlink(__dirname+'/../public/uploaded/'+doc,function(err){
                     if(err) return next(err);
                 })
@@ -472,8 +474,8 @@ exports.deleteCategoryTotal = function(req,res,next){
     var categoryTitle = req.params.category;
     db.categoryModel.find({cat_title:categoryTitle},function(err,data){
         if(err) return next(err);
-        if(data.cat_photos && data.cat_photos.length!=0){
-            data.cat_photos.forEach(function(pic){
+        if(data[0].cat_photos && data[0].cat_photos.length!=0){
+            data[0].cat_photos.forEach(function(pic){
                 fs.unlink(__dirname+'/../public/uploaded/'+pic,function(err){
                     if(err) return next(err);
                     fs.unlink(__dirname+'/../public/uploaded/mini_'+pic,function(err){
@@ -499,8 +501,8 @@ exports.deleteAreaTotal = function(req,res,next){
     var areaTitle = req.params.area;
     db.areaModel.find({area_title:areaTitle},function(err,data){
         if(err) return next(err);
-        if(data.area_photos && data.area_photos.length!=0){
-            data.area_photos.forEach(function(pic){
+        if(data[0].area_photos && data[0].area_photos.length!=0){
+            data[0].area_photos.forEach(function(pic){
                 fs.unlink(__dirname+'/../public/uploaded/'+pic,function(err){
                     if(err) return next(err);
                     fs.unlink(__dirname+'/../public/uploaded/mini_'+pic,function(err){
