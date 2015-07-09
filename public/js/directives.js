@@ -110,7 +110,10 @@ app.directive('inputActionPicture',function($resource,$route,$upload,$window){
         scope: {
             progres: "=",
             title: "=",
-            order:"="
+            order:"=",
+            about:"=",
+            startingDate:"=",
+            endingDate:"="
         },
         link:function(scope,element,attrs){
             var files;
@@ -122,7 +125,10 @@ app.directive('inputActionPicture',function($resource,$route,$upload,$window){
                         url: 'addPictureTo/action',
                         data: {
                             title : scope.title,
-                            order: scope.order
+                            order: scope.order,
+                            about:scope.about,
+                            startDate:scope.startingDate,
+                            endDate:scope.endingDate
                         },
                         file: item
                     }).progress(function(evt) {

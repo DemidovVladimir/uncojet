@@ -471,8 +471,6 @@ app.controller('addAction',function($scope,$routeParams,$resource,$route,$window
             }
 
 
-            $scope.startingDate = 'Введите данные в формате: 00/00/0000 (день/месяц/год)';
-            $scope.endingDate = 'Введите данные в формате: 00/00/0000 (день/месяц/год)';
             $scope.filesInput = [];
 
             $scope.newInput = function(){

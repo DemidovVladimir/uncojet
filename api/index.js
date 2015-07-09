@@ -11,10 +11,12 @@ exports.addPictureAction = function(req,res,next){
     var order = req.body.order;
     var picsArr;
     var fileName = req.files.file.path.split('tmp/').pop();
+    var actionData;
 
     async.series([
         function(callback){
             db.actionModel.find({title:titleAction},function(err,data){
+                actionData = data;
                 if(err) return next(err);
                 if(!data){
                     picsArr = [];
@@ -59,8 +61,30 @@ exports.addPictureAction = function(req,res,next){
             });
         },
         function(callback){
+            var startDate;
+            var endDate;
+            var about;
+            if(req.body.about!='undefined'){
+               about = req.body.about;
+            }else{
+                about = actionData[0].about;
+            }
+            if(req.body.startDate!='undefined'){
+                startDate = new Date(req.body.startDate);
+            }else{
+                startDate = actionData[0].startDate;
+            }
+            if(req.body.endDate!='undefined'){
+                endDate = new Date(req.body.endDate);
+            }else{
+                endDate = actionData[0].endDate;
+            }
             db.actionModel.update({title:titleAction},
-                {pictures:picsArr},{upsert:true},
+                {pictures:picsArr, about:about
+                    ,
+                    startDate:startDate,
+                    endDate:endDate
+                },{upsert:true},
                 function(err){
                     if(err) return next(err);
                     fs.createReadStream(req.files.file.path)
