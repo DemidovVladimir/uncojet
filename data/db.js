@@ -3,7 +3,7 @@ var options = {
     user: 'uncojet',
     pass: 'videojet'
 }
-mongoose.connect('mongodb://localhost/uncojet');
+mongoose.connect('mongodb://localhost:27017/uncojet');
 
 var mongoose = require('mongoose');
 
