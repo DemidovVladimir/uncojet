@@ -95,7 +95,10 @@ app.get('/getAreasTotalByEquipment/:equipment',api.getAreasTotalByEquipment);
 app.get('/searchFor/:item',api.search);
 
 app.get('*',function(req, res) {
-    res.sendfile('index.html');
+    res.sendfile(path.join(
+      __dirname,
+      'index.html'
+    ));
 });
 
 
