@@ -118,6 +118,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-http.listen(8080,'localhost', function(){
+http.listen(80,'localhost', function(){
     console.log('listening on 80');
 });
