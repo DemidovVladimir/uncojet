@@ -9,7 +9,7 @@ var session      = require('express-session');
 var bodyParser = require('body-parser');
 var api = require('./api/index');
 var io = require('socket.io')(http);
-
+var path = require('path');
 
 
 
@@ -85,7 +85,10 @@ app.get('/getAreasTotalByEquipment/:equipment',api.getAreasTotalByEquipment);
 app.get('/searchFor/:item',api.search);
 
 app.get('*',function(req, res) {
-    res.sendfile('index.html');
+    res.sendfile(path.join(
+      __dirname,
+      'index.html'
+    ));
 });
 
 
@@ -108,6 +111,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-http.listen(8080, function(){
-    console.log('listening on 8080');
+http.listen(3000, function(){
+    console.log('listening on 3000');
 });
