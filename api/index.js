@@ -4,6 +4,7 @@ var gm = require('gm');
 var nodemailer = require("nodemailer");
 var async = require('async');
 var request = require('request');
+var path = require('path');
 
 
 exports.addPictureAction = function(req,res,next){
@@ -260,7 +261,7 @@ exports.addFilesTo = function(req,res,next){
     var element = req.params.element;
     var titleEl = req.body.titleEl;
     var equipmentTitle = req.body.equipment_title;
-    var fileName = req.files.file.path.split('tmp/').pop();
+    var fileName = req.files.file.path.split('/').pop();
     if(element=='equipment'){
         if(!req.body.equipment_title){
             res.send(200);
@@ -271,9 +272,12 @@ exports.addFilesTo = function(req,res,next){
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
+                            .pipe(fs.createWriteStream(
+                              path.join(
+                                __dirname,
+                                '../public/uploaded/'+fileName
+                              )));
                         if (!err) console.log('Files are loaded!');
-                        res.send(200);
                     }
                 )
             }else if(titleEl=='video'){
@@ -282,8 +286,11 @@ exports.addFilesTo = function(req,res,next){
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
-                        res.send(200);
+                            .pipe(fs.createWriteStream(
+                              path.join(
+                                __dirname,
+                                '../public/uploaded/'+fileName
+                              )));
                     }
                 )
             }else if(titleEl=='photos'){
@@ -292,12 +299,22 @@ exports.addFilesTo = function(req,res,next){
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
-                        gm('public/uploaded/'+fileName)
+                            .pipe(fs.createWriteStream(
+                              path.join(
+                                __dirname,
+                              '../public/uploaded/'+fileName
+                            )));
+                        gm(
+                          path.join(
+                          __dirname,
+                          '../public/uploaded/'+fileName))
                             .resize(170, 140)
-                            .write('public/uploaded/mini_'+fileName, function (err) {
+                            .write(
+                              path.join(
+                                __dirname,
+                                '../public/uploaded/mini_'+fileName
+                              ), function (err) {
                                 if (!err) console.log('Files are loaded!');
-                                res.send(200);
                             });
                     }
                 )
@@ -313,8 +330,11 @@ exports.addFilesTo = function(req,res,next){
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
-                        res.send(200);
+                            .pipe(fs.createWriteStream(
+                              path.join(
+                                __dirname,
+                                '../public/uploaded/'+fileName
+                              )));
                     }
                 )
             }else if(titleEl=='photos'){
@@ -323,12 +343,23 @@ exports.addFilesTo = function(req,res,next){
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
-                        gm('public/uploaded/'+fileName)
+                            .pipe(fs.createWriteStream(
+                              path.join(
+                                __dirname,
+                                '../public/uploaded/'+fileName
+                              )));
+                        gm(
+                          path.join(
+                          __dirname,
+                          '../public/uploaded/'+fileName
+                        ))
                             .resize(170, 140)
-                            .write('public/uploaded/mini_'+fileName, function (err) {
+                            .write(
+                              path.join(
+                              __dirname,
+                              '../public/uploaded/mini_'+fileName
+                            ), function (err) {
                                 if (!err) console.log('Files are loaded!');
-                                res.send(200);
                             });
                     }
                 )
@@ -338,8 +369,11 @@ exports.addFilesTo = function(req,res,next){
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
-                        res.send(200);
+                            .pipe(fs.createWriteStream(
+                              path.join(
+                              __dirname,
+                              '../public/uploaded/'+fileName
+                            )));
                     }
                 )
             }
@@ -354,9 +388,12 @@ exports.addFilesTo = function(req,res,next){
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
+                            .pipe(fs.createWriteStream(
+                              path.join(
+                              __dirname,
+                              '../public/uploaded/'+fileName
+                            )));
                         if (!err) console.log('Files are loaded!');
-                        res.send(200);
                     }
                 )
             }else if(titleEl=='photos'){
@@ -365,12 +402,23 @@ exports.addFilesTo = function(req,res,next){
                     function(err){
                         if(err) return next(err);
                         fs.createReadStream(req.files.file.path)
-                            .pipe(fs.createWriteStream('public/uploaded/'+fileName));
-                        gm('public/uploaded/'+fileName)
+                            .pipe(fs.createWriteStream(
+                              path.join(
+                              __dirname,
+                              '../public/uploaded/'+fileName
+                            )));
+                        gm(
+                          path.join(
+                            __dirname,
+                            '../public/uploaded/'+fileName
+                          ))
                             .resize(170, 140)
-                            .write('public/uploaded/mini_'+fileName, function (err) {
+                            .write(
+                              path.join(
+                              __dirname,
+                                '../public/uploaded/mini_'+fileName
+                              ), function (err) {
                                 if (!err) console.log('Files are loaded!');
-                                res.send(200);
                             });
                     }
                 )
@@ -378,8 +426,11 @@ exports.addFilesTo = function(req,res,next){
                 db.categoryModel.update({cat_title:req.body.category_title},{$push:{cat_videos_custom:{title:fileName}}},{upsert:true},function(err){
                     if(err) return next(err);
                     fs.createReadStream(req.files.file.path)
-                        .pipe(fs.createWriteStream('public/uploaded/'+fileName));
-                    res.send(200);
+                        .pipe(fs.createWriteStream(
+                          path.join(
+                          __dirname,
+                          '../public/uploaded/'+fileName
+                        )));
                 });
             }
         }
