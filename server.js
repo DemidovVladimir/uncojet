@@ -111,6 +111,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-http.listen(3000, function(){
-    console.log('listening on 3000');
+http.listen(80, function(){
+    console.log('listening on 80');
 });
