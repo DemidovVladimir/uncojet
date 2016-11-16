@@ -730,16 +730,11 @@ exports.postAreaOutOfFile = function(req,res,next){
 }
 //At the menu administration posting data without photo
 exports.postCategoryOutOfFile = function(req,res,next){
-    var title = "req.body.title";
-    var about = '';
-    var areas = [];
-    var videoLinks = [];
-    var order = '';
-
-    if(req.body.about) about = req.body.about;
-    if(req.body.areas) areas = req.body.areas;
-    if(req.body.videoLinks) videoLinks = req.body.videoLinks;
-    if(req.body.order) order = req.body.order;
+    var title = req.body.title || 'failure';
+    var about = req.body.about || '';
+    var areas = req.body.areas || [];
+    var videoLinks = req.body.videoLinks || [];
+    var order = req.body.order || '';
 
     db.categoryModel.update({
       cat_title:title
@@ -775,17 +770,17 @@ exports.getAreaTotal = function(req,res,next){
 }
 exports.getCategoriesTotal = function(req,res,next){
   res.send(200);
-    // db.categoryModel.aggregate({$sort:{cat_order:1}},function(err,data){
-    //     if(err) return next(err);
-    //     res.send(data);
-    // });
+    db.categoryModel.aggregate({$sort:{cat_order:1}},function(err,data){
+      if(err) return next(err);
+      res.send(data);
+    });
 }
 exports.getEquipmentsTotalByCat = function(req,res,next){
     var cat = req.params.bycat;
     db.equipmentModel.aggregate({$match:{equipment_category:cat}},{$sort:{equipment_order:1}},function(err,data){
-        if(err) return next(err);
-        var info = data;
-        res.send(info);
+      if(err) return next(err);
+      var info = data;
+      res.send(info);
     });
 }
 exports.getEquipmentsTotalByArea = function(req,res,next){

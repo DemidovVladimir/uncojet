@@ -55,9 +55,9 @@ app.controller('total',function($scope,$resource,$location){
     }
 
     var todo_1 = $resource('/getCategoriesTotal');
-    // var cats = todo_1.query(function(){
-    //     $scope.cats = cats;
-    // });
+    var cats = todo_1.query(function(){
+        $scope.cats = cats;
+    });
 
     var areasTodo = $resource('/getAreasTotal');
     var areas = areasTodo.query(function(){
@@ -372,11 +372,11 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
 
             $scope.cats = [];
             var Todo2 = $resource('/getCategoriesTotal');
-            // var info2 = Todo2.query(function(){
-            //     info2.forEach(function(cat){
-            //         $scope.cats.push(cat.cat_title);
-            //     });
-            // });
+            var info2 = Todo2.query(function(){
+                info2.forEach(function(cat){
+                    $scope.cats.push(cat.cat_title);
+                });
+            });
             $scope.incomings = [];
             var getEquipments = $resource('/getEquipmentsTotal');
             var infoEquipments = getEquipments.query(function(){
@@ -823,14 +823,14 @@ app.controller('addCategory', function ($scope,$resource,$route,$upload,$locatio
 
             var Todo = $resource('/getCategoriesTotal');
             $scope.incomings = [];
-            // var info = Todo.query(function(){
-            //     info.forEach(function(data){
-            //         var incomeInfo = {};
-            //         incomeInfo.title = data.cat_title;
-            //         incomeInfo.photo = data.cat_photos;
-            //         $scope.incomings.push(incomeInfo);
-            //     });
-            // });
+            var info = Todo.query(function(){
+                info.forEach(function(data){
+                    var incomeInfo = {};
+                    incomeInfo.title = data.cat_title;
+                    incomeInfo.photo = data.cat_photos;
+                    $scope.incomings.push(incomeInfo);
+                });
+            });
 
 
 
