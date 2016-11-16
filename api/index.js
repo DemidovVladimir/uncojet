@@ -732,7 +732,9 @@ exports.postAreaOutOfFile = function(req,res,next){
 exports.postCategoryOutOfFile = function(req,res,next){
     var title = req.body.title;
     res.type('application/json');
-    res.status(404).send({'title': req.body.title});
+    var response = {'title': req.body.title};
+    response = JSON.stringify(response);
+    res.status(200).send(response);
 
     // var about = '';
     // var areas = [];
