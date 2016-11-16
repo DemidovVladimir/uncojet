@@ -745,14 +745,13 @@ exports.postCategoryOutOfFile = function(req,res,next){
     db.categoryModel.find({}, function(err, data){
       if(err) console.log(err);
       data ? console.log(data) : null;
-        db.categoryModel.update({
-          cat_title:title
-        },{
+        db.categoryModel.insert({
+          cat_title:title,
           cat_about:"about",
           cat_areas:["areas"],
           cat_videos:["videoLinks"],
           cat_order:"order"
-        },{upsert:true},function(err){
+        },function(err){
             if(err) return next(err);
             res.send(200);
         });
