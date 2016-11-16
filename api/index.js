@@ -730,11 +730,12 @@ exports.postAreaOutOfFile = function(req,res,next){
 }
 //At the menu administration posting data without photo
 exports.postCategoryOutOfFile = function(req,res,next){
+    console.log('Something is wrong!..');
     var title = req.body.title;
     res.type('application/json');
     var response = {'title': req.body.title};
     response = JSON.stringify(response);
-    res.status(200).send(response);
+    res.send(response);
 
     // var about = '';
     // var areas = [];
