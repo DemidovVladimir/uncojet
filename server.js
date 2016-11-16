@@ -10,10 +10,6 @@ var bodyParser = require('body-parser');
 var api = require('./api/index');
 var io = require('socket.io')(http);
 
-
-
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.use(favicon(path.join(__dirname, 'public/img/mini_logo.ico')));
@@ -121,6 +117,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-http.listen(80,'46.101.107.111', function(){
+http.listen(80,'46.101.107.111/', function(){
     console.log('listening on 80');
 });
