@@ -769,7 +769,6 @@ exports.getAreaTotal = function(req,res,next){
     });
 }
 exports.getCategoriesTotal = function(req,res,next){
-  res.send(200);
     db.categoryModel.aggregate({$sort:{cat_order:1}},function(err,data){
       if(err) return next(err);
       res.send(data);
