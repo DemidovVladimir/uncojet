@@ -731,30 +731,27 @@ exports.postAreaOutOfFile = function(req,res,next){
 //At the menu administration posting data without photo
 exports.postCategoryOutOfFile = function(req,res,next){
     var title = req.body.title;
-    console.log(req.body);
-    res.send(200);
+    var about = '';
+    var areas = [];
+    var videoLinks = [];
+    var order = '';
 
-    // var about = '';
-    // var areas = [];
-    // var videoLinks = [];
-    // var order = '';
-    //
-    // if(req.body.about) about = req.body.about;
-    // if(req.body.areas) areas = req.body.areas;
-    // if(req.body.videoLinks) videoLinks = req.body.videoLinks;
-    // if(req.body.order) order = req.body.order;
-    //
-    // db.categoryModel.update({
-    //   cat_title:title
-    // },{
-    //   cat_about:about,
-    //   cat_areas:areas,
-    //   cat_videos:videoLinks,
-    //   cat_order:order
-    // },{upsert:true},function(err){
-    //     if(err) return next(err);
-    //     res.send(200);
-    // });
+    if(req.body.about) about = req.body.about;
+    if(req.body.areas) areas = req.body.areas;
+    if(req.body.videoLinks) videoLinks = req.body.videoLinks;
+    if(req.body.order) order = req.body.order;
+
+    db.categoryModel.update({
+      cat_title:title
+    },{
+      cat_about:about,
+      cat_areas:areas,
+      cat_videos:videoLinks,
+      cat_order:order
+    },{upsert:true},function(err){
+        if(err) return next(err);
+        res.send(200);
+    });
 }
 exports.getEquipmentsTotal = function(req,res,next){
     db.equipmentModel.aggregate({$sort:{equipment_order:1}},function(err,data){
@@ -777,10 +774,11 @@ exports.getAreaTotal = function(req,res,next){
     });
 }
 exports.getCategoriesTotal = function(req,res,next){
-    db.categoryModel.aggregate({$sort:{cat_order:1}},function(err,data){
-        if(err) return next(err);
-        res.send(data);
-    });
+  res.send(200);
+    // db.categoryModel.aggregate({$sort:{cat_order:1}},function(err,data){
+    //     if(err) return next(err);
+    //     res.send(data);
+    // });
 }
 exports.getEquipmentsTotalByCat = function(req,res,next){
     var cat = req.params.bycat;
