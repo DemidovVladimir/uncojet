@@ -3,7 +3,7 @@ var options = {
     user: 'uncojet',
     pass: 'videojet'
 }
-mongoose.connect('mongodb://localhost:27017/uncojet');
+mongoose.connect('mongodb://46.101.107.111:27017/uncojet');
 
 var equipment = mongoose.Schema({
     equipment_title:{
