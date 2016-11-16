@@ -746,7 +746,7 @@ exports.postCategoryOutOfFile = function(req,res,next){
       // if(err) console.log(err);
       // data ? console.log(data) : null;
       // res.send(data);
-        db.categoryModel.insert({
+        db.categoryModel.create({
           cat_title:"title",
           cat_about:"about",
           cat_areas:["areas"],
