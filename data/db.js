@@ -5,8 +5,6 @@ var options = {
 }
 mongoose.connect('mongodb://localhost:27017/uncojet');
 
-var mongoose = require('mongoose');
-
 var equipment = mongoose.Schema({
     equipment_title:{
         type:String,
@@ -53,7 +51,6 @@ var equipment = mongoose.Schema({
     }
 });
 exports.equipmentModel = mongoose.model('equipment',equipment);
-
 
 var categories = mongoose.Schema({
     cat_title:{

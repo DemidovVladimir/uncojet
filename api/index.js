@@ -731,34 +731,27 @@ exports.postAreaOutOfFile = function(req,res,next){
 //At the menu administration posting data without photo
 exports.postCategoryOutOfFile = function(req,res,next){
     var title = req.body.title;
-    if(req.body.about===undefined){
-        var about = '';
-    }else{
-        var about = req.body.about;
-    }
+    var about = '';
+    var areas = [];
+    var videoLinks = [];
+    var order = '';
 
-    if(req.body.areas===undefined){
-        var areas = [];
-    }else{
-        var areas = req.body.areas;
-    }
-
-    if(req.body.videoLinks===undefined){
-        var videoLinks = [];
-    }else{
-        var videoLinks = req.body.videoLinks;
-    }
-
-    if(req.body.order===undefined){
-        var order = '';
-    }else{
-        var order = req.body.order;
-    }
-            db.categoryModel.update({cat_title:title},{cat_about:about,cat_areas:areas,cat_videos:videoLinks,cat_order:order},{upsert:true},function(err){
-                if(err) return next(err);
-                res.send(200);
-            });
-
+    if(req.body.about) about = req.body.about;
+    if(req.body.areas) areas = req.body.areas;
+    if(req.body.videoLinks) videoLinks = req.body.videoLinks;
+    if(req.body.order) order = req.body.order;
+    
+    db.categoryModel.update({
+      cat_title:title
+    },{
+      cat_about:about,
+      cat_areas:areas,
+      cat_videos:videoLinks,
+      cat_order:order
+    },{upsert:true},function(err){
+        if(err) return next(err);
+        res.send(200);
+    });
 }
 exports.getEquipmentsTotal = function(req,res,next){
     db.equipmentModel.aggregate({$sort:{equipment_order:1}},function(err,data){
