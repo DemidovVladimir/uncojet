@@ -730,34 +730,28 @@ exports.postAreaOutOfFile = function(req,res,next){
 }
 //At the menu administration posting data without photo
 exports.postCategoryOutOfFile = function(req,res,next){
-    console.log('Something is wrong!..');
     var title = req.body.title;
-    res.type('application/json');
-    var response = {'title': req.body.title};
-    response = JSON.stringify(response);
-    res.send(response);
+    var about = '';
+    var areas = [];
+    var videoLinks = [];
+    var order = '';
 
-    // var about = '';
-    // var areas = [];
-    // var videoLinks = [];
-    // var order = '';
-    //
-    // if(req.body.about) about = req.body.about;
-    // if(req.body.areas) areas = req.body.areas;
-    // if(req.body.videoLinks) videoLinks = req.body.videoLinks;
-    // if(req.body.order) order = req.body.order;
-    //
-    // db.categoryModel.update({
-    //   cat_title:title
-    // },{
-    //   cat_about:about,
-    //   cat_areas:areas,
-    //   cat_videos:videoLinks,
-    //   cat_order:order
-    // },{upsert:true},function(err){
-    //     if(err) return next(err);
-    //     res.send(200);
-    // });
+    if(req.body.about) about = req.body.about;
+    if(req.body.areas) areas = req.body.areas;
+    if(req.body.videoLinks) videoLinks = req.body.videoLinks;
+    if(req.body.order) order = req.body.order;
+
+    db.categoryModel.update({
+      cat_title:title
+    },{
+      cat_about:about,
+      cat_areas:areas,
+      cat_videos:videoLinks,
+      cat_order:order
+    },{upsert:true},function(err){
+        if(err) return next(err);
+        res.send(200);
+    });
 }
 exports.getEquipmentsTotal = function(req,res,next){
     db.equipmentModel.aggregate({$sort:{equipment_order:1}},function(err,data){
