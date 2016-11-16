@@ -741,19 +741,22 @@ exports.postCategoryOutOfFile = function(req,res,next){
     if(req.body.videoLinks) videoLinks = req.body.videoLinks;
     if(req.body.order) order = req.body.order;
 
-    console.log(db);
 
-    // db.categoryModel.update({
-    //   cat_title:title
-    // },{
-    //   cat_about:about,
-    //   cat_areas:areas,
-    //   cat_videos:videoLinks,
-    //   cat_order:order
-    // },{upsert:true},function(err){
-    //     if(err) return next(err);
-    //     res.send(200);
-    // });
+    db.categoryModel.find({}, function(err, data){
+      if(err) console.log(err);
+      data ? console.log(data) : null;
+        db.categoryModel.update({
+          cat_title:title
+        },{
+          cat_about:"about",
+          cat_areas:["areas"],
+          cat_videos:["videoLinks"],
+          cat_order:"order"
+        },{upsert:true},function(err){
+            if(err) return next(err);
+            res.send(200);
+        });
+    })
 }
 exports.getEquipmentsTotal = function(req,res,next){
     db.equipmentModel.aggregate({$sort:{equipment_order:1}},function(err,data){
