@@ -845,7 +845,7 @@ app.controller('addCategory', function ($scope,$resource,$route,$upload,$locatio
                 var videoLinks = $scope.videoLinks;
                 var order = $scope.order;
                 if(title && title!='Данное поле является обязательным!!!'){
-                    var inputTo = $resource('http://46.101.107.111/postCategoryOutOfFile');
+                    var inputTo = $resource('/postCategoryOutOfFile');
 
                     var input = new inputTo();
                     input.title = title;
