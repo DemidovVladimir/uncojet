@@ -742,20 +742,20 @@ exports.postCategoryOutOfFile = function(req,res,next){
     if(req.body.order) order = req.body.order;
 
 
-    db.categoryModel.find({}, function(err, data){
-      if(err) console.log(err);
-      data ? console.log(data) : null;
-      res.send(data);
-        // db.categoryModel.insert({
-        //   cat_title:"title",
-        //   cat_about:"about",
-        //   cat_areas:["areas"],
-        //   cat_videos:["videoLinks"],
-        //   cat_order:"order"
-        // },function(err){
-        //     if(err) return next(err);
-        //     res.send(200);
-        // });
+    // db.categoryModel.find({}, function(err, data){
+      // if(err) console.log(err);
+      // data ? console.log(data) : null;
+      // res.send(data);
+        db.categoryModel.insert({
+          cat_title:"title",
+          cat_about:"about",
+          cat_areas:["areas"],
+          cat_videos:["videoLinks"],
+          cat_order:"order"
+        },function(err){
+            if(err) return next(err);
+            res.send(200);
+        });
     })
 }
 exports.getEquipmentsTotal = function(req,res,next){
