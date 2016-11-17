@@ -304,8 +304,7 @@ exports.addFilesTo = function(req,res,next){
                                 __dirname,
                               '../public/uploaded/'+fileName
                             )));
-                        gm(
-                          path.join(
+                        gm(path.join(
                           __dirname,
                           '../public/uploaded/'+fileName))
                             .resize(170, 140)
@@ -348,8 +347,7 @@ exports.addFilesTo = function(req,res,next){
                                 __dirname,
                                 '../public/uploaded/'+fileName
                               )));
-                        gm(
-                          path.join(
+                        gm(path.join(
                           __dirname,
                           '../public/uploaded/'+fileName
                         ))
