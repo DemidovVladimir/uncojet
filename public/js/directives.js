@@ -369,13 +369,32 @@ app.directive('singlePhotoEquipments',function(){
     }
 });
 
-
-
-
-
-
-
-
-
-
-
+app.directive('areasSelect', function($resource){
+  var NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/;
+  return {
+    restrict: 'E',
+    transclude: true,
+    scope: {
+		    ngModel: "=",
+        ngChange: "=",
+		    title: "@",
+		    type: "@",
+		    options: "@"
+	  },
+     link: function (scope, element, attrs, controller, $transclude) {
+       function parseSelect(){
+         if (scope.type == 'select') {
+         var parsedOptions = attrs.options.match(NG_OPTIONS_REGEXP);
+         var optionsArray = /^(.*) \|/.exec(parsedOptions[7]) || parsedOptions[7];
+         $transclude(function (clone, $outerScope) {
+           scope[optionsArray] = $outerScope[optionsArray];
+         });
+       }
+     }
+     scope.$watch("options", function (newValue, oldValue) {
+          parseSelect();
+      });
+    },
+    templateUrl: 'parts/areas-selector.html'
+  };
+})

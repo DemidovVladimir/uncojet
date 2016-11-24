@@ -518,6 +518,7 @@ exports.deleteFileCategory = function(req,res,next){
 
 exports.deleteEquipmentTotal = function(req,res,next){
     var equipmentTitle = req.params.equipment;
+    equipmentTitle = equipmentTitle.replace(/slash/g, '/');
     db.equipmentModel.find({equipment_title:equipmentTitle},function(err,data){
         if(err) return next(err);
         if(data[0].equipment_photo && data[0].equipment_photo.length!=0){
@@ -804,14 +805,13 @@ exports.getEquipmentsTotalByArea = function(req,res,next){
     });
 }
 exports.getAreasTotalByEquipment = function(req,res,next){
-    var equipment = req.params.equipment;
+    var equipment = req.params.equipment.replace(/slash/g, '/');
     var output = [];
     db.equipmentModel.find({equipment_title:equipment},function(err,info){
         if(err) return next(err);
-        var equipAreas = info[0].equipment_areas;
+        var equipAreas = info[0] ? info[0].equipment_areas : '';
         for(var i=0; i<equipAreas.length; i++){
-
-                db.areaModel.find({area_title:equipAreas[i].title},function(err,data){
+                db.areaModel.find({area_title:equipAreas[i]},function(err,data){
                     if(err) return next(err);
                     if(data.length!=0){
                         var outputObj = {};
@@ -829,11 +829,10 @@ exports.getAreasTotalByEquipment = function(req,res,next){
     });
 }
 exports.getEquipmentTotal = function(req,res,next){
-    var equipment = req.params.equipment;
+    var equipment = req.params.equipment.replace(/slash/g, '/');
     db.equipmentModel.find({equipment_title:equipment},function(err,data){
         if(err) return next(err);
         var info = data;
-       // console.log(info);
         res.send(info);
     });
 }
@@ -1193,7 +1192,7 @@ exports.makeAreaChanges = function(req,res,next){
 }
 
 exports.getEquipment = function(req,res,next){
-    var title = req.params.equipment;
+    var title = req.params.equipment.replace(/slash/g, '/');
     db.equipmentModel.find({equipment_title:title},function(err,data){
         if(err) return next(err);
         res.send(200,data);
@@ -1240,7 +1239,7 @@ exports.deleteEquipmentArea = function(req,res,next){
     var link = req.body.title;
     var equipment = req.body.equipment;
     //If array with objects
-    db.equipmentModel.update({equipment_title:equipment},{$pull:{equipment_areas:{title:link}}},function(err){
+    db.equipmentModel.update({equipment_title:equipment},{$pull:{equipment_areas:link}},function(err){
         if(err) return next(err);
         res.send(200);
     })
@@ -1284,7 +1283,6 @@ exports.makeEquipmentChanges = function(req,res,next){
     var videoLinks = req.body.videoLinksInput;
     var areas = req.body.areasInput;
     var spec = req.body.specInput;
-
 
     async.parallel([
         function(callback){

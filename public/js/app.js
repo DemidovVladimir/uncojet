@@ -13,27 +13,28 @@ var app = angular.module('myApp',[
     'ngRoute',
     'ngResource',
     'angularFileUpload',
-    'google-maps',
-    'ngAnimate',
-    'youtube-embed',
-    'ui.bootstrap',
-    'ui.date',
-    "modelOptions",
+    // 'google-maps',
+    // 'youtube-embed',
+    // 'ui.bootstrap',
+    // 'ui.date',
     'ngAnimate'
 ]);
 
 
-angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
-    .controller('CarouselController', ['$scope', '$timeout', '$transition', '$q', function ($scope, $timeout, $transition, $q) {
-    }]).directive('carousel', [function() {
-        return { }
-    }]);
+// angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
+//     .controller('CarouselController', ['$scope', '$timeout', '$transition', '$q', function ($scope, $timeout, $transition, $q) {
+//     }]).directive('carousel', [function() {
+//         return { }
+//     }]);
 
 
 
     app.config(function($routeProvider,$locationProvider)
     {
-        $locationProvider.html5Mode(true);
+      $locationProvider.html5Mode({
+        enabled: true,
+        requireBase: false
+      });
         // Register routes with the $routeProvider
         $routeProvider
             .when('/', {
@@ -112,6 +113,3 @@ angular.module('ui.bootstrap.carousel', ['ui.bootstrap.transition'])
                 redirectTo: '/'
             });
     });
-
-
-

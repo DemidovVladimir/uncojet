@@ -1,27 +1,12 @@
 'use strict';
 
-
-
-
-
-
-
-
-
-app.controller('home',function($scope,$resource,$window){
+app.controller('home',function($scope, $rootScope, $resource, $window){
+  $rootScope.$on('$includeContentLoaded', function() {
     var actionsTodo = $resource('/getActions/');
     var actions = actionsTodo.query(function(){
         $scope.actions = actions;
-        //var activeArr = [];
-        //$scope.actions.forEach(function(item){
-        //    activeArr.push(item.pictures.splice(0,1).pop());
-        //});
-        //$scope.activeSlidesActions = activeArr;
     });
-
     $scope.foo = '100';
-
-
     var todo = $resource('/getEquipmentsTotal');
     var equipments = todo.query(function(){
         var equipmentArrFirst = [];
@@ -46,9 +31,9 @@ app.controller('home',function($scope,$resource,$window){
         $scope.equipmentsFirst = equipmentArrFirst;
         $scope.equipmentsSecond = equipmentArrSecond;
     });
+  });
 });
 app.controller('total',function($scope,$resource,$location){
-
     $scope.refer = function(area){
         $location.url('/itemArea'+area);
         $('.menu-item').removeClass('open');
@@ -67,7 +52,9 @@ app.controller('total',function($scope,$resource,$location){
     $scope.collectData = function(cat){
      var todo_2 = $resource('/getEquipmentsTotal/'+cat);
      var equipments = todo_2.query(function(){
-
+       for(var i = 0; i < equipments.length; i++) {
+         equipments[i].link = equipments[i].equipment_title.replace(/\//g, 'slash');
+       }
      $scope.equipmentsInCat = equipments;
      });
      };
@@ -166,12 +153,7 @@ app.controller('assist',function($scope){
     if(!sessionStorage.person){
         var person = prompt("Введите ваше имя", "");
         sessionStorage.person = person;
-    }else{
-
     }
-
-
-
     if(sessionStorage.person=='' || sessionStorage.person=='undefined' || sessionStorage.person == 'null' || sessionStorage.person == 'UncoTech'){
         window.location.href = '/';
     }else{
@@ -324,7 +306,8 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
     $scope.session = JSON.parse($window.localStorage.getItem('session'));
     $scope.popular = 'false';
     if($scope.session){
-        if($scope.session.pwd=='dushes05'){
+        if($scope.session.pwd==='dushes05'){
+            startEquipmentsAdmin();
             $scope.specs = [];
             $scope.addSpec = function(){
                 $scope.specs.push({title:'',value:''});
@@ -336,8 +319,6 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
                     $scope.allAreas = allAreas;
                 }
             );
-
-
             $scope.areas = [];
             $scope.addArea = function(){
                 $scope.areas.push({title:''});
@@ -348,63 +329,48 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
             $scope.newInput = function(){
                 $scope.addingFiles = true;
             }
-
-
-
             $scope.videoLinks = [];
             $scope.addVideoLink = function(){
                 $scope.videoLinks.push({videoLink:''});
             }
-
-
-
-
-            //$scope.path = 'http://104.131.239.73/equipmentAdmin';// Путь который контролит данный обработчик--------------------------------------
-
-
             $scope.deleteTotalEquipment = function(equipment){
-                var Todo = $resource('/deleteEquipmentTotal/'+equipment);
-                var info = Todo.query();
-                $window.location.reload();
+              equipment = equipment.replace(/\//g , "slash");
+              var Todo = $resource('/deleteEquipmentTotal/'+equipment);
+              var info = Todo.query();
+              startEquipmentsAdmin();
+              // $window.location.reload();
             }
 
-
-
-            $scope.cats = [];
-            var Todo2 = $resource('/getCategoriesTotal');
-            var info2 = Todo2.query(function(){
-                info2.forEach(function(cat){
-                    $scope.cats.push(cat.cat_title);
-                });
-            });
-            $scope.incomings = [];
-            var getEquipments = $resource('/getEquipmentsTotal');
-            var infoEquipments = getEquipments.query(function(){
-                infoEquipments.forEach(function(data){
-
-                    var incomeInfo = {};
-                    incomeInfo.title = data.equipment_title;
-                    incomeInfo.photo = data.equipment_photo;
-                    incomeInfo.about = data.equipment_about;
-                    incomeInfo.some = data.equipment_some;
-                    incomeInfo.price = data.equipment_price;
-                    incomeInfo.benefit = data.equipment_benefits;
-
-                    incomeInfo.specs = data.equipment_spec;
-                    incomeInfo.areas = data.equipment_areas;
-                    incomeInfo.videoLinks = data.equipment_videos;
-                    incomeInfo.order = data.equipment_order;
-                    $scope.incomings.push(incomeInfo);
-                });
-            });
-
-
-
-
+            function startEquipmentsAdmin(){
+              $scope.cats = [];
+              var Todo2 = $resource('/getCategoriesTotal');
+              var info2 = Todo2.query(function(){
+                  info2.forEach(function(cat){
+                      $scope.cats.push(cat.cat_title);
+                  });
+              });
+              $scope.incomings = [];
+              var getEquipments = $resource('/getEquipmentsTotal');
+              var infoEquipments = getEquipments.query(function(){
+                  infoEquipments.forEach(function(data){
+                      var incomeInfo = {};
+                      incomeInfo.title = data.equipment_title;
+                      incomeInfo.link = data.equipment_title.replace(/\//g , "slash");
+                      incomeInfo.photo = data.equipment_photo;
+                      incomeInfo.about = data.equipment_about;
+                      incomeInfo.some = data.equipment_some;
+                      incomeInfo.price = data.equipment_price;
+                      incomeInfo.benefit = data.equipment_benefits;
+                      incomeInfo.specs = data.equipment_spec;
+                      incomeInfo.areas = data.equipment_areas;
+                      incomeInfo.videoLinks = data.equipment_videos;
+                      incomeInfo.order = data.equipment_order;
+                      $scope.incomings.push(incomeInfo);
+                  });
+              });
+            }
 
             $scope.sendData = function() {
-
-
                 var title = $scope.title;
                 var about = $scope.about;
                 var some = $scope.some;
@@ -434,16 +400,13 @@ app.controller('addEquipment', function ($scope,$resource,$route,$upload,$locati
                     //input.videoLinks = JSON.stringify(input.videoLinks);
                     input.order = order;
                     input.popular = popular;
-
                     input.$save();
-
-                    $window.location.reload();
+                    // $window.location.reload();
+                    startEquipmentsAdmin();
                 }else{
                     $scope.title = 'Данное поле является обязательным!!!';
                 }
             }
-
-
         }else{
             $window.location.href='/admin';
         }
@@ -606,12 +569,9 @@ app.controller('itemEquipment',function($scope,$routeParams,$resource){
     var todo2 = $resource('/getAreasTotalByEquipment/'+equipment);
     var areas = todo2.query(function(){
         $scope.areas = areas;
-
         $scope.$watch('width', function(newValue, oldValue) {
             if(newValue < 992){
                 var areasData = [];
-                /*var todo2 = $resource('/getAreasTotalByEquipment/'+equipment);
-                 var areas = todo2.query(function(){*/
                 if($scope.areas!='no result'){
                     $scope.areas.forEach(function(area){
                         if($scope.areas.indexOf(area)==$scope.areas.length-1){
@@ -1098,11 +1058,40 @@ app.controller('maintainArea',function($scope,$resource,$routeParams,$route,$win
 app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route){
     var equipment = $routeParams.equipment;
     var eq = $resource('/getEquipment/'+equipment);
-    var todo = eq.query(function(){
-        $scope.result = todo;
-        $scope.popular = todo[0].equipment_popular;
-        $scope.title = todo[0].equipment_title;
-    });
+    $scope.areas = [];
+    $scope.selectedArea = 0;
+    $scope.checkout = function(){
+      $scope.areasInput = $scope.areas[$scope.selectedArea] ?
+        $scope.areas[$scope.selectedArea].area_title :
+        ''
+    }
+    getAreas();
+    getCats();
+    startWith();
+    function getAreas(){
+      var areasSrc = $resource('/getAreasTotal');
+      var areas = areasSrc.query(function(){
+        $scope.areasRaw = JSON.parse(angular.toJson(areas));
+        $scope.areasRaw.forEach(function(item, index){
+          item.id = index;
+          $scope.areas.push(item);
+        })
+      });
+    }
+    function getCats(){
+      var categoriesSrc = $resource('/getCategoriesTotal');
+      var cats = categoriesSrc.query(function(){
+          $scope.cats = JSON.parse(angular.toJson(cats));
+      });
+    }
+    function startWith(){
+      var todo = eq.query(function(){
+          $scope.result = JSON.parse(angular.toJson(todo));
+          $scope.popular = todo[0].equipment_popular;
+          $scope.title = todo[0].equipment_title;
+          $scope.buttonStatus = '';
+      });
+    }
 
     $scope.deleteVideoFile = function(video){
         var del = $resource('/deleteEquipmentVideoFile');
@@ -1111,7 +1100,7 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
         deleteVid.equipment = $scope.result[0].equipment_title;
 
         deleteVid.$save();
-        $window.location.reload();
+        startWith();
     }
     $scope.deleteVideoYoutube = function(video){
         var del = $resource('/deleteEquipmentVideoYoutube');
@@ -1120,7 +1109,7 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
         deleteVid.equipment = $scope.result[0].equipment_title;
 
         deleteVid.$save();
-        $window.location.reload();
+        startWith();
     }
 
     $scope.videoLinksInput = [];
@@ -1135,13 +1124,13 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
         deleteVid.equipment = $scope.result[0].equipment_title;
 
         deleteVid.$save();
-        $window.location.reload();
+        startWith();
     }
 
-    $scope.areasInput = [];
-    $scope.addArea = function(){
-        $scope.areasInput.push({title:''});
-    }
+    // $scope.areasInput = [];
+    // $scope.addArea = function(){
+        // $scope.areasInput.push({title:''});
+    // }
 
     $scope.specInput = [];
     $scope.addSpec = function(){
@@ -1150,12 +1139,12 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
 
     $scope.deleteArea = function(area){
         var del = $resource('/deleteEquipmentArea');
-        var deleteVid = new del();
-        deleteVid.title = area;
-        deleteVid.equipment = $scope.result[0].equipment_title;
+        var deleteArea = new del();
+        deleteArea.title = area;
+        deleteArea.equipment = $scope.result[0].equipment_title;
 
-        deleteVid.$save();
-        $window.location.reload();
+        deleteArea.$save();
+        startWith();
     }
 
     $scope.deleteSpec = function(title,value){
@@ -1165,7 +1154,7 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
         deleteVid.equipment = $scope.result[0].equipment_title;
 
         deleteVid.$save();
-        $window.location.reload();
+        startWith();
     }
 
     $scope.deletePhoto = function(pic){
@@ -1175,7 +1164,7 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
         deleteVid.equipment = $scope.result[0].equipment_title;
 
         deleteVid.$save();
-        $window.location.reload();
+        startWith();
     }
 
     $scope.filesInput = [];
@@ -1184,7 +1173,7 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
     }
 
     $scope.makeChanges = function(){
-        // $scope.saved = $scope.videoLinksInput;
+        $scope.buttonStatus = 'Подождите пока изменения будут внесены!';
         var todo = $resource('/makeEquipmentChanges');
         var save = new todo();
         save.title = $scope.title;
@@ -1192,14 +1181,14 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
         save.some = $scope.some;
         save.price = $scope.price;
         save.benefits = $scope.benefits;
-        save.category = $scope.category;
+        save.category =  $scope.categorySelected || $scope.result[0].equipment_category;
         save.order = $scope.order;
         save.popular = $scope.popular;
         save.videoLinksInput = $scope.videoLinksInput;
-        save.areasInput = $scope.areasInput;
+        save.areasInput = [$scope.areasInput];
         save.specInput = $scope.specInput;
         save.$save();
-        $window.location.reload();
+        startWith();
     }
     /*var category = $routeParams.category;
     $scope.title = category;

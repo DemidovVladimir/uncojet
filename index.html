@@ -3,480 +3,48 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>First Page Render</title>
-<link href="/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-<link href='http://fonts.googleapis.com/css?family=Lobster&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'>
-<link href="/lib/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="/lib/lightbox/css/lightbox.css" rel="stylesheet">
-    <link href="/lib/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet">
+<title>UncoJet Company</title>
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"/>
+<link href='http://fonts.googleapis.com/css?family=Lobster&subset=cyrillic-ext,latin' rel='stylesheet' type='text/css'/>
+<link href="lib/font-awesome/css/font-awesome.min.css" rel="stylesheet"/>
+<link href="lib/lightbox/css/lightbox.css" rel="stylesheet"/>
+<link href="lib/jquery-ui/themes/smoothness/jquery-ui.min.css" rel="stylesheet"/>
 <!-- Custom CSS -->
-<link href="css/modern-business.css" rel="stylesheet">
-
+<link href="css/modern-business.css" rel="stylesheet"/>
 <!-- Custom Fonts -->
 <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
-
-
-
-<style type="text/css" rel="slylesheet">
-/*Declaring fonts*/
-@font-face {
-    font-family: 'Nautilus';
-    src: url('fonts/Nautilus.otf');
-}
-@font-face {
-    font-family: 'gabriela';
-    src: url('fonts/Gabriela-Regular.ttf');
-}
-
-html, body {
-    width: auto !important;
-    overflow-x: hidden !important;
-}
-body{
-    font-family: "gabriela";
-    background-image: url('/img/back.jpg');
-    padding-top: 50px;
-}
-/*Футер*/
-.gradHorFooter{
-    background: -webkit-radial-gradient(center top, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
-    background: -o-radial-gradient(center top, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
-    background: -moz-radial-gradient(center top, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
-    background: radial-gradient(center top, ellipse farthest-side, rgba(188,188,188,0.23), rgba(188,188,188,0.02));
-}
-.lineFooter{
-    clear: both;
-    width:100%;
-    height:5px;
-    background-color: rgba(66,139,202,0.9);
-}
-.contentFooter{
-    background-color: rgba(29,29,27,0);
-    height:215px;
-    overflow:hidden;
-}
-.contentFooter a{
-    color:rgba(66,139,202,0.9);
-}
-.contentFooter a:hover{
-    color:white;
-}
-.contentFooter p{
-    margin-top: 10px;
-    background-color: rgba(29,29,27,0);
-    color:rgba(66,139,202,0.9);
-    border-width: 0;
-    font-size: 90%;
-}
-.delivery{
-    margin-top: 10px;
-}
-.contentFooter .ourNavigation #downHome h5{
-    margin-top: 20px;
-}
-.ourNavigation h5{
-}
-address p{
-}
-
-
-
-
-
-/*Контакты в футере*/
-.contacts_bot{
-    margin-top: 10px;
-    color:rgba(66,139,202,0.9);
-}
-.contacts a:hover{
-    color:white;
-}
-.contacts .phone{
-    margin-top: 2%;
-}
-
-
-
-
-
-
-
-
-/*--------------------------------------------------------------------------------------------------------------------*/
-/*Разрешение монитора > 768px*/
-@media (min-width: 768px) {
-
-}
-
-
-
-
-
-/*Между 768px u 992px*/
-@media (min-width: 768px) and (max-width: 992px ) {
-
-}
-
-
-
-
-
-
-
-
-/*Разрешение монитора > 992px*/
-@media (min-width: 992px){
-    /*Футер caption*/
-    .contacts p{
-        margin-left: -20px;
-    }
-    .carousel-indicators{
-        position: absolute;
-        top:95%;
-    }
-    .navbar-header{
-        position:relative;
-        left:2%;
-    }
-    .search{
-        position:relative;
-        right:2%;
-    }
-}
-
-
-/*Разрешение монитора < 992px*/
-@media (max-width: 992px) {
-    /*Футер*/
-    .contentFooter .aboutUs{
-        display: none;
-    }
-    .contentFooter .ourNavigation{
-        display: none;
-    }
-    /*Футер caption*/
-    .contacts p{
-        margin-left: -50px;
-    }
-    .carousel-indicators{
-        position: absolute;
-        top:90%;
-    }
-    .carousel-caption h3{
-        font-size: 90%;
-    }
-    .navbar-body{
-        margin-left:20%;
-    }
-    .navbar-header{
-        position: relative;
-        left: 2%;
-    }
-}
-
-
-
-
-/*Между 992px u 1200px*/
-@media(min-width: 992px) and (max-width: 1200px){
-
-}
-
-
-
-
-
-/*Разрешение монитора > 1200px*/
-@media (min-width:1200px){
-    .navbar-body{
-        margin-left:26%;
-    }
-    .equipment{
-        margin-left:-16%;
-        font-size: 120%;
-    }
-    .areas{
-        margin-left: 4%;
-        font-size: 120%;
-    }
-    .library{
-        margin-left: 4%;
-        font-size: 120%;
-    }
-    .assist{
-        margin-left: 4%;
-        font-size: 120%;
-    }
-    .contacts{
-        margin-left: 4%;
-        font-size: 120%;
-    }
-}
-
-
-/*Разрешение монитора < 1200px*/
-@media (max-width: 1200px){
-    #myCarousel_4 .carousel-caption{
-        display:none;
-    }
-    #myCarousel_4 .carousel-indicators{
-        display: none;
-    }
-    .navbar-body{
-        margin-left:20%;
-    }
-}
-
-
-
-
-
-/*Разрешение монитора < 768px*/
-@media (max-width: 768px){
-    .delivery{
-        display: none;
-    }
-}
-
-
-.ui-loader{
-    display:none;
-}
-.carousel-control{
-    background-color: rgba(40,103,237,0);
-    border-style: none;
-}
-footer{
-    margin-top:50px;
-    margin-bottom: 0;
-}
-
-.carousel-caption h3{
-    color: rgb(1, 1, 3);
-    background-color: rgba(66,139,202,0.7);;
-    border-radius: 15px
-}
-.carousel-indicators li{
-    border-color:white;
-}
-.carousel-indicators .active{
-    background-color:rgba(66,139,202,0.9);
-}
-.navbar-default .navbar-nav>li>a{
-    color:rgba(66,139,202,0.9);
-}
-.navbar-default .navbar-brand{
-    color:rgba(66,139,202,0.9);
-}
-.form-control::-webkit-input-placeholder {
-    color:rgba(47,109,245,0.5);
-}
-
-.navbar-default .navbar-nav>li>a:hover{
-    color:black;
-}
-.navbar-default .navbar-nav>li>a:active{
-    color:black;
-}
-.navbar-default .navbar-nav>li>a:visited{
-    color:rgba(66,139,202,0.9);
-}
-.navbar-default .navbar-nav>li>a:focus{
-    color:rgba(66,139,202,0.9);
-}
-.navbar-default .navbar-brand:hover{
-    color:white;
-}
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:hover, .navbar-default .navbar-nav>.open>a:focus{
-    color:black;
-}
-.dropdown-menu>li>a{
-    color:rgba(66,139,202,0.9);
-}
-.dropdown-menu>li>a:hover{
-    color:black;
-}
-
-
-
-.text-center{
-    text-align: center;
-}
-.float-right{
-    float: right;
-}
-.text-left{
-    text-align: left;
-}
-
-.panel-body p{
-    padding-bottom: 10px;
-}
-.center{
-    margin:0 auto;
-}
-.search-sm{
-    margin-top:15px;
-    width:80%;
-    margin-left: 10%;
-}
-.map-marker{
-    margin-top: 20px;
-}
-.cert{
-    text-align: right;
-}
-.about{
-    margin-top: 80px;
-}
-.angular-google-map-container {
-    height: 400px;
-}
-.mapThumb{
-    margin-top: 15px;
-}
-.float-left{
-    float:left;
-}
-.assist_page{
-    margin-bottom: 15px;
-}
-.assist_page button{
-    float: right;
-}
-#msg{
-    width: 100%;
-}
-.assist_msg{
-    height:400px;
-    overflow: scroll;
-}
-.clear-both{
-    clear: both;
-}
-.thumbnails .thumbnail{
-    text-align: center;
-    border-width: 0;
-    background-color:rgba(255,255,255,0.1);
-}
-.addToEquipmentList{
-    margin-top: 15px;
-}
-.addToAreaList{
-    margin-top: 15px;
-    margin-bottom: 225px;
-}
-.addToCategoryList{
-    margin-top: 15px;
-    margin-bottom: 225px;
-}
-.suppliesContent{
-    margin-top: 15px;
-    margin-bottom: 225px;
-}
-.progress{
-    margin-top: 30px;
-}
-#carousel-item-equipment .carousel-control.left{
-    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
-}
-#carousel-item-equipment .carousel-control.right{
-    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
-}
-#carousel-areas .carousel-control.left{
-    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
-}
-#carousel-areas .carousel-control.right{
-    background-image: linear-gradient(to right,rgba(0,0,0,0) 0,rgba(0,0,0,0) 100%);
-}
-.table-hover tbody tr:hover td, .table-hover tbody tr:hover th {
-    background-color: rgba(66,139,202,0.9);
-}
-.sendDataButton{
-    position: relative;
-    top:25px;
-    right:27px;
-}
-.inputFilter{
-    position: relative;
-    top:55px;
-    right:27px;
-}
-.allIncome{
-    position: relative;
-    top:85px;
-}
-.suppliesThumb{
-    border-color: rgba(255,255,255,0);
-    background-color: rgba(255,255,255,0);
-}
-.secondThumb{
-    position: relative;
-    top:-200px;
-}
-.thirdThumb{
-    position: relative;
-    top:-200px;
-}
-
-a {
-    cursor: pointer;
-}
-.addfile{
-    margin-top: 15px;
-    text-align: center;
-}
-.addArea{
-    margin-top: 15px;
-}
-.makechanges{
-    margin-top: 15px;
-}
-.catimgs{
-    margin-top: 10px;
-}
-
-.slider-size {
-    height: 350px; /* This is your slider height */
-}
-</style>
-<script type="text/javascript" src="/lib/jquery/dist/jquery.min.js"></script>
-    <script src="/lib/jquery-ui/jquery-ui.min.js"></script>
-<script src="/socket.io/socket.io.js"></script>
-    <script type="text/javascript" src="/lib/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/lib/angular/angular.js"></script>
-<script type="text/javascript"src="/lib/ng-file-upload/angular-file-upload-html5-shim.min.js"></script>
-
-<script type="text/javascript" src="/lib/ng-file-upload/angular-file-upload.min.js"></script>
-    <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap.min.js"></script>
-    <script type="text/javascript" src="/lib/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
-    <script type="text/javascript" src="/lib/angular-ui-date/src/date.js"></script>
-
-
-<script type="text/javascript" src="/lib/lightbox/js/lightbox.min.js"></script>
-<script type="text/javascript" src="/lib/swipe/jquery.touchSwipe.min.js"></script>
-
-<script type="text/javascript" src="/lib/angular-route/angular-route.min.js"></script>
-<script type="text/javascript" src="/lib/angular-resource/angular-resource.min.js"></script>
-<script type="text/javascript" src='//maps.googleapis.com/maps/api/js?sensor=true'></script>
-<script type="text/javascript" src="/lib/lodash/dist/lodash.min.js"></script>
-<script type="text/javascript" src="/lib/angular-google-maps/dist/angular-google-maps.min.js"></script>
-<script type="text/javascript" src="/lib/angular-animate/angular-animate.min.js"></script>
-<script type="text/javascript" src="/lib/angular-youtube-mb/dist/angular-youtube-embed.min.js"></script>
-<script type="text/javascript" src="/lib/ngmodeloptions/ngModelOptions.min.js"></script>
-    <script type="text/javascript" src="/js/app.js"></script>
-    <script type="text/javascript" src="/js/controller.js"></script>
-    <script type="text/javascript" src="/js/directives.js"></script>
-    <script type="text/javascript" src="/js/factory.js"></script>
+<link href="css/style.css" rel="stylesheet"/>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"  ></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.6.0/socket.io.min.js"  ></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"  ></script>
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"  ></script>
+<script src="lib/ng-file-upload/angular-file-upload.min.js"  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap.min.js"  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.2.0/ui-bootstrap-tpls.min.js"  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-date/1.0.1/date.min.js"  ></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/lightbox/0.5/js/jquery.lightbox-0.5.min.js"  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.touchswipe/1.6.18/jquery.touchSwipe.min.js"  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-route.min.js"  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-resource.min.js"  ></script>
+<script type="text/javascript" src='//maps.googleapis.com/maps/api/js?sensor=true'  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.17.2/lodash.min.js"  ></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-maps/2.4.0/angular-google-maps.js"  ></script> -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-google-maps/2.4.0/angular-google-maps.min.js"  ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.0/angular-animate.min.js"  ></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/g/lightbox@0.5,angular.youtube-embed@0.4.3"  ></script>
+<!-- <script type="text/javascript" src="/lib/ngmodeloptions/ngModelOptions.min.js"  ></script> -->
+<script type="text/javascript" src="/js/app.js"  ></script>
+<script type="text/javascript" src="/js/controller.js"  ></script>
+<script type="text/javascript" src="/js/directives.js"  ></script>
+<script type="text/javascript" src="/js/factory.js"  ></script>
 </head>
 <body>
 <div data-ng-controller="total">
-<!--Навигация-->
+<!--Navigation-->
 <div class="navbar navbar-default navbar-fixed-top center" role="navigation">
     <div class="container-fluid">
         <div class="row">
-        <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <span class="sr-only">Toggle navigation</span>
@@ -494,7 +62,7 @@ a {
                     <ul class="dropdown-menu">
                         <li data-ng-repeat="cat in cats" class="menu-item dropdown dropdown-submenu"><a class="dropdown-toggle" data-toggle="dropdown" ng-click="collectData(cat.cat_title)">{{cat.cat_title}}<b class="caret"></b></a>
                             <ul class="dropdown-menu">
-                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="/itemEquipment{{equipment.equipment_title}}">{{equipment.equipment_title}}</a></li>
+                                <li class="menu-item " data-ng-repeat="equipment in equipmentsInCat"><a ng-href="/itemEquipment{{equipment.link}}">{{equipment.equipment_title}}</a></li>
                             </ul>
                         </li>
                     </ul>
@@ -514,11 +82,6 @@ a {
                         <li><a ng-href="/assurance">Система Code Assurance</a></li>
                     </ul>
                 </li>
-
-
-
-                <!-- <li class="menu-item assist"><a href="/assist">Тех Поддержка</a></li> -->
-
                 <li class="menu-item contacts"><a href="/contacts">Контакты</a></li>
             </ul>
             <ul class="visible-md visible-lg nav navbar-nav navbar-right search">
@@ -571,25 +134,21 @@ a {
             </div>
         </div>
     </div>
-
 </div>
-
-    <div ng-view class="container"></div>
-
-
-<!--Футер-->
+<div ng-view class="container"></div>
 <footer class="navbar-static-bottom navbar-default">
     <div class="lineFooter">
     </div>
     <div class="contentFooter gradHorFooter">
-        <div class="container">
+        <div class="row">
             <div class="ourNavigation col-md-1 col-md-offset-1">
                 <a ng-href="/">
                     <h4 class="text-center"><span class="glyphicon glyphicon-home"></span></h4>
+                    <h5 class="text-center">Главная</h5>
                 </a>
-                <a ng-href="/assist">
+                <!-- <a ng-href="/assist">
                     <h5>Тех Поддержка</h5>
-                </a>
+                </a> -->
             </div>
             <div class="delivery col-md-4 col-sm-6 col-md-offset-2">
                 <a ng-href="delivery">
@@ -651,22 +210,7 @@ a {
                         </h6>
                     </div>
                 </div>
-                <!--<div class="row cell_phone ">
-                    <div class="col-md-3 col-sm-3 col-sm-offset-0 col-xs-3 col-xs-offset-1">
-                        <i class="fa fa-mobile fa-2x"></i>
-                    </div>
-                    <div class="col-md-9 col-sm-9 col-xs-8">
-                        <h6>
-                            8 701 915 78 34
-                        </h6>
-                    </div>
-                </div>-->
             </address>
-
-
-<!--Some comments for github-->
-
-
         </div>
     </div>
     <div class="lineBeneath"></div>
