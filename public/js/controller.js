@@ -300,7 +300,7 @@ app.controller('assistTech',function($scope){
 
 
 
-app.controller('addEquipment', function ($scope,$resource,$route,$upload,$location,$window) {
+app.controller('addEquipment', function ($scope,$resource,$route,Upload,$location,$window) {
     var files=[];
 
     $scope.session = JSON.parse($window.localStorage.getItem('session'));
@@ -747,7 +747,7 @@ app.controller('itemArea',function($scope,$routeParams,$resource){
 });
 
 
-app.controller('addCategory', function ($scope,$resource,$route,$upload,$location,$window) {
+app.controller('addCategory', function ($scope,$resource,$route,Upload,$location,$window) {
     var files=[];
     $scope.session = JSON.parse($window.localStorage.getItem('session'));
     if($scope.session){
@@ -1055,11 +1055,29 @@ app.controller('maintainArea',function($scope,$resource,$routeParams,$route,$win
     }
 });
 
-app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route){
+app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route, Upload, $window){
     var equipment = $routeParams.equipment;
     var eq = $resource('/getEquipment/'+equipment);
     $scope.areas = [];
     $scope.selectedArea = 0;
+    $scope.upload = function (file) {
+        Upload.upload({
+            url: '/addFilesTo/equipment',
+            data: {
+              file: file,
+              equipment_title: $scope.title,
+              titleEl: "photos"
+            }
+        }).then(function (resp) {
+          if(resp.data) {
+            startWith();
+          }
+        }, function (resp) {
+            console.log('Error status: ' + resp.status);
+        }, function (evt) {
+            $scope.progress = parseInt(100.0 * evt.loaded / evt.total);
+        });
+    };
     $scope.checkout = function(){
       $scope.areasInput = $scope.areas[$scope.selectedArea] ?
         $scope.areas[$scope.selectedArea].area_title :
@@ -1085,6 +1103,7 @@ app.controller('maintainEquipment',function($scope,$resource,$routeParams,$route
       });
     }
     function startWith(){
+      $scope.progress = 0;
       var todo = eq.query(function(){
           $scope.result = JSON.parse(angular.toJson(todo));
           $scope.popular = todo[0].equipment_popular;

@@ -1,7 +1,7 @@
 'use strict';
 
 
-app
+// app
 
 
     // Angular File Upload module does not include this directive
@@ -16,212 +16,280 @@ app
  *
  */
 
-    .directive('listUser',function(){
-        return {
-            restrict: 'E',
-            link:function(scope,element,attrs){
-            },
-            templateUrl: 'parts/userList.html'
-        };
-    })
-    .directive('mainCarousel',function(){
-        return {
-            restrict: 'E',
-            transclude: true,
-            scope: {},
-            link:function($scope,$element){
-                $element.swiperight(function() {
-                    $('#myCarousel_1 .left').trigger('click');
-                });
-                $element.swipeleft(function(){
-                    $('#myCarousel_1 .right').trigger('click');
-                });
-            },
-            templateUrl: 'parts/mainCarousel.html'
-        };
-    })
-    .directive('mainCarouselSecond',function(){
-        return {
-            restrict: 'E',
-            transclude: true,
-            scope: {},
-            link:function($scope,$element){
-                $element.swiperight(function() {
-                    $('#myCarousel_4 .left').trigger('click');
-                });
-                $element.swipeleft(function(){
-                    $('#myCarousel_4 .right').trigger('click');
-                });
-            },
-            templateUrl: 'parts/mainCarouselSecond.html'
-        };
-    })
+//     .directive('listUser',function(){
+//         return {
+//             restrict: 'E',
+//             link:function(scope,element,attrs){
+//             },
+//             templateUrl: 'parts/userList.html'
+//         };
+//     })
+//     .directive('mainCarousel',function(){
+//         return {
+//             restrict: 'E',
+//             transclude: true,
+//             scope: {},
+//             link:function($scope,$element){
+//                 $element.swiperight(function() {
+//                     $('#myCarousel_1 .left').trigger('click');
+//                 });
+//                 $element.swipeleft(function(){
+//                     $('#myCarousel_1 .right').trigger('click');
+//                 });
+//             },
+//             templateUrl: 'parts/mainCarousel.html'
+//         };
+//     })
+//     .directive('mainCarouselSecond',function(){
+//         return {
+//             restrict: 'E',
+//             transclude: true,
+//             scope: {},
+//             link:function($scope,$element){
+//                 $element.swiperight(function() {
+//                     $('#myCarousel_4 .left').trigger('click');
+//                 });
+//                 $element.swipeleft(function(){
+//                     $('#myCarousel_4 .right').trigger('click');
+//                 });
+//             },
+//             templateUrl: 'parts/mainCarouselSecond.html'
+//         };
+//     })
+//
+//     .directive('ngThumb', ['$window', function($window) {
+//         var helper = {
+//             support: !!($window.FileReader && $window.CanvasRenderingContext2D),
+//             isFile: function(item) {
+//                 return angular.isObject(item) && item instanceof $window.File;
+//             },
+//             isImage: function(file) {
+//                 var type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
+//                 return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
+//             }
+//         };
+//
+//         return {
+//             restrict: 'A',
+//             template: '<canvas/>',
+//             link: function(scope, element, attributes) {
+//                 if (!helper.support) return;
+//
+//                 var params = scope.$eval(attributes.ngThumb);
+//
+//                 if (!helper.isFile(params.file)) return;
+//                 if (!helper.isImage(params.file)) return;
+//
+//                 var canvas = element.find('canvas');
+//                 var reader = new FileReader();
+//
+//                 reader.onload = onLoadFile;
+//                 reader.readAsDataURL(params.file);
+//
+//                 function onLoadFile(event) {
+//                     var img = new Image();
+//                     img.onload = onLoadImage;
+//                     img.src = event.target.result;
+//                 }
+//
+//                 function onLoadImage() {
+//                     var width = params.width || this.width / this.height * params.height;
+//                     var height = params.height || this.height / this.width * params.width;
+//                     canvas.attr({ width: width, height: height });
+//                     canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
+//                 }
+//             }
+//         };
+//     }]);
+//
+//
+// app.directive('inputActionPicture',function($resource,$route,$upload,$window){
+//     return{
+//         restrict:'E',
+//         templateUrl:'parts/inputPictureAction.html',
+//         scope: {
+//             progres: "=",
+//             title: "=",
+//             order:"=",
+//             about:"=",
+//             startingDate:"=",
+//             endingDate:"="
+//         },
+//         link:function(scope,element,attrs){
+//             var files;
+//             scope.onFileSelect = function($files){
+//                 scope.progres.value = 0;
+//                 files = $files;
+//                 files.forEach(function(item){
+//                     scope.upload = $upload.upload({
+//                         url: 'addPictureTo/action',
+//                         data: {
+//                             title : scope.title,
+//                             order: scope.order,
+//                             about:scope.about,
+//                             startDate:scope.startingDate,
+//                             endDate:scope.endingDate
+//                         },
+//                         file: item
+//                     }).progress(function(evt) {
+//                         scope.progres.value = parseInt(100.0 * evt.loaded / evt.total);
+//                     }).success(function(data, status, headers, config) {
+//                         $window.location.reload();
+//                     });
+//                 });
+//             };
+//         }
+//     }
+// });
 
-    .directive('ngThumb', ['$window', function($window) {
-        var helper = {
-            support: !!($window.FileReader && $window.CanvasRenderingContext2D),
-            isFile: function(item) {
-                return angular.isObject(item) && item instanceof $window.File;
-            },
-            isImage: function(file) {
-                var type =  '|' + file.type.slice(file.type.lastIndexOf('/') + 1) + '|';
-                return '|jpg|png|jpeg|bmp|gif|'.indexOf(type) !== -1;
-            }
-        };
 
-        return {
-            restrict: 'A',
-            template: '<canvas/>',
-            link: function(scope, element, attributes) {
-                if (!helper.support) return;
-
-                var params = scope.$eval(attributes.ngThumb);
-
-                if (!helper.isFile(params.file)) return;
-                if (!helper.isImage(params.file)) return;
-
-                var canvas = element.find('canvas');
-                var reader = new FileReader();
-
-                reader.onload = onLoadFile;
-                reader.readAsDataURL(params.file);
-
-                function onLoadFile(event) {
-                    var img = new Image();
-                    img.onload = onLoadImage;
-                    img.src = event.target.result;
-                }
-
-                function onLoadImage() {
-                    var width = params.width || this.width / this.height * params.height;
-                    var height = params.height || this.height / this.width * params.width;
-                    canvas.attr({ width: width, height: height });
-                    canvas[0].getContext('2d').drawImage(this, 0, 0, width, height);
-                }
-            }
-        };
-    }]);
-
-
-app.directive('inputActionPicture',function($resource,$route,$upload,$window){
-    return{
-        restrict:'E',
-        templateUrl:'parts/inputPictureAction.html',
-        scope: {
-            progres: "=",
-            title: "=",
-            order:"=",
-            about:"=",
-            startingDate:"=",
-            endingDate:"="
-        },
-        link:function(scope,element,attrs){
-            var files;
-            scope.onFileSelect = function($files){
-                scope.progres.value = 0;
-                files = $files;
-                files.forEach(function(item){
-                    scope.upload = $upload.upload({
-                        url: 'addPictureTo/action',
-                        data: {
-                            title : scope.title,
-                            order: scope.order,
-                            about:scope.about,
-                            startDate:scope.startingDate,
-                            endDate:scope.endingDate
-                        },
-                        file: item
-                    }).progress(function(evt) {
-                        scope.progres.value = parseInt(100.0 * evt.loaded / evt.total);
-                    }).success(function(data, status, headers, config) {
-                        $window.location.reload();
-                    });
-                });
-            };
-        }
-    }
-});
-
-
-app.directive('inputFile',function($resource,$route,$upload,$window){
+app.directive('inputFile',function($resource,$route,Upload,$window){
+    // var NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/;
         return{
             restrict:'E',
-            link:function(scope,element,attrs){
-                var files;
-                scope.onFileSelect = function($files){
-                     files = $files;
-                    scope.files = [];
-                    files.forEach(function(item){
-                        scope.upload = $upload.upload({
-                            url: 'addFilesTo/equipment',
-                             data: {titleEl : scope.fileType,
-                             equipment_title: scope.title
-                             },
-                            file: item
-                        }).progress(function(evt) {
-                                var progress = parseInt(100.0 * evt.loaded / evt.total);
-                                scope.progress = progress;
+            transclude: true,
+            scope: {
+        		    ngModel: "="
+        	  },
+            // link:function(scope,element,attrs){
+                // var files;
+                // scope.progress = 0;
+                // scope.onFileSelect = function($files){
 
-                            }).success(function(data, status, headers, config) {
-                                scope.files.push(item);
-                                $window.location.reload();
-                                //$route.reload();
-                            });
-                    });
-                };
+                // scope.$apply(function(scope) {
+                  //  var photofile = element.files[0];
+                  //  console.log(photofile);
+                  //  var reader = new FileReader();
+                  //  reader.onload = function(e) {
+                      // handle onload
+                  //  };
+                  //  reader.readAsDataURL(photofile);
+              //  });
 
-                scope.deleteEquipmentFile = function(file){
-                    var Todo = $resource('/deleteFileEquipment/'+scope.fileType+'/'+file);
-                    var info = Todo.query();
-                    var indexOf = scope.files.indexOf(file);
-                    scope.files.splice(indexOf, 1);
-                }
+                    //  files = $files;
+                    // scope.files = [];
+                    // files.forEach(function(item){
+                    //     scope.upload = $upload.upload({
+                    //         url: 'addFilesTo/equipment',
+                    //          data: {titleEl : scope.fileType,
+                    //          equipment_title: scope.title
+                    //          },
+                    //         file: item
+                    //     }).progress(function(evt) {
+                    //             var progress = parseInt(100.0 * evt.loaded / evt.total);
+                    //             scope.progress = progress;
+                    //
+                    //         }).success(function(data, status, headers, config) {
+                    //             scope.files.push(item);
+                    //             console.log('Something here...');
+                    //             // $window.location.reload();
+                    //             //$route.reload();
+                    //         });
+                    // });
+                // };
+
+
+
+                link: function (scope, element, attrs, controller, $transclude) {
+                  scope.deleteEquipmentFile = function(file){
+                      var Todo = $resource('/deleteFileEquipment/'+scope.fileType+'/'+file);
+                      var info = Todo.query();
+                      var indexOf = scope.files.indexOf(file);
+                      scope.files.splice(indexOf, 1);
+                  }
+
+                  scope.upload = function (file) {
+                      Upload.upload({
+                          url: 'addFilesTo/equipment'
+                          // data: {file: file, 'username': $scope.username}
+                      }).then(function (resp) {
+                          console.log('Success ' + resp.config.data.file.name + 'uploaded. Response: ' + resp.data);
+                      }, function (resp) {
+                          console.log('Error status: ' + resp.status);
+                      }, function (evt) {
+                          var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+                          console.log('progress: ' + progressPercentage + '% ' + evt.config.data.file.name);
+                      });
+                  };
+
+                  // scope.file_changed = function(element) {
+                  //    scope.$apply(function(scope) {
+                  //        var photofile = element.files[0];
+                  //       //  console.log(photofile, ' - checking file select....');
+                  //        var reader = new FileReader();
+                  //        reader.onload = function(e) {
+                  //       //     // handle onload
+                  //         // console.log(e, ' - stuff from file select...');
+                  //
+                  //
+                  //        };
+                  //        reader.readAsDataURL(photofile);
+                  //    });
+                  // }
+
+                    //  function parseInputFile(){
+                      //  if (scope.type == 'file') {
+                        //  console.log(attrs, ' - attrs...');
+                      //  var parsedOptions = attrs.options.match(NG_OPTIONS_REGEXP);
+                      //  var optionsArray = /^(.*) \|/.exec(parsedOptions[7]) || parsedOptions[7];
+                      //  $transclude(function (clone, $outerScope) {
+                        //  scope[optionsArray] = $outerScope[optionsArray];
+                      //  });
+                    //  }
+                  //  }
+
+                  //  parseInputFile();
+                    //  scope.$watch("options", function (newValue, oldValue) {
+                          // parseInputFile();
+                      // });
+                    // }
+
             },
             templateUrl:'parts/inputFile.html'
         }
     });
 
-app.directive('inputArea',function($resource,$route,$upload,$window){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-            var files;
-            scope.onFileSelect = function($files){
-                files = $files;
-                scope.files = [];
-                files.forEach(function(item){
-                    scope.upload = $upload.upload({
-                        url: 'addFilesTo/areas',
-                        data: {
-                            area_title:scope.title,
-                            titleEl : scope.fileType
-                        },
-                        file: item
-                    }).progress(function(evt) {
-                            var progress = parseInt(100.0 * evt.loaded / evt.total);
-                            scope.progress = progress;
-
-                        }).success(function(data, status, headers, config) {
-                            scope.files.push(item);
-                            $window.location.reload();
-                            //$route.reload();
-                        });
-                });
-            };
-
-            scope.deleteEquipmentFile = function(file){
-                var Todo = $resource('/deleteFileArea/'+file);
-                var info = Todo.query();
-                var indexOf = scope.files.indexOf(file);
-                scope.files.splice(indexOf, 1);
-            }
-        },
-        templateUrl:'parts/inputFile.html'
-    }
-});
-
-
-app.directive('inputFileArea',function($resource,$route,$upload){
+// app.directive('inputArea',function($resource,$route,$upload,$window){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//             var files;
+//             scope.onFileSelect = function($files){
+//                 files = $files;
+//                 scope.files = [];
+//                 files.forEach(function(item){
+//                     scope.upload = $upload.upload({
+//                         url: 'addFilesTo/areas',
+//                         data: {
+//                             area_title:scope.title,
+//                             titleEl : scope.fileType
+//                         },
+//                         file: item
+//                     }).progress(function(evt) {
+//                             var progress = parseInt(100.0 * evt.loaded / evt.total);
+//                             scope.progress = progress;
+//
+//                         }).success(function(data, status, headers, config) {
+//                             scope.files.push(item);
+//                             $window.location.reload();
+//                             //$route.reload();
+//                         });
+//                 });
+//             };
+//
+//             scope.deleteEquipmentFile = function(file){
+//                 var Todo = $resource('/deleteFileArea/'+file);
+//                 var info = Todo.query();
+//                 var indexOf = scope.files.indexOf(file);
+//                 scope.files.splice(indexOf, 1);
+//             }
+//         },
+//         templateUrl:'parts/inputFile.html'
+//     }
+// });
+//
+//
+app.directive('inputFileArea',function($resource,$route,Upload){
     return{
         restrict:'E',
         link:function(scope,element,attrs){
@@ -230,171 +298,171 @@ app.directive('inputFileArea',function($resource,$route,$upload){
         templateUrl:'parts/inputFileArea.html'
     }
 });
-
-app.directive('inputCategoryFile',function($resource,$route,$upload,$window){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-            var files;
-            scope.onFileSelect = function($files){
-                //alert($files);
-                files = $files;
-                scope.files = [];
-                files.forEach(function(item){
-                    scope.upload = $upload.upload({
-                        url: 'addFilesTo/category',
-                        data: {titleEl : scope.fileType,
-                            category_title:scope.title
-                        },
-                        file: item
-                    }).progress(function(evt) {
-                            var progress = parseInt(100.0 * evt.loaded / evt.total);
-                            scope.progress = progress;
-
-                        }).success(function(data, status, headers, config) {
-                            scope.files.push(item);
-                            $window.location.reload();
-                            //$route.reload();
-                        });
-                });
-            };
-
-
-            scope.deleteCategoryFile = function(file){
-                var Todo = $resource('/deleteFileCategory/'+scope.fileType+'/'+file);
-                var info = Todo.query();
-                var indexOf = scope.files.indexOf(file);
-                scope.files.splice(indexOf, 1);
-            }
-        },
-
-        templateUrl:'parts/inputCategoryFile.html'
-    }
-});
-
-app.directive('menuEquipment',function($resource){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-            var todo_1 = $resource('/getCategoriesTotal');
-            var cats = todo_1.query(function(){
-                scope.cats = cats;
-            });
-
-            scope.collectData = function(cat){
-                var todo_2 = $resource('/getEquipmentsTotal/'+cat);
-                var equipments = todo_2.query(function(){
-                    scope.equipmentsInCat = equipments;
-                });
-            };
-        },
-        templateUrl:'parts/menuEquipment.html'
-    }
-});
-
-app.directive('youtube',function($resource,$routeParams,$sce){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-
-            scope.videoSafe = $sce.trustAsResourceUrl(scope.video.videoLink);
-
-
-
-
-
-
-
-
-
-        },
-        templateUrl:'parts/youtube.html'
-    }
-});
-app.directive('customVideo',function($resource,$routeParams,$sce){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-
-            scope.videoSafe = $sce.trustAsResourceUrl('uploaded/'+scope.video.title);
-            /*if(video[0].videoLink.length!=1){
-             video[0].videoLink.forEach(function(item){
-             var trusted = $sce.trustAsResourceUrl(item);
-             scope.videoLinks.push(trusted);
-             });
-             }else{
-             var trusted = $sce.trustAsResourceUrl(video[0].videoLink);
-             scope.videoLinks.push(trusted);
-             }*/
-
-
-
-
-
-
-        },
-        templateUrl:'parts/customVideo.html'
-    }
-});
-app.directive('activePhotoAreas',function(){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-        },
-        templateUrl:'parts/activePhotoAreas.html'
-    }
-});
-app.directive('singlePhotoAreas',function(){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-        },
-        templateUrl:'parts/singlePhotoAreas.html'
-    }
-});
-app.directive('activePhotoEquipments',function(){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-        },
-        templateUrl:'parts/activePhotoEquipments.html'
-    }
-});
-app.directive('singlePhotoEquipments',function(){
-    return{
-        restrict:'E',
-        link:function(scope,element,attrs){
-        },
-        templateUrl:'parts/singlePhotoEquipments.html'
-    }
-});
-
-app.directive('areasSelect', function($resource){
-  var NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/;
-  return {
-    restrict: 'E',
-    transclude: true,
-    scope: {
-		    ngModel: "=",
-        ngChange: "=",
-		    title: "@",
-		    type: "@",
-		    options: "@"
-	  },
-     link: function (scope, element, attrs, controller, $transclude) {
-       function parseSelect(){
-         if (scope.type == 'select') {
-         var parsedOptions = attrs.options.match(NG_OPTIONS_REGEXP);
-         var optionsArray = /^(.*) \|/.exec(parsedOptions[7]) || parsedOptions[7];
-         $transclude(function (clone, $outerScope) {
-           scope[optionsArray] = $outerScope[optionsArray];
-         });
-       }
-     }
-     scope.$watch("options", function (newValue, oldValue) {
-          parseSelect();
-      });
-    },
-    templateUrl: 'parts/areas-selector.html'
-  };
-})
+//
+// app.directive('inputCategoryFile',function($resource,$route,$upload,$window){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//             var files;
+//             scope.onFileSelect = function($files){
+//                 //alert($files);
+//                 files = $files;
+//                 scope.files = [];
+//                 files.forEach(function(item){
+//                     scope.upload = $upload.upload({
+//                         url: 'addFilesTo/category',
+//                         data: {titleEl : scope.fileType,
+//                             category_title:scope.title
+//                         },
+//                         file: item
+//                     }).progress(function(evt) {
+//                             var progress = parseInt(100.0 * evt.loaded / evt.total);
+//                             scope.progress = progress;
+//
+//                         }).success(function(data, status, headers, config) {
+//                             scope.files.push(item);
+//                             $window.location.reload();
+//                             //$route.reload();
+//                         });
+//                 });
+//             };
+//
+//
+//             scope.deleteCategoryFile = function(file){
+//                 var Todo = $resource('/deleteFileCategory/'+scope.fileType+'/'+file);
+//                 var info = Todo.query();
+//                 var indexOf = scope.files.indexOf(file);
+//                 scope.files.splice(indexOf, 1);
+//             }
+//         },
+//
+//         templateUrl:'parts/inputCategoryFile.html'
+//     }
+// });
+//
+// app.directive('menuEquipment',function($resource){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//             var todo_1 = $resource('/getCategoriesTotal');
+//             var cats = todo_1.query(function(){
+//                 scope.cats = cats;
+//             });
+//
+//             scope.collectData = function(cat){
+//                 var todo_2 = $resource('/getEquipmentsTotal/'+cat);
+//                 var equipments = todo_2.query(function(){
+//                     scope.equipmentsInCat = equipments;
+//                 });
+//             };
+//         },
+//         templateUrl:'parts/menuEquipment.html'
+//     }
+// });
+//
+// app.directive('youtube',function($resource,$routeParams,$sce){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//
+//             scope.videoSafe = $sce.trustAsResourceUrl(scope.video.videoLink);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//         },
+//         templateUrl:'parts/youtube.html'
+//     }
+// });
+// app.directive('customVideo',function($resource,$routeParams,$sce){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//
+//             scope.videoSafe = $sce.trustAsResourceUrl('uploaded/'+scope.video.title);
+//             /*if(video[0].videoLink.length!=1){
+//              video[0].videoLink.forEach(function(item){
+//              var trusted = $sce.trustAsResourceUrl(item);
+//              scope.videoLinks.push(trusted);
+//              });
+//              }else{
+//              var trusted = $sce.trustAsResourceUrl(video[0].videoLink);
+//              scope.videoLinks.push(trusted);
+//              }*/
+//
+//
+//
+//
+//
+//
+//         },
+//         templateUrl:'parts/customVideo.html'
+//     }
+// });
+// app.directive('activePhotoAreas',function(){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//         },
+//         templateUrl:'parts/activePhotoAreas.html'
+//     }
+// });
+// app.directive('singlePhotoAreas',function(){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//         },
+//         templateUrl:'parts/singlePhotoAreas.html'
+//     }
+// });
+// app.directive('activePhotoEquipments',function(){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//         },
+//         templateUrl:'parts/activePhotoEquipments.html'
+//     }
+// });
+// app.directive('singlePhotoEquipments',function(){
+//     return{
+//         restrict:'E',
+//         link:function(scope,element,attrs){
+//         },
+//         templateUrl:'parts/singlePhotoEquipments.html'
+//     }
+// });
+//
+// app.directive('areasSelect', function($resource){
+//   var NG_OPTIONS_REGEXP = /^\s*(.*?)(?:\s+as\s+(.*?))?(?:\s+group\s+by\s+(.*))?\s+for\s+(?:([\$\w][\$\w]*)|(?:\(\s*([\$\w][\$\w]*)\s*,\s*([\$\w][\$\w]*)\s*\)))\s+in\s+(.*?)(?:\s+track\s+by\s+(.*?))?$/;
+//   return {
+//     restrict: 'E',
+//     transclude: true,
+//     scope: {
+// 		    ngModel: "=",
+//         ngChange: "=",
+// 		    title: "@",
+// 		    type: "@",
+// 		    options: "@"
+// 	  },
+//      link: function (scope, element, attrs, controller, $transclude) {
+//        function parseSelect(){
+//          if (scope.type == 'select') {
+//          var parsedOptions = attrs.options.match(NG_OPTIONS_REGEXP);
+//          var optionsArray = /^(.*) \|/.exec(parsedOptions[7]) || parsedOptions[7];
+//          $transclude(function (clone, $outerScope) {
+//            scope[optionsArray] = $outerScope[optionsArray];
+//          });
+//        }
+//      }
+//      scope.$watch("options", function (newValue, oldValue) {
+//           parseSelect();
+//       });
+//     },
+//     templateUrl: 'parts/areas-selector.html'
+//   };
+// })

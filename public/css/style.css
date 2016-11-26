@@ -422,3 +422,7 @@ a {
 .slider-size {
     height: 350px; /* This is your slider height */
 }
+
+.form-control.upload {
+  margin-top: 80px;
+}

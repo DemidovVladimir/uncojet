@@ -314,6 +314,7 @@ exports.addFilesTo = function(req,res,next){
                                 '../public/uploaded/mini_'+fileName
                               ), function (err) {
                                 if (!err) console.log('Files are loaded!');
+                                res.send('uploaded');
                             });
                     }
                 )

@@ -1,10 +1,11 @@
 <label for="inputArea" class="col-sm-2 control-label">Файлы</label>
 <div class="col-sm-10">
-    <input type="file" ng-file-select="onFileSelect($files)" class="form-control" id="inputPhoto" multiple/>
+  <!-- <input onchange="angular.element(this).scope().file_changed(this)" type="file" ng-model="ngModel"/> -->
+    <!-- <input type="file" ng-file-select="onFileSelect($files)" class="form-control" id="inputPhoto" multiple/> -->
 </div>
 
 
-    <div class="float-left" data-ng-repeat="file in files">
+    <!-- <div class="float-left" data-ng-repeat="file in files">
         <img ng-show="fileType=='photos' || !fileType" src="uploaded/{{file.name}}" width="250px">
         <h3 ng-show="fileType=='docs'">{{file.name}}</h3>
             <custom-video ng-show="fileType=='video'" ng-init="video.title = file.name" class="col-md-10 col-md-offset-2"></custom-video>
@@ -25,4 +26,4 @@
             {{progress}}%
         </div>
     </div>
-</div>
+</div> -->
