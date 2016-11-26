@@ -104,6 +104,6 @@ app.use(function(err, req, res, next) {
 });
 
 module.exports = app;
-http.listen(8080,'localhost', function(){
-    console.log('listening on 8080');
+http.listen(80,'46.101.107.111', function(){
+    console.log('listening on 80');
 });
